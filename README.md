@@ -7,10 +7,10 @@
 * <Add Name Here>
 
 ## Project Proposal
-TODO
+<TODO>
 
 ## Group Repository
-Our group repository can be found here: TODO
+Our group repository can be found here: <TODO>
 
 ## Communication Apps
-TODO
+<TODO>
