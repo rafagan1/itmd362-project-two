@@ -2,7 +2,8 @@
 
 ## Team Members
 * Christopher Millan
-* <Add Name Here>
+* Natalie Herrmann
+  * My strengths include being comfortable with coding, being persistent with diagnosing and figuring out errors, and following rubrics/specifications and keeping track of whether everything is being done as expected. I'm a stronger programmer than designer, and I work best when I know exactly how things should be done.
 * <Add Name Here>
 * <Add Name Here>
 
