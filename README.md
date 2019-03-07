@@ -2,7 +2,7 @@
 
 ## Team Members
 * Christopher Millan
-* <Add Name Here>
+* Richard Fagan
 * <Add Name Here>
 * <Add Name Here>
 
