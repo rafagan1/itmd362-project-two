@@ -3,6 +3,8 @@
 ## Team Members
 * Christopher Millan
 * Richard Fagan
+I'm good at programming, designing, and testing, with preference to programming. I'm not good with colors.
+I think I'm also good at multi-tasking.
 * <Add Name Here>
 * <Add Name Here>
 
