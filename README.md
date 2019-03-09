@@ -2,7 +2,8 @@
 
 ## Team Members
 * Christopher Millan
-* <Add Name Here>
+* Abdulaziz Aldossari
+I'm good at designing, coding in HTML CSS JavaScript, and tracks errors. Also, I likes to suggest things like, for this project I suggest creating cars rent app. I'm not good at choosing or designing pictures for websites.
 * <Add Name Here>
 * <Add Name Here>
 
