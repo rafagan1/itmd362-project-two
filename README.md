@@ -7,9 +7,9 @@
   * My strengths include being comfortable with coding, being persistent with diagnosing and figuring out errors, and following rubrics/specifications and keeping track of whether everything is being done as expected. I'm a stronger programmer than designer, and I work best when I know exactly how things should be done.
 * Richard Fagan
   * I'm good at programming, designing, and testing, with preference to programming. I'm not good with colors. I think I'm also good at multi-tasking.
-* <Add Name Here>
-  * <TODO - few sentences about your strengths>
-
+* Abdulaziz Aldossari
+  * I'm good at designing, coding in HTML CSS JavaScript, and tracks errors. Also, I likes to suggest things like, for this project I suggest creating cars rent app. I'm not good at choosing or designing pictures for websites.
+  
 ## Project Proposal
 <TODO>
 
