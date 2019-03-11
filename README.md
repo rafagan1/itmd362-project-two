@@ -17,4 +17,5 @@
 Our group repository can be found here: https://github.com/itmd362-arcn/itmd362-project-two
 
 ## Communication Apps
-<TODO>
+**Basecamp:** primary organization tool for TO-DO lists, calendars, and group chatting.  
+**Github:** for reviewing pull requests.
