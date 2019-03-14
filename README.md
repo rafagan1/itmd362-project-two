@@ -11,7 +11,8 @@
   * I'm good at designing, coding in HTML CSS JavaScript, and tracks errors. Also, I likes to suggest things like, for this project I suggest creating cars rent app. I'm not good at choosing or designing pictures for websites.
 
 ## Project Proposal
-<TODO>
+Our group will design a booking system for the purchase of movie tickets from a franchise.
+As such, the customer will be able to view a seating chart and purchase tickets for that specific location. They will enter their name and a credit card to complete the purchase.
 
 ## Group Repository
 Our group repository can be found here: https://github.com/itmd362-arcn/itmd362-project-two
