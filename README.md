@@ -9,12 +9,12 @@
   * I'm good at programming, designing, and testing, with preference to programming. I'm not good with colors. I think I'm also good at multi-tasking.
 * Abdulaziz Aldossari
   * I'm good at designing, coding in HTML CSS JavaScript, and tracks errors. Also, I likes to suggest things like, for this project I suggest creating cars rent app. I'm not good at choosing or designing pictures for websites.
-  
+
 ## Project Proposal
 <TODO>
 
 ## Group Repository
-Our group repository can be found here: <TODO>
+Our group repository can be found here: https://github.com/itmd362-arcn/itmd362-project-two
 
-## Communication Apps
-<TODO>
+## Communication App
+**Basecamp:** primary organization tool for TO-DO lists, calendars, and group chatting.
