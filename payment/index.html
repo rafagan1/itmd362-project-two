@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ARCN Theater - Payment</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+  <link rel="stylesheet" href="screen.css" />
+</head>
+
+<body>
+  <main id="content">
+    <h1>Payment Information</h1>
+    <!-- TODO: Form with fields: Full name (as on card), CC#, exp date, CVV, ZIP code, email/phone #? -->
+    <form id="payment" action="#null" method="get">
+      <ol>
+        <li>
+          <label id="name-label" for="name">Full Name on Card</label>
+          <input type="text" name="name" id="name" />
+        </li>
+        <li>
+          <label id="ccn-label" for="ccn">Credit Card Number</label>
+          <input type="text" name="ccn" id="ccn" />
+        </li>
+        <li>
+          <label id="expr-label" for="expr">Expiration Date</label>
+          <select id=exp-month id="exp-month">
+            <option value="jan">01</option>
+            <option value="feb">02</option>
+            <option value="mar">03</option>
+            <option value="apr">04</option>
+            <option value="may">05</option>
+            <option value="jun">06</option>
+            <option value="jul">07</option>
+            <option value="aug">08</option>
+            <option value="sep">09</option>
+            <option value="oct">10</option>
+            <option value="nov">11</option>
+            <option value="dec">12</option>
+          </select>
+          <input type="number" name="exp-year" id="exp-year" min="2019" max="2034" value="2019"/>
+        </li>
+        <li>
+          <label id="cvv-label" for="cvv">CVV</label>
+          <input type="text" name="cvv" id="cvv" />
+        </li>
+        <li>
+          <label id="zipcode-label" for='zipcode'>Zip Code</label>
+          <input type="text" name="zipcode" id="zipcode" />
+        </li>
+        <li>
+          <label id="email-label" for="email">Email Address</label>
+          <input type="email" name="email" id="email" />
+        </li>
+        <li>
+          <input type="submit" name="pay" id="pay" value="Pay Now" />
+        </li>
+      </ol>
+    </form>
+
+  </main>
+</body>
+
+</html>
