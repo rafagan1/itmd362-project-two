@@ -22,8 +22,9 @@
           <input type="text" name="ccn" id="ccn" />
         </li>
         <li>
-          <label id="expr-label" for="expr">Expiration Date</label>
-          <select id=exp-month id="exp-month">
+          <!-- TODO: Figure out how to format a form entry for expiration date -->
+          <label for="exp-month">Expr Month</label>
+          <select name="exp-month" id="exp-month">
             <option value="jan">01</option>
             <option value="feb">02</option>
             <option value="mar">03</option>
@@ -37,6 +38,7 @@
             <option value="nov">11</option>
             <option value="dec">12</option>
           </select>
+          <label for="exp-year">Expr Year</label>
           <input type="number" name="exp-year" id="exp-year" min="2019" max="2034" value="2019"/>
         </li>
         <li>
@@ -44,7 +46,7 @@
           <input type="text" name="cvv" id="cvv" />
         </li>
         <li>
-          <label id="zipcode-label" for='zipcode'>Zip Code</label>
+          <label id="zipcode-label" for="zipcode">Zip Code</label>
           <input type="text" name="zipcode" id="zipcode" />
         </li>
         <li>
