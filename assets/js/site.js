@@ -42,6 +42,11 @@
     }
   }
 
+  function validate_name(value) {
+    // Valid name is a non-empty string after removing excess whitespace
+    return validate(remove_excess_whitespace(value), /\.+/g);
+  }
+
   // Event Listeners
   // TODO: Enable/disable submit button if all fields are valid
   // ETC
