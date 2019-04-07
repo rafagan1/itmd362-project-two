@@ -66,6 +66,11 @@
     return false;
   }
 
+  function validate_ccv(ccv) {
+    // Valid security code is a 3 or 4 digit string with all whitespace removed
+    return validate(remove_all_whitespace, /^[0-9]{3}[0-9]?$/g)
+  }
+
   // Event Listeners
   // TODO: Enable/disable submit button if all fields are valid
   // ETC
