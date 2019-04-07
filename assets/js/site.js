@@ -10,8 +10,6 @@
   // Value cleaning functions
 
   //  Payment form inputs:
-  //    TODO: Full name (non-empty string?)
-  //    TODO: Credit Card Number (16-digits, remove all whitespace, no other chars)
   //    TODO: Expiration date (month [dropdown value] + year [number])
   //    TODO: Security code (3 or 4 digit number code)
   //    TODO: Zip code (5# or 5#-4# number code)
@@ -42,9 +40,14 @@
     }
   }
 
-  function validate_name(value) {
+  function validate_name(name) {
     // Valid name is a non-empty string after removing excess whitespace
-    return validate(remove_excess_whitespace(value), /\.+/g);
+    return validate(remove_excess_whitespace(name), /\.+/g);
+  }
+
+  function validate_ccn(ccn) {
+    // Valid CCN is a 16-digit string with no whitespace
+    return validate(remove_all_whitespace(ccn), /^[0-9]{16}$/g);
   }
 
   // Event Listeners
