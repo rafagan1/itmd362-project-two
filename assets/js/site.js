@@ -10,8 +10,6 @@
   // Value cleaning functions
 
   //  Payment form inputs:
-  //    TODO: Expiration date (month [dropdown value] + year [number])
-  //    TODO: Security code (3 or 4 digit number code)
   //    TODO: Zip code (5# or 5#-4# number code)
   //    TODO: Email addresss (Remove whitespace, includes @)
 
@@ -68,7 +66,12 @@
 
   function validate_ccv(ccv) {
     // Valid security code is a 3 or 4 digit string with all whitespace removed
-    return validate(remove_all_whitespace, /^[0-9]{3}[0-9]?$/g)
+    return validate(remove_all_whitespace(ccv), /^[0-9]{3}[0-9]?$/g)
+  }
+
+  function validate_zipcode(zipcode) {
+    // Valid zip code is either 5 digits or 5 digits + '-' + 4 digits with all whitespace removed
+    return validate(remove_all_whitespace(zipcode), /^[0-9]{5}(-[0-9]{4})?$/g)
   }
 
   // Event Listeners
