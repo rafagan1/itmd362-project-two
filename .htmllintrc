@@ -1,52 +1,32 @@
 {
+    // Stolley House Config, v. 1.2.0, 20190107
 
-  # Stolley House Config, v. 1.2.0, 20181009
+    // names of npm modules to load into htmllint
+    "plugins": [],
 
-  "rules": {
-    "at-rule-name-case": "lower",
-    "at-rule-name-space-after": "always",
-    "at-rule-semicolon-newline-after": "always",
-    "block-closing-brace-newline-before": "always-multi-line",
-    "block-closing-brace-space-before": "always-single-line",
-    "block-no-empty": true,
-    "block-opening-brace-newline-after": "always-multi-line",
-    "block-opening-brace-space-after": "always-single-line",
-    "block-opening-brace-space-before": "always",
-    "declaration-block-no-duplicate-properties": true,
-    "declaration-block-semicolon-newline-after": "always-multi-line",
-    "declaration-block-semicolon-space-after": "always-single-line",
-    "declaration-block-single-line-max-declarations": 1,
-    "declaration-block-trailing-semicolon": "always",
-    "declaration-colon-space-after": "always",
-    "declaration-colon-space-before": "never",
-    "declaration-no-important": true,
-    "font-family-name-quotes": "always-where-recommended",
-    "indentation": 2,
-    "length-zero-no-unit": true,
-    "media-feature-colon-space-after": "always",
-    "media-feature-colon-space-before": "never",
-    "media-feature-name-case": "lower",
-    "no-descending-specificity": [true, {"severity": "warning"}],
-    "no-duplicate-selectors": true,
-    "no-eol-whitespace": true,
-    "no-invalid-double-slash-comments": true,
-    "no-missing-end-of-source-newline": true,
-    "number-leading-zero": "always",
-    "number-no-trailing-zeros": true,
-    "property-case": "lower",
-    "selector-attribute-brackets-space-inside": "never",
-    "selector-attribute-quotes": "always",
-    "selector-combinator-space-after": "always",
-    "selector-combinator-space-before": "always",
-    "selector-list-comma-newline-after": "always-multi-line",
-    "selector-list-comma-space-after": "always-single-line",
-    "selector-pseudo-class-case": "lower",
-    "selector-type-case": "lower",
-    "string-quotes": "double",
-    "unit-blacklist": [["px", "pt", "in", "cm", "mm"], {"ignoreProperties": {"px": ["/^border/"]}, "ignoreMediaFeatureNames": { "px": ["min-width"]}}],
-    "unit-case": "lower",
-    "unit-no-unknown": true,
-    "value-keyword-case": "lower",
-    "value-list-comma-space-after": "always"
-  }
+    // Configuration options:
+    "attr-bans": ["align", "background", "bgcolor", "border", "frameborder", "longdesc", "marginwidth", "marginheight", "scrolling", "style", "target", "width", "height", "onload", "onclick"], // ban deprecated/obsolete attributes
+    "attr-name-style": "dash", // allow hyphens/dashes in attributes, e.g., for data- attributes
+    "attr-no-dup": true, // no duplicate attributes
+    "attr-validate": true, // well-formed attribute style
+    "class-no-dup": true, // no duplicate classes on same element
+    "doctype-first": true, // <!DOCTYPE html> must be first line
+    "fig-req-figcaption": true, // require <figcaption>
+    "html-req-lang": true, // <html> tag must have lang attribute
+    "head-req-title": true, // All documents must have <title>
+    "head-valid-content-model": true, // Only valid <head> children
+    "id-class-style": "dash", // allow hyphens/dashes in attribute values, e.g., week-one
+    "id-no-dup": true, // no duplicate IDs anywhere on page
+    "img-req-alt": true, // All <img> tags must have non-empty alt attribute
+    "indent-style": "spaces",  // use spaces to indent
+    "indent-width": 2, // use two spaces, to be precise
+    "input-req-label": true, // All <input> tags must have a <label> tag
+    "label-req-for": true, // All <label> tags must have a for attribute
+    "line-end-style": "lf", // Unix-style LF line-endings
+    "spec-char-escape": true, // XML special characters (<,>,&,etc.) must be escaped
+    "tag-bans": ["br", "button", "div", "hr", "iframe", "style"],
+    "tag-close": true, // tags that open must close
+    "tag-name-lowercase": true, // only lowercase for tag names
+    "tag-name-match": true, // tag names must match, in both name and case
+    "tag-self-close": "always" // tags like <meta> must self-close: <meta />
 }
