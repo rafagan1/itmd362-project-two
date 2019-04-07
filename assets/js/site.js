@@ -32,6 +32,15 @@
   }
 
   // Validation functions
+  function validate(value, regex) {
+    // General validation checker
+    if (typeof(regex.test) === 'function') {  // Check if valid regex
+      // If true, use regex to test the value
+      return regex.test(value);
+    } else {
+      return false;
+    }
+  }
 
   // Event Listeners
   // TODO: Enable/disable submit button if all fields are valid
