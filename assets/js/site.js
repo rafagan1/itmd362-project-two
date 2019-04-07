@@ -50,6 +50,22 @@
     return validate(remove_all_whitespace(ccn), /^[0-9]{16}$/g);
   }
 
+  function validate_expr_month(month) {
+    // Valid mo is a 2-digit number between 1-12
+    if (month >= 1 && month <= 12) {
+      return true;
+    }
+    return false;
+  }
+
+  function validate_expr_year(year) {
+    // Valid year is a 4-digit number after [current year]
+    if (year >= 2019 && year <= 9999) {
+      return true;
+    }
+    return false;
+  }
+
   // Event Listeners
   // TODO: Enable/disable submit button if all fields are valid
   // ETC
