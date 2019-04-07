@@ -18,12 +18,17 @@
   //    TODO: Email addresss (Remove whitespace, includes @)
 
 
-  function remove_whitespace(value) {
+  function remove_excess_whitespace(value) {
     // Remove excess whitespace
     value = value.replace(/^ +/g, '');  // Remove whitespace from beginning
     value = value.replace(/ +$/g, '');  // Remove whitespace from end
     value = value.replace(/ +/g, ' ');  // Remove extra whitespace in the middle
     return value;
+  }
+
+  function remove_all_whitespace(value) {
+    // Removes any form of whitespace
+    return value.replace(/ +/g, '');
   }
 
   // Validation functions
