@@ -12,6 +12,7 @@
     <h1>Payment Information</h1>
     <!-- TODO: Form with fields: Full name (as on card), CC#, exp date, CVV, ZIP code, email/phone #? -->
     <form id="payment" action="#null" method="get">
+      <h2>Payment Information</h2>
       <ol>
         <li>
           <label id="name-label" for="name">Full Name on Card</label>
@@ -25,24 +26,25 @@
           <!-- TODO: Figure out how to format a form entry for expiration date -->
           <label for="exp-month">Expr Month</label>
           <select name="exp-month" id="exp-month">
-            <option value="jan">01</option>
-            <option value="feb">02</option>
-            <option value="mar">03</option>
-            <option value="apr">04</option>
-            <option value="may">05</option>
-            <option value="jun">06</option>
-            <option value="jul">07</option>
-            <option value="aug">08</option>
-            <option value="sep">09</option>
-            <option value="oct">10</option>
-            <option value="nov">11</option>
-            <option value="dec">12</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
           </select>
+          <!-- QUESTION: Dropdown or number input? -->
           <label for="exp-year">Expr Year</label>
-          <input type="number" name="exp-year" id="exp-year" min="2019" max="2034" value="2019"/>
+          <input type="number" name="exp-year" id="exp-year" min="2019" max="2039" value="2019"/>
         </li>
         <li>
-          <label id="cvv-label" for="cvv">CVV</label>
+          <label id="cvv-label" for="cvv">Security Code</label>
           <input type="text" name="cvv" id="cvv" />
         </li>
         <li>
@@ -59,6 +61,16 @@
       </ol>
     </form>
 
+    <!-- TODO: Use JS to actually fill these fields -->
+    <section id="purchase-info">
+      <h2>Purchase Information</h2>
+      <p>Adults: 2 ($20.00)</p>
+      <p>Children: 3 ($21.00)</p>
+      <p>Seniors: 1 ($6.00)</p>
+      <p><em>Subtotal: $47.00</em></p>
+      <p>Tax: $4.70</p>
+      <p><strong>Total: $51.70</strong></p>
+    </section>
   </main>
 </body>
 
