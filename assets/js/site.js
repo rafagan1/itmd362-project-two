@@ -111,7 +111,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Represents the movie selection list on homepage
     var movie_list = document.querySelector('#movie-list');
-    
+
     // Change 'nojs' class for each html document to 'js'
     document.querySelector('html').className = 'js';
 
@@ -143,6 +143,36 @@
           runtime: movie_info.childNodes[5].innerText
         });
       }
+
+      // Listen for selection on #genre-select to sort by movie genre
+      document.querySelector('#genre-select').addEventListener('change', function(e) {
+        var selection = e.target.value;
+        for (var i = 0; i < movie_attributes.length; i++) {
+          if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
+            movie_list.appendChild(movie_nodes[i]);
+          }
+          else {
+            if (movie_list.contains(movie_nodes[i])) {
+              movie_list.removeChild(movie_nodes[i]);
+            }
+          }
+        }
+      });
+
+      // Listen for selection on #rating-select to sort by movie rating
+      document.querySelector('#rating-select').addEventListener('change', function(e) {
+        var selection = e.target.value;
+        for (var i = 0; i < movie_attributes.length; i++) {
+          if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
+            movie_list.appendChild(movie_nodes[i]);
+          }
+          else {
+            if (movie_list.contains(movie_nodes[i])) {
+              movie_list.removeChild(movie_nodes[i]);
+            }
+          }
+        }
+      });
     }
 
   });
