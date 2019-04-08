@@ -45,7 +45,7 @@
 
   function validate_expr_month(month) {
     // Valid mo is a 2-digit number between 1-12
-    if (typeof(month) == NaN) {
+    if (isNaN(typeof(month))) {
       return false;
     }
     month = Number(month);
@@ -58,7 +58,7 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
-    if (typeof(year) == NaN) {
+    if (isNaN(typeof(year))) {
       return false;
     }
     year = Number(year);
@@ -128,6 +128,37 @@
           console.log('Submit button disabled');
         }
         // TODO: Add error messages depending on invalid inputs
+
+        // Invalid name
+        if (!validate_name(pay_name)) {
+          console.log('Invalid name');
+          // TODO: Add some form of warning for an invalid name
+        }
+
+        // Invalid CCN
+        if (!validate_ccn(pay_ccn)) {
+          console.log('Invalid CCN');
+        }
+
+        // Invalid expr month
+        if (!validate_expr_month(pay_expr_mo)) {
+          console.log('Invalid Expiration Month');
+        }
+
+        // Invalid expr year
+        if (!validate_expr_year(pay_expr_yr)) {
+          console.log('Invalid Expiration Year');
+        }
+
+        // Invalid zip code
+        if (!validate_zipcode(pay_zipcode)) {
+          console.log('Invalid ZIP Code');
+        }
+
+        // Invalid email
+        if (!validate_email(pay_email)) {
+          console.log('Invalid Email');
+        }
       }
     });
   });
