@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ARCN Theater - Payment</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+  <link rel="stylesheet" href="screen.css" />
+</head>
+
+<body>
+  <main id="content">
+    <h1>Payment Information</h1>
+    <!-- TODO: Use JS to actually fill these fields -->
+    <section id="purchase-info">
+      <h2>Purchase Information</h2>
+      <p>Adults: 2 ($20.00)</p>
+      <p>Children: 3 ($21.00)</p>
+      <p>Seniors: 1 ($6.00)</p>
+      <p><em>Subtotal: $47.00</em></p>
+      <p>Tax: $4.70</p>
+      <p><strong>Total: $51.70</strong></p>
+    </section>
+
+    <form id="payment" action="#null" method="get">
+      <h2>Payment Information</h2>
+      <ol>
+        <li>
+          <label id="name-label" for="name">Full Name on Card</label>
+          <input type="text" name="name" id="name" />
+        </li>
+        <li>
+          <label id="ccn-label" for="ccn">Credit Card Number</label>
+          <input type="text" name="ccn" id="ccn" />
+        </li>
+        <li>
+          <!-- TODO: Figure out how to format a form entry for expiration date -->
+          <label for="exp-month">Expr Month</label>
+          <select name="exp-month" id="exp-month">
+            <option value="1">01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <!-- QUESTION: Dropdown or number input? -->
+          <label for="exp-year">Expr Year</label>
+          <input type="number" name="exp-year" id="exp-year" min="2019" max="2039" value="2019"/>
+        </li>
+        <li>
+          <label id="cvv-label" for="cvv">Security Code</label>
+          <input type="text" name="cvv" id="cvv" />
+        </li>
+        <li>
+          <label id="zipcode-label" for="zipcode">Zip Code</label>
+          <input type="text" name="zipcode" id="zipcode" />
+        </li>
+        <li>
+          <label id="email-label" for="email">Email Address</label>
+          <input type="email" name="email" id="email" />
+        </li>
+        <li>
+          <input type="submit" name="pay" id="pay" value="Pay Now" />
+        </li>
+      </ol>
+    </form>
+  </main>
+  <script src="../assets/js/site.js"></script>
+</body>
+
+</html>
