@@ -94,8 +94,31 @@
     // If broswer supports template, add Sort-By functionality
     // on movie selection homepage
     if('content' in document.createElement('template')) {
+      // Node list of all the available movies
+      var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
+
+      // Save attributes of each movie for sorting
+      var movie_attributes = [];
+
+      // Create element for displaying a message if no movies were
+      // found under a set of filter criteria
+      var sort_result = document.createElement('p');
+      sort_result.setAttribute('id', 'result-message');
+      document.querySelector('#select-movie-h2').appendChild(sort_result);
+
       // Add section for sorting movies after the #select-movie section
       document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
+
+      // Populate movie_attributes list
+      for (var i = 0; i < movie_nodes.length; i++) {
+        var movie_info = movie_nodes[i].lastElementChild;
+        movie_attributes.push({
+          title: movie_nodes[i].id,
+          rating: movie_info.childNodes[1].innerText,
+          genre: movie_info.childNodes[3].innerText.toLowerCase().split(', '),
+          runtime: movie_info.childNodes[5].innerText
+        });
+      }
     }
 
   });
