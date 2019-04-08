@@ -9,13 +9,13 @@
   * I'm good at programming, designing, and testing, with preference to programming. I'm not good with colors. I think I'm also good at multi-tasking.
 * Abdulaziz Aldossari
   * I'm good at designing, coding in HTML CSS JavaScript, and tracks errors. Also, I likes to suggest things like, for this project I suggest creating cars rent app. I'm not good at choosing or designing pictures for websites.
-  
+
 ## Project Proposal
-Our group will design a booking system for the purchase of movie tickets from a franchise.
-As such, the customer will be able to view a seating chart and purchase tickets for that specific location. They will enter their name and a credit card to complete the purchase.
+Our group will design a booking system for the purchase of movie tickets from a hypothetical local theater.
+As such, the customer will be able to look up viewing availabilities for each movie, check a seating chart to reserve their spot(s), and purchase tickets. They will enter their name and a credit card to complete the purchase.
 
 ## Group Repository
-Our group repository can be found here: <TODO>
+Our group repository can be found here: https://github.com/itmd362-arcn/itmd362-project-two
 
-## Communication Apps
-<TODO>
+## Communication App
+**Basecamp:** primary organization tool for TO-DO lists, calendars, and group chatting.
