@@ -83,6 +83,30 @@
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
 
+  // Checks if the selected movie genre from the sort-by form matches
+  // the genre of a particular movie
+  function check_genre(selection, genres) {
+    if (selection !== "") {
+      return (genres.includes(selection));
+    }
+    else {
+      // Selection is "All Genres", every movie is a match
+      return true;
+    }
+  }
+
+  // Checks if the selected movie rating from the sort-by form matches
+  // the rating of a particular movie
+  function check_rating(selection, rating) {
+    if (selection !== "") {
+      return (selection === rating);
+    }
+    else {
+      // Selection is "All Ratings", every movie is a match
+      return true;
+    }
+  }
+
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     // Represents the movie selection list on homepage
