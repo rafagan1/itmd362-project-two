@@ -35,7 +35,7 @@
 
   function validate_name(name) {
     // Valid name is a non-empty string after removing excess whitespace
-    return validate(remove_excess_whitespace(name), /\.+/g);
+    return validate(remove_excess_whitespace(name), /.+/g);
   }
 
   function validate_ccn(ccn) {
