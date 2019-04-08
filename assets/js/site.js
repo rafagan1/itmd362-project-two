@@ -83,4 +83,21 @@
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
 
-});
+  // Run JS once DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Represents the movie selection list on homepage
+    var movie_list = document.querySelector('#movie-list');
+    
+    // Change 'nojs' class for each html document to 'js'
+    document.querySelector('html').className = 'js';
+
+    // If broswer supports template, add Sort-By functionality
+    // on movie selection homepage
+    if('content' in document.createElement('template')) {
+      // Add section for sorting movies after the #select-movie section
+      document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
+    }
+
+  });
+
+})();
