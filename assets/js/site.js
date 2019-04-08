@@ -59,23 +59,63 @@
     return false;
   }
 
-  function validate_ccv(ccv) {
+  function validate_cvv(cvv) {
     // Valid security code is a 3 or 4 digit string with all whitespace removed
-    return validate(remove_all_whitespace(ccv), /^[0-9]{3}[0-9]?$/g)
+    return validate(remove_all_whitespace(cvv), /^[0-9]{3}[0-9]?$/g);
   }
 
   function validate_zipcode(zipcode) {
     // Valid zip code is either 5 digits or 5 digits + '-' + 4 digits with all whitespace removed
-    return validate(remove_all_whitespace(zipcode), /^[0-9]{5}(-[0-9]{4})?$/g)
+    return validate(remove_all_whitespace(zipcode), /^[0-9]{5}(-[0-9]{4})?$/g);
   }
 
   function validate_email(email) {
     // Valid email is a non-empty string that includes an '@' with all whitespace removed
-    return validate(remove_all_whitespace(email), /^.+@.+$/g)
+    return validate(remove_all_whitespace(email), /^.+@.+$/g);
   }
 
   // Event Listeners
   // TODO: Enable/disable submit button if all fields are valid
+  document.addEventListener('DOMContentLoaded', function() {
+    var payment_form = document.querySelector('#payment');
+    var submit_payment = document.querySelector('#pay');
+    var pay_name = document.querySelector('#name').value;
+    var pay_ccn = document.querySelector('#ccn').value;
+    var pay_expr_mo = document.querySelector('#exp-month').value;
+    var pay_expr_yr = document.querySelector('#exp-year').value;
+    var pay_cvv = document.querySelector('#cvv').value;
+    var pay_zipcode = document.querySelector('#zipcode').value;
+    var pay_email = document.querySelector('#email').value;
+
+    console.log('DOM loaded');
+
+    // Disable submit button
+    submit_payment.setAttribute('disabled', 'disabled');
+    console.log('Submit button disabled');
+
+    // Set up listener for any changes in the form using keyup
+    payment_form.addEventListener('keyup', function() {
+      console.log('keyup');
+
+      // If everything is valid, enable the submit button
+      if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
+        // Enable submit if all valid
+        if (submit_payment.hasAttribute('disabled')) {
+          submit_payment.removeAttribute('disabled');
+          console.log('Submit button enabled');
+        }
+      } else {
+        // Else, disable the submit button
+        if (!submit_payment.hasAttribute('disabled')) {
+          submit_payment.setAttribute('disabled', 'disabled');
+          console.log('Submit button disabled');
+        }
+      }
+
+      // TODO: Add error messages depending on invalid inputs
+    });
+  });
+
   // ETC
 
   //  TODO: Update expiration month/year based on current date
@@ -83,4 +123,4 @@
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
 
-});
+}());
