@@ -105,6 +105,14 @@
     // Set up listener for any changes in the form using keyup
     payment_form.addEventListener('keyup', function() {
       console.log('keyup');
+      // Get updated input values
+      pay_name = document.querySelector('#name').value;
+      pay_ccn = document.querySelector('#ccn').value;
+      pay_expr_mo = document.querySelector('#exp-month').value;
+      pay_expr_yr = document.querySelector('#exp-year').value;
+      pay_cvv = document.querySelector('#cvv').value;
+      pay_zipcode = document.querySelector('#zipcode').value;
+      pay_email = document.querySelector('#email').value;
 
       // If everything is valid, enable the submit button
       if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
