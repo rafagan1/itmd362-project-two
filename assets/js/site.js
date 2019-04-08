@@ -45,6 +45,11 @@
 
   function validate_expr_month(month) {
     // Valid mo is a 2-digit number between 1-12
+    if (typeof(month) == NaN) {
+      return false;
+    }
+    month = Number(month);
+
     if (month >= 1 && month <= 12) {
       return true;
     }
@@ -53,6 +58,10 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
+    if (typeof(year) == NaN) {
+      return false;
+    }
+    year = Number(year);
     if (year >= 2019 && year <= 9999) {
       return true;
     }
@@ -110,9 +119,8 @@
           submit_payment.setAttribute('disabled', 'disabled');
           console.log('Submit button disabled');
         }
+        // TODO: Add error messages depending on invalid inputs
       }
-
-      // TODO: Add error messages depending on invalid inputs
     });
   });
 
