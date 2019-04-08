@@ -107,6 +107,16 @@
     }
   }
 
+    // Outputs a message if no movies were found for a set of filters
+  function check_movie_list(count, sort_result) {
+    if (count === 0) {
+      sort_result.innerText = "Sorry, no movies were found with those filters.";
+    }
+    else {
+      sort_result.innerText = "";
+    }
+  }
+
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     // Represents the movie selection list on homepage
@@ -157,6 +167,7 @@
             }
           }
         }
+        check_movie_list(movie_list.childElementCount, sort_result);
       });
 
       // Listen for selection on #rating-select to sort by movie rating
@@ -172,6 +183,7 @@
             }
           }
         }
+        check_movie_list(movie_list.childElementCount, sort_result);
       });
     }
 
