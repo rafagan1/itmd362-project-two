@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Select Showtime</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+<link rel="stylesheet" href="../assets/screen.css" />
+</head>
+<body class="ng">
+    <h2>Showtimes</h2>
+    <form id="booking-form" action="../tickets/index.html" method="get">
+      <ol>
+        <li id="sdate">
+        <label for="date">Select Date </label>
+        <select id="date" required>
+            <option value=""> </option>
+            <option value="Fri">Fri, Apr 5</option>
+            <option value="Sat">Sat, Apr 6</option>
+            <option value="Sun">Sun, Apr 7</option>
+            <option value="Mon">Mon, Apr 8</option>
+            <option value="Tue">Tue, Apr 9</option>
+            <option value="Wed">Sat, Apr 10</option>
+            <option value="Thur">Sun, Apr 11</option>
+            <option value="Fri">Mon, Apr 12</option>
+            <option value="Sat">Tue, Apr 13</option>
+          </select>
+        </li>
+        <li id="ptime">
+          <label for="pick-time">Select time</label>
+          <select id="pick-time" required>
+              <option value=""> </option>
+              <option value="AM">10:00 AM</option>
+              <option value="PM1">02:30 PM</option>
+              <option value="PM2">06:00 PM</option>
+              <option value="PM3">07:30 PM</option>
+              <option value="PM4">10:00 PM</option>
+            </select>
+        </li>
+        <li id="submit">
+          <input type="submit" id="show-time" value="NEXT" formaction="../tickets/index.html" />
+        </li>
+      </ol>
+    </form>
+  <!--<script src="site.js"></script>-->
+</body>
+</html>
