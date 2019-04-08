@@ -83,4 +83,110 @@
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
 
-});
+  // Checks if the selected movie genre from the sort-by form matches
+  // the genre of a particular movie
+  function check_genre(selection, genres) {
+    if (selection !== "") {
+      return (genres.includes(selection));
+    }
+    else {
+      // Selection is "All Genres", every movie is a match
+      return true;
+    }
+  }
+
+  // Checks if the selected movie rating from the sort-by form matches
+  // the rating of a particular movie
+  function check_rating(selection, rating) {
+    if (selection !== "") {
+      return (selection === rating);
+    }
+    else {
+      // Selection is "All Ratings", every movie is a match
+      return true;
+    }
+  }
+
+    // Outputs a message if no movies were found for a set of filters
+  function check_movie_list(count, sort_result) {
+    if (count === 0) {
+      sort_result.innerText = "Sorry, no movies were found with those filters.";
+    }
+    else {
+      sort_result.innerText = "";
+    }
+  }
+
+  // Run JS once DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Represents the movie selection list on homepage
+    var movie_list = document.querySelector('#movie-list');
+
+    // Change 'nojs' class for each html document to 'js'
+    document.querySelector('html').className = 'js';
+
+    // If broswer supports template, add Sort-By functionality
+    // on movie selection homepage
+    if('content' in document.createElement('template')) {
+      // Node list of all the available movies
+      var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
+
+      // Save attributes of each movie for sorting
+      var movie_attributes = [];
+
+      // Create element for displaying a message if no movies were
+      // found under a set of filter criteria
+      var sort_result = document.createElement('p');
+      sort_result.setAttribute('id', 'result-message');
+      document.querySelector('#select-movie-h2').appendChild(sort_result);
+
+      // Add section for sorting movies after the #select-movie section
+      document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
+
+      // Populate movie_attributes list
+      for (var i = 0; i < movie_nodes.length; i++) {
+        var movie_info = movie_nodes[i].lastElementChild;
+        movie_attributes.push({
+          title: movie_nodes[i].id,
+          rating: movie_info.childNodes[1].innerText,
+          genre: movie_info.childNodes[3].innerText.toLowerCase().split(', '),
+          runtime: movie_info.childNodes[5].innerText
+        });
+      }
+
+      // Listen for selection on #genre-select to sort by movie genre
+      document.querySelector('#genre-select').addEventListener('change', function(e) {
+        var selection = e.target.value;
+        for (var i = 0; i < movie_attributes.length; i++) {
+          if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
+            movie_list.appendChild(movie_nodes[i]);
+          }
+          else {
+            if (movie_list.contains(movie_nodes[i])) {
+              movie_list.removeChild(movie_nodes[i]);
+            }
+          }
+        }
+        check_movie_list(movie_list.childElementCount, sort_result);
+      });
+
+      // Listen for selection on #rating-select to sort by movie rating
+      document.querySelector('#rating-select').addEventListener('change', function(e) {
+        var selection = e.target.value;
+        for (var i = 0; i < movie_attributes.length; i++) {
+          if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
+            movie_list.appendChild(movie_nodes[i]);
+          }
+          else {
+            if (movie_list.contains(movie_nodes[i])) {
+              movie_list.removeChild(movie_nodes[i]);
+            }
+          }
+        }
+        check_movie_list(movie_list.childElementCount, sort_result);
+      });
+    }
+
+  });
+
+})();

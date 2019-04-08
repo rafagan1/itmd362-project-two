@@ -10,7 +10,17 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 /* Base Rules */
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
 /* Layout Rules */
+#movie-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); /* TODO: Update to rel unit */
+}
 
 /* Module Rules */
 
