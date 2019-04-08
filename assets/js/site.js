@@ -9,11 +9,6 @@
 
   // Value cleaning functions
 
-  //  Payment form inputs:
-  //    TODO: Zip code (5# or 5#-4# number code)
-  //    TODO: Email addresss (Remove whitespace, includes @)
-
-
   function remove_excess_whitespace(value) {
     // Remove excess whitespace
     value = value.replace(/^ +/g, '');  // Remove whitespace from beginning
@@ -72,6 +67,11 @@
   function validate_zipcode(zipcode) {
     // Valid zip code is either 5 digits or 5 digits + '-' + 4 digits with all whitespace removed
     return validate(remove_all_whitespace(zipcode), /^[0-9]{5}(-[0-9]{4})?$/g)
+  }
+
+  function validate_email(email) {
+    // Valid email is a non-empty string that includes an '@' with all whitespace removed
+    return validate(remove_all_whitespace(email), /^.+@.+$/g)
   }
 
   // Event Listeners
