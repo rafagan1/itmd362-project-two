@@ -11,19 +11,19 @@
   <h2>Ticket Type</h2>
   <form id="ticket-form" action="booking.html" method="get">
     <fieldset>
-      <legend>Select Ticket Type</legend>
+      <legend class="page-type">Select Ticket Type</legend>
       <ul>
       <li id="adult">
-        <label for="adult-tickets">Adult (Age 13+:  $12.50)</label>
-        <input type= "number" id= "adult-tickets" name="adult-tickets" min="1" max="10" required />
+        <label for="adult-tickets">Adult ($12.50)</label>
+        <input type= "number" id= "adult-tickets" name="adult-tickets" min="1" max="10" placeholder="(Age 13+)" required />
       </li>
       <li id="child">
-        <label for="ch-tickets">Child(Age 2-12: $11.00) </label>
-        <input type="number" id="ch-tickets" name="ch-tickets" min="1" max="10" />
+        <label for="ch-tickets">Child($11.00) </label>
+        <input type="number" id="ch-tickets" name="ch-tickets" min="1" max="10" placeholder="(Age 2-12)"  />
       </li>
         <li id="senior">
-        <label for="sr-tickets">Senior(Age 60+: $12.00)</label>
-        <input type="number" id="sr-tickets" name="sr-tickets" min="1" max="10" />
+        <label for="sr-tickets">Senior($12.00)</label>
+        <input type="number" id="sr-tickets" name="sr-tickets" min="1" max="10" placeholder="(Age 60+)"  />
       </li>
         <li id="submit">
         <input type="submit" id="ticket-type" value="NEXT" formaction="booking.html" />
