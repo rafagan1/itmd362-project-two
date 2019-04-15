@@ -84,8 +84,11 @@
   }
 
   // Event Listeners
-  // TODO: Enable/disable submit button if all fields are valid
   document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('main-pay-info') === null) {
+      return;
+    }
+
     var payment_form = document.querySelector('#payment');
     var submit_payment = document.querySelector('#pay');
     var pay_name = document.querySelector('#name').value;
@@ -206,6 +209,10 @@
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('main-select-movie') === null) {
+      return;
+    }
+
     // Represents the movie selection list on homepage
     var movie_list = document.querySelector('#movie-list');
 
