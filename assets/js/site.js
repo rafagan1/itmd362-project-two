@@ -55,8 +55,8 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
-    year = Number(year);
-
+    year = Number(year)
+    
     if (year >= 2019 && year <= 9999) {
       return true;
     }
@@ -83,7 +83,7 @@
     if (document.getElementById('main-pay-info') === null) {
       return;
     }
-
+    
     var payment_form = document.querySelector('#payment');
     var submit_payment = document.querySelector('#pay');
     var pay_name = document.querySelector('#name').value;
