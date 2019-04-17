@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../assets/css/screen.css" />
 </head>
 <body class="ng">
+  <main id="content">
   <p id="movie-date-selected"> </p>
   <h2>Ticket Type</h2>
   <form id="ticket-form" action="booking.html" method="get">
@@ -15,15 +16,15 @@
       <ul>
       <li id="adult">
         <label for="adult-tickets">Adult ($12.50)</label>
-        <input type= "number" id= "adult-tickets" name="adult-tickets" min="1" max="10" placeholder="(Age 13+)" required />
+        <input type= "number" id= "adult-tickets" name="adult-tickets" min="1" max="10" placeholder="(Age 13+)" />
       </li>
       <li id="child">
         <label for="ch-tickets">Child($11.00) </label>
-        <input type="number" id="ch-tickets" name="ch-tickets" min="1" max="10" placeholder="(Age 2-12)"  />
+        <input type="number" id="ch-tickets" name="ch-tickets" min="1" max="10" placeholder="(Age 2-12)" />
       </li>
         <li id="senior">
         <label for="sr-tickets">Senior($12.00)</label>
-        <input type="number" id="sr-tickets" name="sr-tickets" min="1" max="10" placeholder="(Age 60+)"  />
+        <input type="number" id="sr-tickets" name="sr-tickets" min="1" max="10" placeholder="(Age 60+)" />
       </li>
         <li id="submit">
         <input type="submit" id="ticket-type" value="NEXT" formaction="booking.html" />
@@ -31,6 +32,7 @@
     </ul>
     </fieldset>
     </form>
+  </main>
   <script src="../assets/js/site.js"></script>
 </body>
 </html>

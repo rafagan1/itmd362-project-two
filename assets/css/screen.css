@@ -22,6 +22,79 @@ img {
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); /* TODO: Update to rel unit */
 }
 
+/* RULES FOR TIME & TICKETS - will reorder soon */
+#time-form #ticket-form, h2 {
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+#movie-date-selected {
+  text-align: left;
+  font-size: 0.75em;
+}
+
+#time-form #ticket-form, ul li {
+  list-style: none;
+  padding-bottom: 1.5em;
+  text-align: center;
+}
+
+#show-time, #ticket-type {
+  background-color: green;
+  border-radius: 1em;
+  color: white;
+  float: center;
+  cursor: pointer;
+  font-size: 60%;
+  min-height: 3em;
+  width: 25%;
+}
+
+#ticket-form input[type="number"], option {
+  background-color: lightblue;
+}
+
+#time-form #ticket-form, fieldset {
+  border: blue solid 0.1em;
+  width: 30%;
+  margin: auto;
+}
+
+#time-form #ticket-form label, select, input {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0.5em;
+  margin: auto;
+  color: blue;
+  background-color: lightblue;
+  font-size: 0.75em;
+}
+
+#time-form #ticket-form, legend {
+  font-size: 1em;
+  display: grid;
+  text-align: center;
+  padding: 1.5em;
+  margin: auto;
+  border-radius: 0.5em;
+  color: green;
+}
+
+#ticket-type:disabled {
+  opacity: 0.5;
+}
+
+label[for="pick-date"],
+label[for="pick-time"],
+label[for="adult-tickets"],
+label[for="ch-tickets"],
+label[for="sr-tickets"] {
+  font-size: 0.75em;
+}
+
+/* END RULES FOR TIME & TICKETS - will reorder soon */
+
 /* Module Rules */
 
 /* State Rules */

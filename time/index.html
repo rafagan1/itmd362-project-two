@@ -7,33 +7,34 @@
 <link rel="stylesheet" href="../assets/css/screen.css" />
 </head>
 <body class="ng">
+  <main id="content">
   <h2 class="time-heading">Showtimes</h2>
     <form id="time-form" action="../tickets/index.html" method="get">
       <fieldset>
         <legend class="page-type">Select Date and Time</legend>
         <ul>
           <li id="sel-date">
-            <label for="date">Select Date </label>
-            <select id="date" required>
-              <option value=""> </option>
-              <option value="Fri-05">Fri, Apr 5</option>
-              <option value="Sat-06">Sat, Apr 6</option>
-              <option value="Sun">Sun, Apr 7</option>
-              <option value="Mon">Mon, Apr 8</option>
-              <option value="Tue">Tue, Apr 9</option>
-              <option value="Wed">Sat, Apr 10</option>
-              <option value="Thur">Sun, Apr 11</option>
-              <option value="Fri-12">Mon, Apr 12</option>
-              <option value="Sat-13">Tue, Apr 13</option>
+            <label for="pick-date">Date Of Show </label>
+            <select id="pick-date" required>
+              <option value=""> Select a Date</option>
+              <option value="Fri-19">Fri, Apr 19</option>
+              <option value="Sat-20">Sat, Apr 20</option>
+              <option value="Sun">Sun, Apr 21</option>
+              <option value="Mon">Mon, Apr 22</option>
+              <option value="Tue">Tue, Apr 23</option>
+              <option value="Wed">Sat, Apr 24</option>
+              <option value="Thur">Sun, Apr 25</option>
+              <option value="Fri-26">Mon, Apr 26</option>
+              <option value="Sat-27">Tue, Apr 27</option>
             </select>
           </li>
           <li id="ptime">
-            <label for="pick-time">Select time</label>
+            <label for="pick-time">Time Of Show</label>
             <select id="pick-time" required>
-              <option value=""> </option>
+              <option value="">Select a Time</option>
               <option value="AM">10:00 AM</option>
               <option value="PM1">02:30 PM</option>
-              <option value="PM2">06:00 PM</option>
+              <option value="PM2">04:00 PM</option>
               <option value="PM3">07:30 PM</option>
               <option value="PM4">10:00 PM</option>
             </select>
@@ -44,6 +45,7 @@
         </ul>
       </fieldset>
     </form>
+  </main>
   <script src="../assets/js/site.js"></script>
 </body>
 </html>
