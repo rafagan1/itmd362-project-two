@@ -147,41 +147,70 @@
 
         // Invalid name
         if (!validate_name(pay_name)) {
-          console.log('Invalid Name')
+          console.log('Invalid Name');
           if (document.querySelector('#name-label + .error') === null) {
             document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-            console.log(0);
           }
         } else {
           if (document.querySelector('#name-label + .error') !== null) {
             document.querySelector('#name-label + .error').remove();
-            console.log(1);
           }
         }
 
         // Invalid CCN
         if (!validate_ccn(pay_ccn)) {
           console.log('Invalid CCN');
-        }
-
-        // Invalid expr month
-        if (!validate_expr_month(pay_expr_mo)) {
-          console.log('Invalid Expiration Month');
+          if (document.querySelector('#ccn-label + .error') === null) {
+            document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#ccn-label + .error') !== null) {
+            document.querySelector('#ccn-label + .error').remove();
+          }
         }
 
         // Invalid expr year
         if (!validate_expr_year(pay_expr_yr)) {
-          console.log('Invalid Expiration Year');
+          if (document.querySelector('#exp-year-label + .error') === null) {
+            document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#exp-year-label + .error') !== null) {
+            document.querySelector('#exp-year-label + .error').remove();
+          }
+        }
+
+        // Invalid CVV
+        if (!validate_cvv(pay_cvv)) {
+          if (document.querySelector('#cvv-label + .error') === null) {
+            document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#cvv-label + .error') !== null) {
+            document.querySelector('#cvv-label + .error').remove();
+          }
         }
 
         // Invalid zip code
         if (!validate_zipcode(pay_zipcode)) {
-          console.log('Invalid ZIP Code');
+          if (document.querySelector('#zipcode-label + .error') === null) {
+            document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#zipcode-label + .error') !== null) {
+            document.querySelector('#zipcode-label + .error').remove();
+          }
         }
 
         // Invalid email
         if (!validate_email(pay_email)) {
-          console.log('Invalid Email');
+          if (document.querySelector('#email-label + .error') === null) {
+            document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#email-label + .error') !== null) {
+            document.querySelector('#email-label + .error').remove();
+          }
         }
       }
     });
