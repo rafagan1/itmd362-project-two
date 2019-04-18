@@ -80,10 +80,6 @@
 
   // Event Listeners
   document.addEventListener('DOMContentLoaded', function() {
-    if (document.getElementById('main-pay-info') === null) {
-      return;
-    }
-
     var payment_form = document.querySelector('#payment');
     var submit_payment = document.querySelector('#pay');
     var pay_name = document.querySelector('#name').value;
@@ -93,6 +89,18 @@
     var pay_cvv = document.querySelector('#cvv').value;
     var pay_zipcode = document.querySelector('#zipcode').value;
     var pay_email = document.querySelector('#email').value;
+
+    // Initialize warning/error labels
+    var allFormLabels = document.getElementsByTagName('label');
+    var i;
+    for (i = 0; i < allFormLabels.length; i++) {
+      console.log(allFormLabels[i].id);
+      document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
+    }
+
+    if (document.getElementById('main-pay-info') === null) {
+      return;
+    }
 
     console.log('DOM loaded');
 
@@ -113,7 +121,6 @@
 
     // Set up listener for any changes in the form using keyup
     payment_form.addEventListener('keyup', function() {
-      console.log('keyup');
       // Get updated input values
       pay_name = document.querySelector('#name').value;
       pay_ccn = document.querySelector('#ccn').value;
@@ -140,8 +147,16 @@
 
         // Invalid name
         if (!validate_name(pay_name)) {
-          console.log('Invalid name');
-          // TODO: Add some form of warning for an invalid name
+          console.log('Invalid Name')
+          if (document.querySelector('#name-label + .error') === null) {
+            document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            console.log(0);
+          }
+        } else {
+          if (document.querySelector('#name-label + .error') !== null) {
+            document.querySelector('#name-label + .error').remove();
+            console.log(1);
+          }
         }
 
         // Invalid CCN
