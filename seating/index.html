@@ -14,6 +14,47 @@
     <p>Screen</p>
   </header>
   <main>
+    <ul id="main-seat-img">
+      <li>
+        <figure>
+          <img src="/assets/img/standard_selected.png" alt="standard selected" />
+          <figcaption>
+            Your seat
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="/assets/img/standard_available.png" alt="standard available" />
+          <figcaption>
+            Available
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="/assets/img/wheelchair_available.png" alt="wheelchair seat" />
+          <figcaption>
+            Wheelchair
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="/assets/img/companion_available.png" alt="companion seat" />
+          <figcaption>
+            Companion
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+    <ol>
+      <li id="adult">
+        <label for="adult-tickets">Adult (Age 13+:  $12.50)</label>
+        <input type= "number" id= "adult-tickets" name="adult-tickets" min="1" max="10" required />
+      </li>
+    </ol>
+    <form action="#null" method="get" id="form-list">
   <ol class="seat-map">
     <li class="seat">
       <input type="checkbox" name="a1" id="A1">
@@ -28,20 +69,38 @@
       <label for="3A">3A</label>
     </li>
     <li class="seat">
-      <input type="checkbox" name="4a" id="4A">
-      <label for="4A">4A</label>
+      <figure class="seat-img">
+        <img class="wheelchair" src="/assets/img/wheelchair_available.png" alt="wheelchair seat" />
+        <figcaption class="fig">
+          wheelchair seat
+        </figcaption>
+      </figure>
     </li>
     <li class="seat">
-      <input type="checkbox" name="5a" id="5A">
-      <label for="5A">5A</label>
+      <figure class="seat-img">
+        <img class="companion" src="/assets/img/companion_available.png" alt="companion seat" />
+        <figcaption class="fig">
+          companion seat
+        </figcaption>
+      </figure>
     </li>
     <li class="seat">
-      <input type="checkbox" name="6a" id="6A">
-      <label for="6A">6A</label>
+      <figure class="seat-img">
+        <img class="companion" src="/assets/img/companion_available.png" alt="companion seat" />
+        <figcaption class="fig">
+          companion seat
+        </figcaption>
+      </figure>
     </li>
     <li class="seat">
-      <input type="checkbox" name="7a" id="7A">
-      <label for="7A">7A</label>
+      <figure class="seat-img">
+        <img class="wheelchair" src="/assets/img/wheelchair_available.png" alt="wheelchair seat" />
+        <figcaption class="fig">
+          wheelchair seat
+        </figcaption>
+      </figure>
+      <!-- <input type="checkbox" name="7a" id="7A"> -->
+      <!-- <label for="7A">7A</label> -->
     </li>
     <li class="seat">
       <input type="checkbox" name="8a" id="8A">
