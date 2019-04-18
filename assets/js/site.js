@@ -55,7 +55,7 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
-    year = Number(year);
+    year = Number(year)
 
     if (year >= 2019 && year <= 9999) {
       return true;
