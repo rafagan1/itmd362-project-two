@@ -121,6 +121,9 @@
 
     // Set up listener for any changes in the form using keyup
     payment_form.addEventListener('keyup', function() {
+      // Initialize variables for use later
+      var error_tags;
+
       // Get updated input values
       pay_name = document.querySelector('#name').value;
       pay_ccn = document.querySelector('#ccn').value;
@@ -137,6 +140,12 @@
           submit_payment.removeAttribute('disabled');
           console.log('Submit button enabled');
         }
+
+        error_tags = document.getElementsByClassName('error');
+        for (i = error_tags.length-1; i >= 0; i--) {
+          error_tags[i].remove();
+        }
+
       } else {
         // Else, disable the submit button
         if (!submit_payment.hasAttribute('disabled')) {
