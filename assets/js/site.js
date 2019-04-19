@@ -61,9 +61,6 @@
 
   function validate_expr_month(month) {
     // Valid mo is a 2-digit number between 1-12
-    if (isNaN(typeof(month))) {
-      return false;
-    }
     month = Number(month);
 
     if (month >= 1 && month <= 12) {
@@ -74,10 +71,8 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
-    if (isNaN(typeof(year))) {
-      return false;
-    }
-    year = Number(year);
+    year = Number(year)
+
     if (year >= 2019 && year <= 9999) {
       return true;
     }
@@ -100,7 +95,6 @@
   }
 
   // Event Listeners
-  // TODO: Enable/disable submit button if all fields are valid
   document.addEventListener('DOMContentLoaded', function() {
     var payment_form = document.querySelector('#payment');
     var submit_payment = document.querySelector('#pay');
@@ -112,15 +106,40 @@
     var pay_zipcode = document.querySelector('#zipcode').value;
     var pay_email = document.querySelector('#email').value;
 
+    // Initialize warning/error labels
+    var allFormLabels = document.getElementsByTagName('label');
+    var i;
+    for (i = 0; i < allFormLabels.length; i++) {
+      console.log(allFormLabels[i].id);
+      document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
+    }
+
+    if (document.getElementById('main-pay-info') === null) {
+      return;
+    }
+
     console.log('DOM loaded');
 
-    // Disable submit button
-    submit_payment.setAttribute('disabled', 'disabled');
-    console.log('Submit button disabled');
+    // Enable/Disable submit button
+    if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
+      // Enable submit if all valid
+      if (submit_payment.hasAttribute('disabled')) {
+        submit_payment.removeAttribute('disabled');
+        console.log('Submit button enabled');
+      }
+    }
+    else {
+      if (!submit_payment.hasAttribute('disabled')) {
+        submit_payment.setAttribute('disabled', 'disabled');
+        console.log('Submit button disabled');
+      }
+    }
 
     // Set up listener for any changes in the form using keyup
     payment_form.addEventListener('keyup', function() {
-      console.log('keyup');
+      // Initialize variables for use later
+      var error_tags;
+
       // Get updated input values
       pay_name = document.querySelector('#name').value;
       pay_ccn = document.querySelector('#ccn').value;
@@ -137,6 +156,12 @@
           submit_payment.removeAttribute('disabled');
           console.log('Submit button enabled');
         }
+
+        error_tags = document.getElementsByClassName('error');
+        for (i = error_tags.length-1; i >= 0; i--) {
+          error_tags[i].remove();
+        }
+
       } else {
         // Else, disable the submit button
         if (!submit_payment.hasAttribute('disabled')) {
@@ -147,33 +172,70 @@
 
         // Invalid name
         if (!validate_name(pay_name)) {
-          console.log('Invalid name');
-          // TODO: Add some form of warning for an invalid name
+          console.log('Invalid Name');
+          if (document.querySelector('#name-label + .error') === null) {
+            document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#name-label + .error') !== null) {
+            document.querySelector('#name-label + .error').remove();
+          }
         }
 
         // Invalid CCN
         if (!validate_ccn(pay_ccn)) {
           console.log('Invalid CCN');
-        }
-
-        // Invalid expr month
-        if (!validate_expr_month(pay_expr_mo)) {
-          console.log('Invalid Expiration Month');
+          if (document.querySelector('#ccn-label + .error') === null) {
+            document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#ccn-label + .error') !== null) {
+            document.querySelector('#ccn-label + .error').remove();
+          }
         }
 
         // Invalid expr year
         if (!validate_expr_year(pay_expr_yr)) {
-          console.log('Invalid Expiration Year');
+          if (document.querySelector('#exp-year-label + .error') === null) {
+            document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#exp-year-label + .error') !== null) {
+            document.querySelector('#exp-year-label + .error').remove();
+          }
+        }
+
+        // Invalid CVV
+        if (!validate_cvv(pay_cvv)) {
+          if (document.querySelector('#cvv-label + .error') === null) {
+            document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#cvv-label + .error') !== null) {
+            document.querySelector('#cvv-label + .error').remove();
+          }
         }
 
         // Invalid zip code
         if (!validate_zipcode(pay_zipcode)) {
-          console.log('Invalid ZIP Code');
+          if (document.querySelector('#zipcode-label + .error') === null) {
+            document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#zipcode-label + .error') !== null) {
+            document.querySelector('#zipcode-label + .error').remove();
+          }
         }
 
         // Invalid email
         if (!validate_email(pay_email)) {
-          console.log('Invalid Email');
+          if (document.querySelector('#email-label + .error') === null) {
+            document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#email-label + .error') !== null) {
+            document.querySelector('#email-label + .error').remove();
+          }
         }
       }
     });
@@ -222,8 +284,9 @@
 
   // ========TIME AND TICKETS FUNCTIONS !!!!!
   // Save selected movie time and date in local storage
-  function storeDateAndTime() {
+  function storeDateAndTime(e) {
     // Remove previous stored time and date
+    //    e.preventDefault();
     localStorage.removeItem('time_movieTime');
     localStorage.removeItem('time_movieDate');
 
@@ -254,32 +317,14 @@
       localStorage.setItem('tickets_seniorTickets', seniorTick.value);
     }
   }
-
-  // Function to retrieve movie time, date, and tickets from local storage
-  function getLocalStorageTimeNTickets() {
-    var timeAndTickets = {
-      time_movieTime: null,
-      time_movieDate: null,
-      tickets_adultTickets : 0,
-      tickets_childTickets : 0,
-      tickets_seniorTickets :0
-    };
-
-    // Get Time and Date
-    timeAndTickets.time_movieDate = localStorage.getItem('time_movieDate');
-    timeAndTickets.time_movieTime = localStorage.getItem('time_movieTime');
-
-    // Check for Tickets by type
-    timeAndTickets.tickets_adultTickets = localStorage.getItem('tickets_adultTickets');
-    timeAndTickets.tickets_childTickets = localStorage.getItem('tickets_childTickets');
-    timeAndTickets.tickets_seniorTickets = localStorage.getItem('tickets_seniorTickets');
-
-    return(timeAndTickets);
-  }
   // ======END TIME AND TICKETS FUNCTIONS
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('main-select-movie') === null) {
+      return;
+    }
+
     // Represents the movie selection list on homepage
     var movie_list = document.querySelector('#movie-list');
 
@@ -354,11 +399,6 @@
 
     // ==== TIME AND TICKETS FUNCTIONALITY
     // Variables for time and tickets pages
-    var time_movieTime = null;
-    var time_movieDate = null;
-    var tickets_adultTickets = 0;
-    var tickets_childTickets = 0;
-    var tickets_seniorTickets = 0;
 
     // Selectors for Time page
     var dateSelected = document.querySelector('#pick-date');
@@ -373,14 +413,15 @@
 
     if (storageAvailable('localStorage')) {
       // Check for the submit button on the time/date page
-      if (submit_showTime != null) {
+      if (submit_showTime !== null) {
         // Time page can only be submitted when the date
         // and time fields are selected
-        submit_showTime.addEventListener('click', storeDateAndTime);
+        submit_showTime.addEventListener('click', function(e){
+          storeDateAndTime(e);
+        });
       }
-
       // Check for the submit button/input on the ticket page
-      if (ticketType != null) {
+      if (ticketType !== null) {
         // Disable the submit button unti at least one ticket
         // type is selected.
         ticketType.setAttribute('disabled', 'disabled');
@@ -391,19 +432,19 @@
           // Could be deleting a value initially selected.
           // Disable the submit button and check the input value.
           ticketType.setAttribute('disabled', 'disabled');
-          checkTicketType(this.value);
+          checkTicketType();
         });
 
         // Listen for input on child ticket type
         childTick.addEventListener('input', function(){
           ticketType.setAttribute('disabled', 'disabled');
-          checkTicketType(this.value);
+          checkTicketType();
         });
 
         // Listen for input on senior ticket type
         seniorTick.addEventListener('input', function(){
-            ticketType.setAttribute('disabled', 'disabled');
-            checkTicketType();
+          ticketType.setAttribute('disabled', 'disabled');
+          checkTicketType();
         });
 
         // Function to allow the tickets page to be submitted
@@ -411,62 +452,90 @@
           // Make sure at least one ticket type is selected before
           // allowing the submit button to be clicked
           if (adultTick.value > 0 ||
-              childTick.value > 0 ||
-              seniorTick.value > 0) {
-              ticketType.removeAttribute('disabled');
-
-              ticketType.addEventListener('click', storeTicketType);
-            }
+            childTick.value > 0 ||
+            seniorTick.value > 0)
+          {
+            ticketType.removeAttribute('disabled');
+            // console.log("On ticket page")
+            ticketType.addEventListener('click', storeTicketType);
+          }
         }
       } // ticketType== null
-
+/*
       // FOR WBT - will be deleted!!!!!!!!!
       // Check if movie date selected should be displayed
-      var movieDateSel  = document.querySelector('#movie-date-selected');
 
-      if (movieDateSel != null && ticketType == null) {
-        console.log("Can print time and tickets");
-        // Get time and Tickets
-        var timeTickets = getLocalStorageTimeNTickets();
+        var time_movieTime;
+        var time_movieDate;
+        var tickets_adultTickets = 0;
+        var tickets_childTickets = 0;
+        var tickets_seniorTickets = 0;
 
-        var date_selected = timeTickets.time_movieDate;
-        var time_selected = timeTickets.time_movieTime;
+        // Function to retrieve movie time, date, and tickets from local storage
+        function getLocalStorageTimeNTickets() {
+          var timeAndTickets = {
+            time_movieTime: null,
+            time_movieDate: null,
+            tickets_adultTickets : 0,
+            tickets_childTickets : 0,
+            tickets_seniorTickets :0
+          }
 
-        // Create display string for showtime and date
-        var date_display = "Movie date "+ date_selected + " | "+ time_selected;
-        movieDateSel.innerText = date_display;
+          // Get Time and Date
+          timeAndTickets.time_movieDate = localStorage.getItem('time_movieDate');
+          timeAndTickets.time_movieTime = localStorage.getItem('time_movieTime');
 
-        // Check for Tickets and date_display
-        var locStor_adultT = timeTickets.tickets_adultTickets;
-        var locStor_childT = timeTickets.tickets_childTickets;
-        var locStor_seniorT = timeTickets.tickets_seniorTickets;
-
-        var ticketArea = document.createElement('p');
-        var para = document.createElement('p');
-
-        movieDateSel.appendChild(ticketArea);
-        ticketArea.innerText = "Ticket summary:";
-        ticketArea.appendChild(para);
-
-        var cost;
-        if (locStor_adultT > 0) {
-          cost = Number(locStor_adultT) * 12.50;
-          ticketArea.innerText +=
-          "\nAdults -      " + "$"+cost+ " ("+locStor_adultT + " at $12.50)";
+          // Check for Tickets by type
+          timeAndTickets.tickets_adultTickets = localStorage.getItem('tickets_adultTickets');
+          timeAndTickets.tickets_childTickets = localStorage.getItem('tickets_childTickets');
+          timeAndTickets.tickets_seniorTickets = localStorage.getItem('tickets_seniorTickets');
+          return(timeAndTickets);
         }
-        if (locStor_childT > 0) {
-          cost = Number(locStor_childT) * 11.00;
-          ticketArea.innerText +=
-          "\nChildren - " + "$"+cost + " ("+locStor_childT + " at $11.00)";
-        }
-        if (locStor_seniorT > 0) {
-          cost = Number(locStor_seniorT) * 12.00;
-          ticketArea.innerText +=
-          "\nSeniors -  " + "$"+cost +" ("+locStor_seniorT + " at $12.00)";
-        }
-      }
+        var movieDateSel  = document.querySelector('#movie-date-selected');
 
-    } // end if (storageAvailable....
+        if (movieDateSel != null && ticketType == null) {
+          console.log("Can print time and tickets");
+          // Get time and Tickets
+          var timeTickets = getLocalStorageTimeNTickets();
+
+          var date_selected = timeTickets.time_movieDate;
+          var time_selected = timeTickets.time_movieTime;
+
+          // Create display string for showtime and date
+          var date_display = "Movie date "+ date_selected + " | "+ time_selected;
+          movieDateSel.innerText = date_display;
+
+          // Check for Tickets and date_display
+          var locStor_adultT = timeTickets.tickets_adultTickets;
+          var locStor_childT = timeTickets.tickets_childTickets;
+          var locStor_seniorT = timeTickets.tickets_seniorTickets;
+
+          var ticketArea = document.createElement('p');
+          var para = document.createElement('p');
+
+          movieDateSel.appendChild(ticketArea);
+          ticketArea.innerText = "Ticket summary:"
+          ticketArea.appendChild(para);
+
+          var cost;
+          if (locStor_adultT > 0) {
+            cost = Number(locStor_adultT) * 12.50;
+            ticketArea.innerText +=
+            "\nAdults -      " + "$"+cost+ " ("+locStor_adultT + " at $12.50)";
+          }
+          if (locStor_childT > 0) {
+            cost = Number(locStor_childT) * 11.00
+            ticketArea.innerText +=
+            "\nChildren - " + "$"+cost + " ("+locStor_childT + " at $11.00)";
+          }
+          if (locStor_seniorT > 0) {
+            cost = Number(locStor_seniorT) * 12.00
+            ticketArea.innerText +=
+            "\nSeniors -  " + "$"+cost +" ("+locStor_seniorT + " at $12.00)";
+          }
+        }
+*/
+      } // end if (storageAvailable....
     // === END TIME AND TICKETS FUNCTIONALITY
   }); // DOM loaded
 

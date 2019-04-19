@@ -4,11 +4,12 @@
   <title>ARCN Theater - Payment</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
-  <link rel="stylesheet" href="screen.css" />
+  <link rel="stylesheet" href="../assets/css/screen.css" />
+  <!-- <link rel="stylesheet" href="//basehold.it/26"> -->
 </head>
 
 <body>
-  <main id="content">
+  <main id="main-pay-info">
     <h1>Payment Information</h1>
     <!-- TODO: Use JS to actually fill these fields -->
     <section id="purchase-info">
@@ -34,7 +35,7 @@
         </li>
         <li>
           <!-- TODO: Figure out how to format a form entry for expiration date -->
-          <label for="exp-month">Expr Month</label>
+          <label id="exp-month-label" for="exp-month">Expr Month</label>
           <select name="exp-month" id="exp-month">
             <option value="1">01</option>
             <option value="2">02</option>
@@ -50,7 +51,7 @@
             <option value="12">12</option>
           </select>
           <!-- QUESTION: Dropdown or number input? -->
-          <label for="exp-year">Expr Year</label>
+          <label id="exp-year-label" for="exp-year">Expr Year</label>
           <input type="number" name="exp-year" id="exp-year" min="2019" max="2039" value="2019"/>
         </li>
         <li>
