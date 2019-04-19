@@ -232,6 +232,24 @@
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
 
+  // Given a list of movies and id for inner list of its attributes,
+  // Returns a list of of movie objects (title, genre, rating, etc.)
+  // Outer loop traverses each movie
+  // Inner loop saves attributes of each movie
+  function get_movie_list(movie_nodes, attribute_list) {
+    var movie_attributes = [];
+    for (var node of movie_nodes) {
+      var movie_entry = {
+        title: node.id
+      };
+      for (var movie of node.querySelector(attribute_list).children) {
+        movie_entry[movie.className] = movie.innerText;
+      }
+      movie_attributes.push(movie_entry);
+    }
+    return movie_attributes;
+  }
+
   // Checks if the selected movie genre from the sort-by form matches
   // the genre of a particular movie
   function check_genre(selection, genres) {
@@ -279,7 +297,7 @@
     var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
 
     // Save attributes of each movie for sorting
-    var movie_attributes = [];
+    var movie_attributes = get_movie_list(movie_nodes, ".movie-info");
 
     // Create element for displaying a message if no movies were
     // found under a set of filter criteria
@@ -289,7 +307,7 @@
     // Change 'nojs' class for each html document to 'js'
     document.querySelector('html').className = 'js';
 
-    // If broswer supports template, add Sort-By functionality
+    // If browser supports template, add Sort-By functionality
     // on movie selection homepage
     if('content' in document.createElement('template')) {
       sort_result.setAttribute('id', 'result-message');
@@ -298,16 +316,6 @@
       // Add section for sorting movies after the #select-movie section
       document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
 
-      // Populate movie_attributes list
-      for (i = 0; i < movie_nodes.length; i++) {
-        movie_info = movie_nodes[i].lastElementChild;
-        movie_attributes.push({
-          title: movie_nodes[i].id,
-          rating: movie_info.childNodes[1].innerText,
-          genre: movie_info.childNodes[3].innerText.toLowerCase().split(', '),
-          runtime: movie_info.childNodes[5].innerText
-        });
-      }
 
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
