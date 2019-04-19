@@ -325,6 +325,24 @@
     // Change 'nojs' class for each html document to 'js'
     document.querySelector('html').className = 'js';
 
+
+    if (storageAvailable('localStorage')) {
+      // Save title of clicked element in Local Storafe before proceeding to
+      // movie times page
+      document.querySelector('#movie-list').addEventListener('click', function(e) {
+        var elem = e.target;
+        e.preventDefault();
+        if (elem.className === 'movie-title' || elem.className === 'poster') {
+          while (elem.className !== 'movie-title') {
+            elem = elem.nextElementSibling;
+          }
+          localStorage.removeItem('movie-title');
+          localStorage.setItem('movie-title', elem.innerText);
+          document.location.assign('time/');
+        }
+      });
+    }
+
     // If browser supports template, add Sort-By functionality
     // on movie selection homepage
     if('content' in document.createElement('template')) {
