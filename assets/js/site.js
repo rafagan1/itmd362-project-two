@@ -237,12 +237,12 @@
   // Outer loop traverses each movie
   // Inner loop saves attributes of each movie
   function get_movie_list(movie_nodes, attribute_list) {
-    var movie_attributes = [];
-    for (var node of movie_nodes) {
-      var movie_entry = {
+    var movie_attributes = [], node, movie, movie_entry;
+    for (node of movie_nodes) {
+      movie_entry = {
         title: node.id
       };
-      for (var movie of node.querySelector(attribute_list).children) {
+      for (movie of node.querySelector(attribute_list).children) {
         movie_entry[movie.className] = movie.innerText;
       }
       movie_attributes.push(movie_entry);
@@ -253,6 +253,7 @@
   // Checks if the selected movie genre from the sort-by form matches
   // the genre of a particular movie
   function check_genre(selection, genres) {
+    genres = genres.toLowerCase().split(', ');
     if (selection !== "") {
       return (genres.includes(selection));
     }
@@ -286,24 +287,24 @@
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
+    var movie_list, movie_nodes, movie_attributes, sort_result;
     if (document.getElementById('main-select-movie') === null) {
       return;
     }
 
     // Represents the movie selection list on homepage
-    var movie_list = document.querySelector('#movie-list');
+    movie_list = document.querySelector('#movie-list');
 
     // Node list of all the available movies
-    var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
+    movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
 
     // Save attributes of each movie for sorting
-    var movie_attributes = get_movie_list(movie_nodes, ".movie-info");
+    movie_attributes = get_movie_list(movie_nodes, ".movie-info");
 
     // Create element for displaying a message if no movies were
     // found under a set of filter criteria
-    var sort_result = document.createElement('p');
+    sort_result = document.createElement('p');
 
-    var i, movie_info, selection;
     // Change 'nojs' class for each html document to 'js'
     document.querySelector('html').className = 'js';
 
@@ -320,7 +321,7 @@
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
         var i;
-        selection = e.target.value;
+        var selection = e.target.value;
         for (i = 0; i < movie_attributes.length; i++) {
           if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
             movie_list.appendChild(movie_nodes[i]);
@@ -336,8 +337,8 @@
 
       // Listen for selection on #rating-select to sort by movie rating
       document.querySelector('#rating-select').addEventListener('change', function(e) {
-        var selection = e.target.value;
         var i;
+        var selection = e.target.value;
         for (i = 0; i < movie_attributes.length; i++) {
           if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
             movie_list.appendChild(movie_nodes[i]);
