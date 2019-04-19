@@ -294,7 +294,7 @@
     var dateSel = dateSelected.options[dateSelected.selectedIndex].text;
     var timeSel = timeSelected.options[timeSelected.selectedIndex].text;
 
-    // Store the selected date and time
+    // Store the selected date and time.
     localStorage.setItem('time_movieDate', dateSel);
     localStorage.setItem('time_movieTime', timeSel);
   }
