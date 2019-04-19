@@ -397,6 +397,8 @@
           }
         }
         check_movie_list(movie_list.childElementCount, sort_result);
+        document.querySelector('#genre-select').value = "";
+        document.querySelector('#rating-select').value = "";
       });
     }
 
