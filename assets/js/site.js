@@ -351,6 +351,18 @@
         }
         check_movie_list(movie_list.childElementCount, sort_result);
       });
+
+      // Listen for click on 'Reset Filter' button to show all movies on screen
+      document.querySelector('#reset-sort').addEventListener('click', function(e) {
+        var movie;
+        e.preventDefault();
+        for (movie of movie_nodes) {
+          if (!movie_list.contains(movie)) {
+            movie_list.appendChild(movie);
+          }
+        }
+        check_movie_list(movie_list.childElementCount, sort_result);
+      });
     }
 
   });
