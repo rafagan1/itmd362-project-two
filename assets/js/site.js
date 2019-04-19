@@ -7,6 +7,23 @@
     return;
   }
 
+  // Function to be called later for determining localStorage support
+  // Taken from discussion at https://gist.github.com/paulirish/5558557
+  function storageAvailable(type) {
+    var storage, x;
+    try {
+      storage = window[type];
+      x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      // console.log("Type = ", type);
+      return true;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
   // Value cleaning functions
 
   function remove_excess_whitespace(value) {
