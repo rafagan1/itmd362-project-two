@@ -45,6 +45,8 @@
 
   function validate_expr_month(month) {
     // Valid mo is a 2-digit number between 1-12
+    month = Number(month);
+
     if (month >= 1 && month <= 12) {
       return true;
     }
@@ -53,29 +55,176 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
+    year = Number(year)
+
     if (year >= 2019 && year <= 9999) {
       return true;
     }
     return false;
   }
 
-  function validate_ccv(ccv) {
+  function validate_cvv(cvv) {
     // Valid security code is a 3 or 4 digit string with all whitespace removed
-    return validate(remove_all_whitespace(ccv), /^[0-9]{3}[0-9]?$/g)
+    return validate(remove_all_whitespace(cvv), /^[0-9]{3}[0-9]?$/g);
   }
 
   function validate_zipcode(zipcode) {
     // Valid zip code is either 5 digits or 5 digits + '-' + 4 digits with all whitespace removed
-    return validate(remove_all_whitespace(zipcode), /^[0-9]{5}(-[0-9]{4})?$/g)
+    return validate(remove_all_whitespace(zipcode), /^[0-9]{5}(-[0-9]{4})?$/g);
   }
 
   function validate_email(email) {
     // Valid email is a non-empty string that includes an '@' with all whitespace removed
-    return validate(remove_all_whitespace(email), /^.+@.+$/g)
+    return validate(remove_all_whitespace(email), /^.+@.+$/g);
   }
 
   // Event Listeners
-  // TODO: Enable/disable submit button if all fields are valid
+  document.addEventListener('DOMContentLoaded', function() {
+    var payment_form = document.querySelector('#payment');
+    var submit_payment = document.querySelector('#pay');
+    var pay_name = document.querySelector('#name').value;
+    var pay_ccn = document.querySelector('#ccn').value;
+    var pay_expr_mo = document.querySelector('#exp-month').value;
+    var pay_expr_yr = document.querySelector('#exp-year').value;
+    var pay_cvv = document.querySelector('#cvv').value;
+    var pay_zipcode = document.querySelector('#zipcode').value;
+    var pay_email = document.querySelector('#email').value;
+
+    // Initialize warning/error labels
+    var allFormLabels = document.getElementsByTagName('label');
+    var i;
+    for (i = 0; i < allFormLabels.length; i++) {
+      console.log(allFormLabels[i].id);
+      document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
+    }
+
+    if (document.getElementById('main-pay-info') === null) {
+      return;
+    }
+
+    console.log('DOM loaded');
+
+    // Enable/Disable submit button
+    if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
+      // Enable submit if all valid
+      if (submit_payment.hasAttribute('disabled')) {
+        submit_payment.removeAttribute('disabled');
+        console.log('Submit button enabled');
+      }
+    }
+    else {
+      if (!submit_payment.hasAttribute('disabled')) {
+        submit_payment.setAttribute('disabled', 'disabled');
+        console.log('Submit button disabled');
+      }
+    }
+
+    // Set up listener for any changes in the form using keyup
+    payment_form.addEventListener('keyup', function() {
+      // Initialize variables for use later
+      var error_tags;
+
+      // Get updated input values
+      pay_name = document.querySelector('#name').value;
+      pay_ccn = document.querySelector('#ccn').value;
+      pay_expr_mo = document.querySelector('#exp-month').value;
+      pay_expr_yr = document.querySelector('#exp-year').value;
+      pay_cvv = document.querySelector('#cvv').value;
+      pay_zipcode = document.querySelector('#zipcode').value;
+      pay_email = document.querySelector('#email').value;
+
+      // If everything is valid, enable the submit button
+      if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
+        // Enable submit if all valid
+        if (submit_payment.hasAttribute('disabled')) {
+          submit_payment.removeAttribute('disabled');
+          console.log('Submit button enabled');
+        }
+
+        error_tags = document.getElementsByClassName('error');
+        for (i = error_tags.length-1; i >= 0; i--) {
+          error_tags[i].remove();
+        }
+
+      } else {
+        // Else, disable the submit button
+        if (!submit_payment.hasAttribute('disabled')) {
+          submit_payment.setAttribute('disabled', 'disabled');
+          console.log('Submit button disabled');
+        }
+        // TODO: Add error messages depending on invalid inputs
+
+        // Invalid name
+        if (!validate_name(pay_name)) {
+          console.log('Invalid Name');
+          if (document.querySelector('#name-label + .error') === null) {
+            document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#name-label + .error') !== null) {
+            document.querySelector('#name-label + .error').remove();
+          }
+        }
+
+        // Invalid CCN
+        if (!validate_ccn(pay_ccn)) {
+          console.log('Invalid CCN');
+          if (document.querySelector('#ccn-label + .error') === null) {
+            document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#ccn-label + .error') !== null) {
+            document.querySelector('#ccn-label + .error').remove();
+          }
+        }
+
+        // Invalid expr year
+        if (!validate_expr_year(pay_expr_yr)) {
+          if (document.querySelector('#exp-year-label + .error') === null) {
+            document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#exp-year-label + .error') !== null) {
+            document.querySelector('#exp-year-label + .error').remove();
+          }
+        }
+
+        // Invalid CVV
+        if (!validate_cvv(pay_cvv)) {
+          if (document.querySelector('#cvv-label + .error') === null) {
+            document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#cvv-label + .error') !== null) {
+            document.querySelector('#cvv-label + .error').remove();
+          }
+        }
+
+        // Invalid zip code
+        if (!validate_zipcode(pay_zipcode)) {
+          if (document.querySelector('#zipcode-label + .error') === null) {
+            document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#zipcode-label + .error') !== null) {
+            document.querySelector('#zipcode-label + .error').remove();
+          }
+        }
+
+        // Invalid email
+        if (!validate_email(pay_email)) {
+          if (document.querySelector('#email-label + .error') === null) {
+            document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+          }
+        } else {
+          if (document.querySelector('#email-label + .error') !== null) {
+            document.querySelector('#email-label + .error').remove();
+          }
+        }
+      }
+    });
+  });
+
   // ETC
 
   //  TODO: Update expiration month/year based on current date
@@ -107,7 +256,7 @@
     }
   }
 
-    // Outputs a message if no movies were found for a set of filters
+  // Outputs a message if no movies were found for a set of filters
   function check_movie_list(count, sort_result) {
     if (count === 0) {
       sort_result.innerText = "Sorry, no movies were found with those filters.";
@@ -119,24 +268,30 @@
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('main-select-movie') === null) {
+      return;
+    }
+
     // Represents the movie selection list on homepage
     var movie_list = document.querySelector('#movie-list');
 
+    // Node list of all the available movies
+    var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
+
+    // Save attributes of each movie for sorting
+    var movie_attributes = [];
+
+    // Create element for displaying a message if no movies were
+    // found under a set of filter criteria
+    var sort_result = document.createElement('p');
+
+    var i, movie_info, selection;
     // Change 'nojs' class for each html document to 'js'
     document.querySelector('html').className = 'js';
 
     // If broswer supports template, add Sort-By functionality
     // on movie selection homepage
     if('content' in document.createElement('template')) {
-      // Node list of all the available movies
-      var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
-
-      // Save attributes of each movie for sorting
-      var movie_attributes = [];
-
-      // Create element for displaying a message if no movies were
-      // found under a set of filter criteria
-      var sort_result = document.createElement('p');
       sort_result.setAttribute('id', 'result-message');
       document.querySelector('#select-movie-h2').appendChild(sort_result);
 
@@ -144,8 +299,8 @@
       document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
 
       // Populate movie_attributes list
-      for (var i = 0; i < movie_nodes.length; i++) {
-        var movie_info = movie_nodes[i].lastElementChild;
+      for (i = 0; i < movie_nodes.length; i++) {
+        movie_info = movie_nodes[i].lastElementChild;
         movie_attributes.push({
           title: movie_nodes[i].id,
           rating: movie_info.childNodes[1].innerText,
@@ -156,8 +311,9 @@
 
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
-        var selection = e.target.value;
-        for (var i = 0; i < movie_attributes.length; i++) {
+        var i;
+        selection = e.target.value;
+        for (i = 0; i < movie_attributes.length; i++) {
           if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
             movie_list.appendChild(movie_nodes[i]);
           }
@@ -173,7 +329,8 @@
       // Listen for selection on #rating-select to sort by movie rating
       document.querySelector('#rating-select').addEventListener('change', function(e) {
         var selection = e.target.value;
-        for (var i = 0; i < movie_attributes.length; i++) {
+        var i;
+        for (i = 0; i < movie_attributes.length; i++) {
           if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
             movie_list.appendChild(movie_nodes[i]);
           }
