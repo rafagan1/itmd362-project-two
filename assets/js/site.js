@@ -7,6 +7,23 @@
     return;
   }
 
+  // Function to be called later for determining localStorage support
+  // Taken from discussion at https://gist.github.com/paulirish/5558557
+  function storageAvailable(type) {
+    var storage, x;
+    try {
+      storage = window[type];
+      x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      // console.log("Type = ", type);
+      return true;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
   // Value cleaning functions
 
   function remove_excess_whitespace(value) {
@@ -232,9 +249,28 @@
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
 
+  // Given a list of movies and id for inner list of its attributes,
+  // Returns a list of of movie objects (title, genre, rating, etc.)
+  // Outer loop traverses each movie
+  // Inner loop saves attributes of each movie
+  function get_movie_list(movie_nodes, attribute_list) {
+    var movie_attributes = [], node, movie, movie_entry;
+    for (node of movie_nodes) {
+      movie_entry = {
+        title: node.id
+      };
+      for (movie of node.querySelector(attribute_list).children) {
+        movie_entry[movie.className] = movie.innerText;
+      }
+      movie_attributes.push(movie_entry);
+    }
+    return movie_attributes;
+  }
+
   // Checks if the selected movie genre from the sort-by form matches
   // the genre of a particular movie
   function check_genre(selection, genres) {
+    genres = genres.toLowerCase().split(', ');
     if (selection !== "") {
       return (genres.includes(selection));
     }
@@ -268,28 +304,46 @@
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
+    var movie_list, movie_nodes, movie_attributes, sort_result;
     if (document.getElementById('main-select-movie') === null) {
       return;
     }
 
     // Represents the movie selection list on homepage
-    var movie_list = document.querySelector('#movie-list');
+    movie_list = document.querySelector('#movie-list');
 
     // Node list of all the available movies
-    var movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
+    movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
 
     // Save attributes of each movie for sorting
-    var movie_attributes = [];
+    movie_attributes = get_movie_list(movie_nodes, ".movie-info");
 
     // Create element for displaying a message if no movies were
     // found under a set of filter criteria
-    var sort_result = document.createElement('p');
+    sort_result = document.createElement('p');
 
-    var i, movie_info, selection;
     // Change 'nojs' class for each html document to 'js'
     document.querySelector('html').className = 'js';
 
-    // If broswer supports template, add Sort-By functionality
+
+    if (storageAvailable('localStorage')) {
+      // Save title of clicked element in Local Storafe before proceeding to
+      // movie times page
+      document.querySelector('#movie-list').addEventListener('click', function(e) {
+        var elem = e.target;
+        e.preventDefault();
+        if (elem.className === 'movie-title' || elem.className === 'poster') {
+          while (elem.className !== 'movie-title') {
+            elem = elem.nextElementSibling;
+          }
+          localStorage.removeItem('movie-title');
+          localStorage.setItem('movie-title', elem.innerText);
+          document.location.assign('time/');
+        }
+      });
+    }
+
+    // If browser supports template, add Sort-By functionality
     // on movie selection homepage
     if('content' in document.createElement('template')) {
       sort_result.setAttribute('id', 'result-message');
@@ -298,21 +352,11 @@
       // Add section for sorting movies after the #select-movie section
       document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
 
-      // Populate movie_attributes list
-      for (i = 0; i < movie_nodes.length; i++) {
-        movie_info = movie_nodes[i].lastElementChild;
-        movie_attributes.push({
-          title: movie_nodes[i].id,
-          rating: movie_info.childNodes[1].innerText,
-          genre: movie_info.childNodes[3].innerText.toLowerCase().split(', '),
-          runtime: movie_info.childNodes[5].innerText
-        });
-      }
 
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
         var i;
-        selection = e.target.value;
+        var selection = e.target.value;
         for (i = 0; i < movie_attributes.length; i++) {
           if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
             movie_list.appendChild(movie_nodes[i]);
@@ -328,8 +372,8 @@
 
       // Listen for selection on #rating-select to sort by movie rating
       document.querySelector('#rating-select').addEventListener('change', function(e) {
-        var selection = e.target.value;
         var i;
+        var selection = e.target.value;
         for (i = 0; i < movie_attributes.length; i++) {
           if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
             movie_list.appendChild(movie_nodes[i]);
@@ -341,6 +385,20 @@
           }
         }
         check_movie_list(movie_list.childElementCount, sort_result);
+      });
+
+      // Listen for click on 'Reset Filter' button to show all movies on screen
+      document.querySelector('#reset-sort').addEventListener('click', function(e) {
+        var movie;
+        e.preventDefault();
+        for (movie of movie_nodes) {
+          if (!movie_list.contains(movie)) {
+            movie_list.appendChild(movie);
+          }
+        }
+        check_movie_list(movie_list.childElementCount, sort_result);
+        document.querySelector('#genre-select').value = "";
+        document.querySelector('#rating-select').value = "";
       });
     }
 
