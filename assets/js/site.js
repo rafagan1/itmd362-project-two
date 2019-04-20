@@ -72,7 +72,7 @@
 
   function validate_expr_year(year) {
     // Valid year is a 4-digit number after [current year]
-    year = Number(year)
+    year = Number(year);
 
     if (year >= 2019 && year <= 9999) {
       return true;
@@ -97,51 +97,22 @@
 
   // Event Listeners
   document.addEventListener('DOMContentLoaded', function() {
-    var payment_form = document.querySelector('#payment');
-    var submit_payment = document.querySelector('#pay');
-    var pay_name = document.querySelector('#name').value;
-    var pay_ccn = document.querySelector('#ccn').value;
-    var pay_expr_mo = document.querySelector('#exp-month').value;
-    var pay_expr_yr = document.querySelector('#exp-year').value;
-    var pay_cvv = document.querySelector('#cvv').value;
-    var pay_zipcode = document.querySelector('#zipcode').value;
-    var pay_email = document.querySelector('#email').value;
+    // Variables for Movie Select / Home page
 
-    // Initialize warning/error labels
-    var allFormLabels = document.getElementsByTagName('label');
-    var i;
-    for (i = 0; i < allFormLabels.length; i++) {
-      console.log(allFormLabels[i].id);
-      document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
-    }
+    // Variables for Date/Time page
 
-    if (document.getElementById('main-pay-info') === null) {
-      return;
-    }
+    // Variables for Ticket page
 
-    console.log('DOM loaded');
+    // Variables for Seating page
 
-    // Enable/Disable submit button
-    if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
-      // Enable submit if all valid
-      if (submit_payment.hasAttribute('disabled')) {
-        submit_payment.removeAttribute('disabled');
-        console.log('Submit button enabled');
-      }
-    }
-    else {
-      if (!submit_payment.hasAttribute('disabled')) {
-        submit_payment.setAttribute('disabled', 'disabled');
-        console.log('Submit button disabled');
-      }
-    }
+    // Variables for Payment page
+    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, allFormLabels, i;
 
-    // Set up listener for any changes in the form using keyup
-    payment_form.addEventListener('keyup', function() {
-      // Initialize variables for use later
-      var error_tags;
-
-      // Get updated input values
+    // Check which page we're on and load that content
+    if (document.getElementById('main-pay-info') !== null) {
+      // Payment page
+      payment_form = document.querySelector('#payment');
+      submit_payment = document.querySelector('#pay');
       pay_name = document.querySelector('#name').value;
       pay_ccn = document.querySelector('#ccn').value;
       pay_expr_mo = document.querySelector('#exp-month').value;
@@ -150,96 +121,133 @@
       pay_zipcode = document.querySelector('#zipcode').value;
       pay_email = document.querySelector('#email').value;
 
-      // If everything is valid, enable the submit button
+      // Initialize warning/error labels
+      allFormLabels = document.getElementsByTagName('label');
+      for (i = 0; i < allFormLabels.length; i++) {
+        console.log(allFormLabels[i].id);
+        document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
+      }
+
+      // Enable/Disable submit button
       if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
         // Enable submit if all valid
         if (submit_payment.hasAttribute('disabled')) {
           submit_payment.removeAttribute('disabled');
           console.log('Submit button enabled');
         }
-
-        error_tags = document.getElementsByClassName('error');
-        for (i = error_tags.length-1; i >= 0; i--) {
-          error_tags[i].remove();
-        }
-
-      } else {
-        // Else, disable the submit button
+      }
+      else {
         if (!submit_payment.hasAttribute('disabled')) {
           submit_payment.setAttribute('disabled', 'disabled');
           console.log('Submit button disabled');
         }
-        // TODO: Add error messages depending on invalid inputs
-
-        // Invalid name
-        if (!validate_name(pay_name)) {
-          console.log('Invalid Name');
-          if (document.querySelector('#name-label + .error') === null) {
-            document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-          }
-        } else {
-          if (document.querySelector('#name-label + .error') !== null) {
-            document.querySelector('#name-label + .error').remove();
-          }
-        }
-
-        // Invalid CCN
-        if (!validate_ccn(pay_ccn)) {
-          console.log('Invalid CCN');
-          if (document.querySelector('#ccn-label + .error') === null) {
-            document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-          }
-        } else {
-          if (document.querySelector('#ccn-label + .error') !== null) {
-            document.querySelector('#ccn-label + .error').remove();
-          }
-        }
-
-        // Invalid expr year
-        if (!validate_expr_year(pay_expr_yr)) {
-          if (document.querySelector('#exp-year-label + .error') === null) {
-            document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-          }
-        } else {
-          if (document.querySelector('#exp-year-label + .error') !== null) {
-            document.querySelector('#exp-year-label + .error').remove();
-          }
-        }
-
-        // Invalid CVV
-        if (!validate_cvv(pay_cvv)) {
-          if (document.querySelector('#cvv-label + .error') === null) {
-            document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-          }
-        } else {
-          if (document.querySelector('#cvv-label + .error') !== null) {
-            document.querySelector('#cvv-label + .error').remove();
-          }
-        }
-
-        // Invalid zip code
-        if (!validate_zipcode(pay_zipcode)) {
-          if (document.querySelector('#zipcode-label + .error') === null) {
-            document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-          }
-        } else {
-          if (document.querySelector('#zipcode-label + .error') !== null) {
-            document.querySelector('#zipcode-label + .error').remove();
-          }
-        }
-
-        // Invalid email
-        if (!validate_email(pay_email)) {
-          if (document.querySelector('#email-label + .error') === null) {
-            document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
-          }
-        } else {
-          if (document.querySelector('#email-label + .error') !== null) {
-            document.querySelector('#email-label + .error').remove();
-          }
-        }
       }
-    });
+
+      // Set up listener for any changes in the form using keyup
+      payment_form.addEventListener('keyup', function() {
+        // Initialize variables for use later
+        var error_tags;
+
+        // Get updated input values
+        pay_name = document.querySelector('#name').value;
+        pay_ccn = document.querySelector('#ccn').value;
+        pay_expr_mo = document.querySelector('#exp-month').value;
+        pay_expr_yr = document.querySelector('#exp-year').value;
+        pay_cvv = document.querySelector('#cvv').value;
+        pay_zipcode = document.querySelector('#zipcode').value;
+        pay_email = document.querySelector('#email').value;
+
+        // If everything is valid, enable the submit button
+        if (validate_name(pay_name) && validate_ccn(pay_ccn) && validate_expr_month(pay_expr_mo) && validate_expr_year(pay_expr_yr) && validate_cvv(pay_cvv) && validate_zipcode(pay_zipcode) && validate_email(pay_email)) {
+          // Enable submit if all valid
+          if (submit_payment.hasAttribute('disabled')) {
+            submit_payment.removeAttribute('disabled');
+            console.log('Submit button enabled');
+          }
+
+          error_tags = document.getElementsByClassName('error');
+          for (i = error_tags.length-1; i >= 0; i--) {
+            error_tags[i].remove();
+          }
+
+        } else {
+          // Else, disable the submit button
+          if (!submit_payment.hasAttribute('disabled')) {
+            submit_payment.setAttribute('disabled', 'disabled');
+            console.log('Submit button disabled');
+          }
+          // TODO: Add error messages depending on invalid inputs
+
+          // Invalid name
+          if (!validate_name(pay_name)) {
+            console.log('Invalid Name');
+            if (document.querySelector('#name-label + .error') === null) {
+              document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            }
+          } else {
+            if (document.querySelector('#name-label + .error') !== null) {
+              document.querySelector('#name-label + .error').remove();
+            }
+          }
+
+          // Invalid CCN
+          if (!validate_ccn(pay_ccn)) {
+            console.log('Invalid CCN');
+            if (document.querySelector('#ccn-label + .error') === null) {
+              document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            }
+          } else {
+            if (document.querySelector('#ccn-label + .error') !== null) {
+              document.querySelector('#ccn-label + .error').remove();
+            }
+          }
+
+          // Invalid expr year
+          if (!validate_expr_year(pay_expr_yr)) {
+            if (document.querySelector('#exp-year-label + .error') === null) {
+              document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            }
+          } else {
+            if (document.querySelector('#exp-year-label + .error') !== null) {
+              document.querySelector('#exp-year-label + .error').remove();
+            }
+          }
+
+          // Invalid CVV
+          if (!validate_cvv(pay_cvv)) {
+            if (document.querySelector('#cvv-label + .error') === null) {
+              document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            }
+          } else {
+            if (document.querySelector('#cvv-label + .error') !== null) {
+              document.querySelector('#cvv-label + .error').remove();
+            }
+          }
+
+          // Invalid zip code
+          if (!validate_zipcode(pay_zipcode)) {
+            if (document.querySelector('#zipcode-label + .error') === null) {
+              document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            }
+          } else {
+            if (document.querySelector('#zipcode-label + .error') !== null) {
+              document.querySelector('#zipcode-label + .error').remove();
+            }
+          }
+
+          // Invalid email
+          if (!validate_email(pay_email)) {
+            if (document.querySelector('#email-label + .error') === null) {
+              document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+            }
+          } else {
+            if (document.querySelector('#email-label + .error') !== null) {
+              document.querySelector('#email-label + .error').remove();
+            }
+          }
+        }
+      });
+    }  // End of payment
   });
 
   // ETC
