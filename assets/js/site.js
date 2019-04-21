@@ -130,7 +130,7 @@
         movie_title = localStorage.getItem('movie-title');
         adult_tix = Number(localStorage.getItem('tickets_adultTickets'));
         child_tix = Number(localStorage.getItem('tickets_childTickets'));
-        senior_tix = Number(localStorage.getItem('tickets_seniorTikets'));
+        senior_tix = Number(localStorage.getItem('tickets_seniorTickets'));
 
         // Update summary with information
         document.querySelector('#summary-movie').innerText += ' '+ movie_title;
