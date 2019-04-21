@@ -14,6 +14,8 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
     +2: 39.988px / 20px = 1.9994em    52px / 39.988px = 1.30039em
 */
 
+/* Color palette: http://paletton.com/#uid=1000u0kw0pB7AiY3tX3S5jcXV0R */
+
 /* ===== Base Rules ===== */
 body {
   display: block;
@@ -33,7 +35,7 @@ h1 {
 
 h2 {
   font-size: 1.414em;
-  line-height: 1.8387553041em; /* 1.2em */ 
+  line-height: 1.8387553041em; /* 1.2em */
   background-color: #cc0000;
   color: #efefef;
   padding: 0 0.70721em;
@@ -91,11 +93,229 @@ input[type="submit"]:disabled {
 #movie-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); /* TODO: Update to rel unit */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.325em;
+  padding: 0.325em;
 }
 
+#sort-by {
+  background: #990000;
+}
+
+#reset-sort {
+  background: #efefef;
+  border-radius: 0.325em;
+  color: #CC0000;
+  display: block;
+  margin: 0 1em;
+  padding: 0.325em 1em;
+  text-decoration: none;
+  text-align: center;
+}
+
+#result-message {
+  padding-right: 1em;
+}
+
+<<<<<<< HEAD
+/* RULES FOR TIME & TICKETS - will reorder soon */
+#time-form #ticket-form, h2 {
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+#movie-date-selected {
+  text-align: left;
+  font-size: 0.75em;
+}
+
+#time-form #ticket-form, ul li {
+  list-style: none;
+  padding-bottom: 1.5em;
+  text-align: center;
+}
+
+#show-time, #ticket-type {
+  background-color: green;
+  border-radius: 1em;
+  color: white;
+  float: center;
+  cursor: pointer;
+  font-size: 60%;
+  min-height: 3em;
+  width: 25%;
+}
+
+#ticket-form input[type="number"], option {
+  background-color: lightblue;
+}
+
+#time-form #ticket-form, fieldset {
+  border: blue solid 0.1em;
+  width: 30%;
+  margin: auto;
+}
+
+#time-form #ticket-form label, select, input {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0.5em;
+  margin: auto;
+  color: blue;
+  background-color: lightblue;
+  font-size: 0.75em;
+}
+
+#time-form #ticket-form, legend {
+  font-size: 1em;
+  display: grid;
+  text-align: center;
+  padding: 1.5em;
+  margin: auto;
+  border-radius: 0.5em;
+  color: green;
+}
+
+#ticket-type:disabled {
+  opacity: 0.5;
+}
+
+label[for="pick-date"],
+label[for="pick-time"],
+label[for="adult-tickets"],
+label[for="ch-tickets"],
+label[for="sr-tickets"] {
+  font-size: 0.75em;
+}
+
+/* END RULES FOR TIME & TICKETS - will reorder soon */
+
+/* Module Rules */
+=======
 /* ===== Module Rules ===== */
+>>>>>>> b88faf18d3937a2bc342fb69a4e194cd01dbf515
+
+#sort-by h2 {
+  background: #990000;
+}
+
+#sort-by label {
+  color: #efefef;
+  padding: 0.325em 0;
+}
+
+#sort-by select {
+  border: none;
+  border-radius: 0.325em;
+  font-size: inherit;
+  padding: 0.325em;
+}
+
+.movie-entry {
+  border: solid 0.05em #CC0000;
+}
+
+.movie-entry a {
+  text-decoration: none;
+}
+
+.movie-title {
+  background: #CC0000;
+  padding: 0.325em 0;
+  text-align: center;
+  color: #efefef;
+}
+
+.movie-info {
+  font-size: 0.707em;
+  padding: 0.325em;
+}
+
+.sort-by-select-entry {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  margin: 0 1em;
+  row-gap: 0.325em;
+}
+
 
 /* ===== State Rules ===== */
+
+#expand-sort {
+  color: #efefef;
+  font-size: 0.5em;
+  padding-left: 1.30039em;
+  text-decoration: none;
+}
+
+#reset-sort.hidden,
+#movie-list.hidden,
+.hidden {
+  display: none;
+}
+
+/* Indicate Sort-By heading is clickable when Expand/Hide toggle is visible */
+.js #sort-by {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 500px) {
+  #movie-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  #movie-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #body-select-movie {
+    background: #990000;
+  }
+
+  #movie-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  #select-movie {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  #select-movie-h2 {
+    width: 100%;
+  }
+
+  #movie-list,
+  #result-message {
+    background: #efefef;
+    flex: 1 0 70%;
+  }
+
+  #sort-by {
+    height: 100%;
+  }
+
+  /* Hide show/hide toggle for Sort By feature */
+  #expand-sort {
+    display: none;
+  }
+
+  /* Show the Sort By feature */
+  #reset-sort.hidden,
+  #sort-by-movie.hidden {
+    display: inherit;
+  }
+
+  /* Remove indication that Sort-By heading is clickable */
+  .js #sort-by {
+    cursor: default;
+  }
+}
 
 /* ===== Theme Rules ===== */
