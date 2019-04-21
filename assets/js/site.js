@@ -699,4 +699,52 @@ function display_seat(e) {
 
   }); // DOM loaded
 
+  document.addEventListener('DOMContentLoaded', function(){
+  // Select the necessary elements from the DOM
+  var seat_form = document.querySelector('#seat-form');
+  var submit_button = document.querySelector('#continue');
+  var seat_hint = document.querySelector('#seats-display .hint');
+  // insert error message
+  seat_hint.innerHTML += ' <b id="seat-error"></b>';
+  // disable the form submition
+  submit_button.setAttribute('disabled', 'disabled');
+  // call the display function
+  seat_form.addEventListener("click", display_seat);
+  // Listen for input clicked and validate tha form
+  seat_form.addEventListener("click", function(){
+    // validate the form to submit it
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    var seat_error = document.querySelector('#seats-display');
+    if (checkboxes !== 0){
+      submit_button.removeAttribute('disabled');
+    }else {
+      submit_button.setAttribute('disabled', 'disabled');
+      seat_error.innerText = 'Select your seat.';
+    }
+
+    });
+
+    if(storageAvailable('localStorage')) {
+    // Restore any existing inputs stored in localStorage
+      restorePrefixedFormInputsFromLocalStorage('seat_form');
+      // Store Post Title leveraging the `input` event
+      // https://developer.mozilla.org/en-US/docs/Web/Events/input
+      seat_form.addEventListener('input', function(){
+        storePrefixedInputStorageItem(seat_form.name, event.target);
+      });
+    }
+
+    // Listen for the form's submit event, intercept it and
+    // display a confirmation where the form once was
+    seat_form.addEventListener('submit', function(e){
+      e.preventDefault();
+      document.location.assign('../payment');
+      if(storageAvailable('localStorage')) {
+        destroyPrefixedStorageItemKeys(seat_form.id);
+      }
+    });
+
+    // End of DOMContentLoaded
+  });
+
 })();
