@@ -347,11 +347,12 @@
     // on movie selection homepage
     if('content' in document.createElement('template')) {
       sort_result.setAttribute('id', 'result-message');
-      document.querySelector('#select-movie-h2').appendChild(sort_result);
 
       // Add section for sorting movies after the #select-movie section
-      document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
+      document.querySelector('#select-movie-h2').after(document.querySelector('#sort-by-template').content);
 
+      // Add element for displaying a message for no sort results
+      document.querySelector('#sort-by').after(sort_result);
 
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
