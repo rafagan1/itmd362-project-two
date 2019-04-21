@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html id="seating-page" lang="en">
 <head>
   <title>SeatMap</title>
   <meta charset="utf-8" />
@@ -13,11 +13,11 @@
     </h1>
     <p>Screen</p>
   </header>
-  <main>
+  <main id="seat-content">
     <ul id="main-seat-img">
       <li>
         <figure>
-          <img src="/assets/img/standard_selected.png" alt="standard selected" />
+          <img src="../assets/img/standard_selected.png" alt="standard selected" />
           <figcaption>
             Your seat
           </figcaption>
@@ -25,7 +25,7 @@
       </li>
       <li>
         <figure>
-          <img src="/assets/img/standard_available.png" alt="standard available" />
+          <img src="../assets/img/standard.png" alt="standard available" />
           <figcaption>
             Available
           </figcaption>
@@ -33,7 +33,7 @@
       </li>
       <li>
         <figure>
-          <img src="/assets/img/wheelchair_available.png" alt="wheelchair seat" />
+          <img src="../assets/img/wheelchair.png" alt="wheelchair seat" />
           <figcaption>
             Wheelchair
           </figcaption>
@@ -41,257 +41,234 @@
       </li>
       <li>
         <figure>
-          <img src="/assets/img/companion_available.png" alt="companion seat" />
+          <img src="../assets/img/companion_available.png" alt="companion seat" />
           <figcaption>
             Companion
           </figcaption>
         </figure>
       </li>
     </ul>
-    <ol>
-      <li id="adult">
-        <label for="adult-tickets">Adult (Age 13+:  $12.50)</label>
-        <input type= "number" id= "adult-tickets" name="adult-tickets" min="1" max="10" required />
-      </li>
-    </ol>
-    <form action="#null" method="get" id="form-list">
-  <ol class="seat-map">
-    <li class="seat">
-      <input type="checkbox" name="1A" id="one-a" />
-      <label for="one-a">1A</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="2A" id="tow-a" />
-      <label for="tow-a">2A</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="3A" id="three-a" />
-      <label for="three-a">3A</label>
-    </li>
-    <li class="seat">
-      <figure class="seat-img">
-        <img class="wheelchair" src="/assets/img/wheelchair_available.png" alt="wheelchair seat" />
-        <figcaption class="fig">
-          wheelchair seat
-        </figcaption>
-      </figure>
-    </li>
-    <li class="seat">
-      <figure class="seat-img">
-        <img class="companion" src="/assets/img/companion_available.png" alt="companion seat" />
-        <figcaption class="fig">
-          companion seat
-        </figcaption>
-      </figure>
-    </li>
-    <li class="seat">
-      <figure class="seat-img">
-        <img class="companion" src="/assets/img/companion_available.png" alt="companion seat" />
-        <figcaption class="fig">
-          companion seat
-        </figcaption>
-      </figure>
-    </li>
-    <li class="seat">
-      <figure class="seat-img">
-        <img class="wheelchair" src="/assets/img/wheelchair_available.png" alt="wheelchair seat" />
-        <figcaption class="fig">
-          wheelchair seat
-        </figcaption>
-      </figure>
-      <!-- <input type="checkbox" name="7a" id="7A"> -->
-      <!-- <label for="7A">7A</label> -->
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="8A" id="eight-a" />
-      <label for="eight-a">8A</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="9A" id="nine-a" />
-      <label for="nine-a">9A</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="10A" id="ten-a" />
-      <label for="ten-a">10A</label>
-    </li>
-  </ol>
-  <ol class="seat-map">
-    <li class="seat">
-      <input type="checkbox" name="1B" id="one-b" />
-      <label for="one-b">1B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="2B" id="tow-b" />
-      <label for="tow-b">2B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="3B" id="three-b" />
-      <label for="three-b">3B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="4B" id="four-b" />
-      <label for="four-b">4B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="5B" id="five-b" />
-      <label for="five-b">5B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="6B" id="six-b" />
-      <label for="six-b">6B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="7B" id="seven-b" />
-      <label for="seven-b">7B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="8B" id="eight-b" />
-      <label for="eight-b">8B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="9B" id="nine-b" />
-      <label for="nine-b">9B</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="10B" id="ten-b" />
-      <label for="ten-b">10B</label>
-    </li>
-  </ol>
-  <ol class="seat-map">
-    <li class="seat">
-      <input type="checkbox" name="1C" id="one-c" />
-      <label for="one-c">1C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="2C" id="tow-c" />
-      <label for="tow-c">2C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="3C" id="three-c" />
-      <label for="three-c">3C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="4C" id="four-c" />
-      <label for="four-c">4C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="5C" id="five-c" />
-      <label for="five-c">5C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="6C" id="six-c" />
-      <label for="six-c">6C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="7C" id="seven-c" />
-      <label for="seven-c">7C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="8C" id="eight-c" />
-      <label for="eight-c">8C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="9C" id="nine-c" />
-      <label for="nine-c">9C</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="10C" id="ten-c" />
-      <label for="ten-c">10C</label>
-    </li>
-  </ol>
-  <ol class="seat-map">
-    <li class="seat">
-      <input type="checkbox" name="1D" id="one-d" />
-      <label for="one-d">1D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="2d" id="tow-d" />
-      <label for="tow-d">2D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="3D" id="three-d" />
-      <label for="three-d">3D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="4D" id="four-d" />
-      <label for="four-d">4D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="5D" id="five-d" />
-      <label for="five-d">5D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="6D" id="six-d" />
-      <label for="six-d">6D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="7D" id="seven-d" />
-      <label for="seven-d">7D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="8D" id="eight-d" />
-      <label for="eight-d">8D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="9D" id="nine-d" />
-      <label for="nine-d">9D</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="10D" id="ten-d" />
-      <label for="ten-d">10D</label>
-    </li>
-  </ol>
-  <ol class="seat-map">
-    <li class="seat">
-      <input type="checkbox" name="1E" id="one-e" />
-      <label for="one-e">1E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="2E" id="tow-e" />
-      <label for="tow-e">2E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="3E" id="three-e" />
-      <label for="three-e">3E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="4E" id="four-e" />
-      <label for="four-e">4E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="5E" id="five-e" />
-      <label for="five-e">5E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="6E" id="six-e" />
-      <label for="six-e">6E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="7E" id="seven-e" />
-      <label for="seven-e">7E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="8E" id="eight-e" />
-      <label for="eight-e">8E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="9E" id="nine-e" />
-      <label for="nine-e">9E</label>
-    </li>
-    <li class="seat">
-      <input type="checkbox" name="10E" id="ten-e" />
-      <label for="ten-e">10E</label>
-    </li>
-  </ol>
-  <ol>
-  <li>
-    <textarea id="seats-display">Seat's Number</textarea>
-  </li>
-  <li>
-    <input type="submit" name="continue" id="continue" value="continue" />
-  </li>
-</ol>
-</form>
+    <form id="seat-form" action="#null" method="get">
+      <ol class="seat-map">
+        <li class="seat">
+          <input type="checkbox" name="1A" id="one-a" />
+          <label for="one-a">1A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="2A" id="two-a" />
+          <label for="two-a">2A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="3A" id="three-a" />
+          <label for="three-a">3A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="wheelchair" id="four-a" />
+          <label for="four-a">4A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="companion" id="five-a" />
+          <label for="five-a">5A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="companion" id="six-a" />
+          <label for="six-a">6A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="wheelchair" id="seven-a" />
+          <label for="seven-a">7A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="8A" id="eight-a" />
+          <label for="eight-a">8A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="9A" id="nine-a" />
+          <label for="nine-a">9A</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="10A" id="ten-a" />
+          <label for="ten-a">10A</label>
+        </li>
+      </ol>
+      <ol class="seat-map">
+        <li class="seat">
+          <input type="checkbox" name="1B" id="one-b" />
+          <label for="one-b">1B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="2B" id="two-b" />
+          <label for="two-b">2B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="3B" id="three-b" />
+          <label for="three-b">3B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="4B" id="four-b" />
+          <label for="four-b">4B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="5B" id="five-b" />
+          <label for="five-b">5B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="6B" id="six-b" />
+          <label for="six-b">6B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="7B" id="seven-b" />
+          <label for="seven-b">7B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="8B" id="eight-b" />
+          <label for="eight-b">8B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="9B" id="nine-b" />
+          <label for="nine-b">9B</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="10B" id="ten-b" />
+          <label for="ten-b">10B</label>
+        </li>
+      </ol>
+      <ol class="seat-map">
+        <li class="seat">
+          <input type="checkbox" name="1C" id="one-c" />
+          <label for="one-c">1C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="2C" id="two-c" />
+          <label for="two-c">2C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="3C" id="three-c" />
+          <label for="three-c">3C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="4C" id="four-c" />
+          <label for="four-c">4C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="5C" id="five-c" />
+          <label for="five-c">5C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="6C" id="six-c" />
+          <label for="six-c">6C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="7C" id="seven-c" />
+          <label for="seven-c">7C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="8C" id="eight-c" />
+          <label for="eight-c">8C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="9C" id="nine-c" />
+          <label for="nine-c">9C</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="10C" id="ten-c" />
+          <label for="ten-c">10C</label>
+        </li>
+      </ol>
+      <ol class="seat-map">
+        <li class="seat">
+          <input type="checkbox" name="1D" id="one-d" />
+          <label for="one-d">1D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="2d" id="two-d" />
+          <label for="two-d">2D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="3D" id="three-d" />
+          <label for="three-d">3D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="4D" id="four-d" />
+          <label for="four-d">4D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="5D" id="five-d" />
+          <label for="five-d">5D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="6D" id="six-d" />
+          <label for="six-d">6D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="7D" id="seven-d" />
+          <label for="seven-d">7D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="8D" id="eight-d" />
+          <label for="eight-d">8D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="9D" id="nine-d" />
+          <label for="nine-d">9D</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="10D" id="ten-d" />
+          <label for="ten-d">10D</label>
+        </li>
+      </ol>
+      <ol class="seat-map">
+        <li class="seat">
+          <input type="checkbox" name="1E" id="one-e" />
+          <label for="one-e">1E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="2E" id="two-e" />
+          <label for="two-e">2E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="3E" id="three-e" />
+          <label for="three-e">3E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="4E" id="four-e" />
+          <label for="four-e">4E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="5E" id="five-e" />
+          <label for="five-e">5E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="6E" id="six-e" />
+          <label for="six-e">6E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="7E" id="seven-e" />
+          <label for="seven-e">7E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="8E" id="eight-e" />
+          <label for="eight-e">8E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="9E" id="nine-e" />
+          <label for="nine-e">9E</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" name="10E" id="ten-e" />
+          <label for="ten-e">10E</label>
+        </li>
+      </ol>
+      <ol>
+        <li id="seats-display">
+          <p class="hint">Your seat</p>
+        </li>
+        <li id="submit-area">
+          <input type="submit" name="continue" id="continue" value="continue" />
+        </li>
+      </ol>
+    </form>
   </main>
+<script src="../assets/js/site.js"></script>
 </body>
 </html>
