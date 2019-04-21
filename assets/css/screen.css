@@ -117,7 +117,6 @@ input[type="submit"]:disabled {
   padding-right: 1em;
 }
 
-<<<<<<< HEAD
 /* RULES FOR TIME & TICKETS - will reorder soon */
 .time-heading,
 .ticket-heading {
@@ -200,12 +199,7 @@ label[for="sr-tickets"] {
   font-style: italic;
 }
 
-/* END RULES FOR TIME & TICKETS - will reorder soon */
-
-/* Module Rules */
-=======
 /* ===== Module Rules ===== */
->>>>>>> b88faf18d3937a2bc342fb69a4e194cd01dbf515
 
 #sort-by h2 {
   background: #990000;
@@ -250,7 +244,6 @@ label[for="sr-tickets"] {
   margin: 0 1em;
   row-gap: 0.325em;
 }
-
 
 /* ===== State Rules ===== */
 
