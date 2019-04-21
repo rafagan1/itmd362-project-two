@@ -99,10 +99,6 @@
       return adult*12.50 + child*11.00 + senior*12.00;
     }
 
-    function calc_tax(amount) {
-      return amount*.1;
-    }
-
     // Event Listeners
     document.addEventListener('DOMContentLoaded', function() {
       // Variables for Movie Select / Home page
@@ -114,7 +110,7 @@
       // Variables for Seating page
 
       // Variables for Payment page
-      var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, allFormLabels, i;
+      var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, allFormLabels, i;
 
       // Check which page we're on and load that content
       if (document.getElementById('main-pay-info') !== null) {
@@ -138,11 +134,18 @@
 
           // Update summary with information
           document.querySelector('#summary-movie').innerText += ' '+ movie_title;
-          document.querySelector('#summary-adults').innerText += ' '+adult_tix
-          document.querySelector('#summary-childs').innerText += ' '+child_tix
-          document.querySelector('#summary-senior').innerText += ' '+senior_tix
+          document.querySelector('#summary-adults').innerText += ' '+adult_tix;
+          document.querySelector('#summary-childs').innerText += ' '+child_tix;
+          document.querySelector('#summary-senior').innerText += ' '+senior_tix;
 
-          // TODO: Calculate subtotal, tax, and grand total
+          // Calculate subtotal, tax, and grand total
+          subtotal = calc_subtotal(adult_tix, child_tix, senior_tix);
+          tax = subtotal*.1;
+
+          // Update totals on page
+          document.querySelector('#summary-subtotal').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal);
+          document.querySelector('#summary-tax').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(tax);
+          document.querySelector('#summary-total').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal+tax);
 
           // TODO: On submit, navigate to success page (on that page, clear localStorage)
         }
