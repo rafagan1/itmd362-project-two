@@ -24,6 +24,64 @@
     }
   }
 
+// Get all interesting information about an input element
+function getInputData(input_element) {
+ return {
+   id: input_element.id,
+   name: input_element.name,
+   type: input_element.tagName.toLowerCase(),
+   value: input_element.value
+ };
+}
+
+// Store a prefixed storage item with input item data
+function storePrefixedInputStorageItem(prefix, input_element) {
+ var item_data = getInputData(input_element);
+ localStorage.setItem(prefix + item_data.id, JSON.stringify(item_data));
+}
+
+// Retrieve and parse an input storage item
+function retrieveAndParseInputStorageItem(key) {
+ return JSON.parse(localStorage.getItem(key));
+}
+
+// Retrieve all prefixed storage item keys
+function retrievePrefixedStorageItemKeys(prefix) {
+ var saved_keys = [];
+ var i, key;
+ for(i = 0; i < localStorage.length; i++) {
+   // Get only the items that begin with `prefix`
+   key = localStorage.key(i);
+   if (key.startsWith(prefix)) {
+     saved_keys.push(key);
+   }
+ }
+ return saved_keys;
+}
+
+function restorePrefixedFormInputsFromLocalStorage(prefix) {
+ // Get an array of all the prefixed stored keys
+ var saved_keys = retrievePrefixedStorageItemKeys(prefix);
+ // Loop through the array and use the stored object data to
+ // restore the value of the corresponding form item
+ var key, item, input_by_id;
+ for (key of saved_keys) {
+   item = retrieveAndParseInputStorageItem(key);
+   // Use old-school getElementById; no need to prefix with #
+   input_by_id = document.getElementById(item.id);
+   if (input_by_id) {
+     input_by_id.value = item.value;
+   }
+ }
+}
+function destroyPrefixedStorageItemKeys(prefix) {
+ var keys_to_destroy = retrievePrefixedStorageItemKeys(prefix);
+ var key;
+ for (key of keys_to_destroy) {
+   localStorage.removeItem(key);
+ }
+}
+
   // Value cleaning functions
 
   function remove_excess_whitespace(value) {

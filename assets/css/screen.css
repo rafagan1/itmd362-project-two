@@ -199,6 +199,11 @@ label[for="sr-tickets"] {
   padding: 0.3125em;
   text-align: center;
 }
+.seat-map {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 #main-seat-img {
   display: flex;
