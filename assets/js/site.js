@@ -290,7 +290,8 @@
         document.querySelector('#summary-childs').innerText += ' '+localStorage.getItem('tickets_childTickets');
         document.querySelector('#summary-senior').innerText += ' '+localStorage.getItem('tickets_seniorTickets');
 
-        // TODO: Clear storage for next session
+        // Clear storage for next session
+        localStorage.clear();
       }
     }
   });
