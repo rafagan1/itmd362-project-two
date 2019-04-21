@@ -153,6 +153,25 @@ function destroyPrefixedStorageItemKeys(prefix) {
     return validate(remove_all_whitespace(email), /^.+@.+$/g);
   }
 
+// function to select seats, name, and show it to user
+const selections = {};
+function display_seat(e) {
+  if (e.target.checked) {
+    selections[e.target.id] = {
+      name: e.target.name
+    };
+  // Remove unselected seats
+  }else {
+    delete selections[e.target.id];
+  }
+  const result = [];
+  for (const key in selections) {
+    result.push(selections[key].name);
+  }
+  // Show seats name to the user
+  document.getElementById("seats-display").innerHTML = result.join(" + ").toUpperCase();
+}
+
   // Event Listeners
   document.addEventListener('DOMContentLoaded', function() {
     var payment_form = document.querySelector('#payment');
