@@ -302,6 +302,195 @@
     }
   }
 
+  // ========TIME AND TICKETS FUNCTIONS !!!!!
+  // Save selected movie time and date in local storage
+  function storeDateAndTime(e) {
+    var dateSelected = document.querySelector('#pick-date');
+    var timeSelected = document.querySelector('#pick-time');
+    // Remove previous stored time and date
+    e.preventDefault();
+    localStorage.removeItem('time_movieTime');
+    localStorage.removeItem('time_movieDate');
+
+    // Get the selected time and date
+    var dateSel = dateSelected.options[dateSelected.selectedIndex].text;
+    var timeSel = timeSelected.options[timeSelected.selectedIndex].text;
+
+    // Store the selected date and time.
+    localStorage.setItem('time_movieDate', dateSel);
+    localStorage.setItem('time_movieTime', timeSel);
+    document.location.assign('../tickets');
+  }
+
+  // Save selected movie time and date in local storage
+  function storeTicketType(e, adult, child, senior) {
+
+    e.preventDefault();
+    // Remove previous stored time and date
+    localStorage.removeItem('tickets_adultTickets');
+    localStorage.removeItem('tickets_childTickets');
+    localStorage.removeItem('tickets_seniorTickets');
+
+    if (adult > 0) {
+      localStorage.setItem('tickets_adultTickets', adult);
+    }
+    if (child > 0) {
+      localStorage.setItem('tickets_childTickets', child);
+    }
+
+    if (senior > 0) {
+      localStorage.setItem('tickets_seniorTickets', senior);
+    }
+    document.location.assign('booking.html');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    // ==== TIME AND TICKETS FUNCTIONALITY
+    // Variables for time and tickets pages
+
+    // Selectors for Time page
+
+    var submit_showTime = document.getElementById('show-time');
+
+    // Variables on ticket page
+    var adultTick = document.querySelector('#adult-tickets');
+    var childTick = document.querySelector('#ch-tickets');
+    var seniorTick = document.querySelector('#sr-tickets');
+    var ticketType = document.querySelector('#ticket-type');
+
+    if (storageAvailable('localStorage')) {
+      // Check for the submit button on the time/date page
+      if (submit_showTime !== null) {
+        // Time page can only be submitted when the date
+        // and time fields are selected
+        submit_showTime.addEventListener('click', function(e){
+          storeDateAndTime(e);
+        });
+      }
+      // Check for the submit button/input on the ticket page
+      if (ticketType !== null) {
+
+        // Disable the submit button unti at least one ticket
+        // type is selected.
+        ticketType.setAttribute('disabled', 'disabled');
+
+        // Allow the page to be submitted if at least one ticket type
+        // is selected.
+        adultTick.addEventListener('input', function(){
+          // Could be deleting a value initially selected.
+          // Disable the submit button and check the input value.
+          ticketType.setAttribute('disabled', 'disabled');
+          checkTicketType();
+        });
+
+        // Listen for input on child ticket type
+        childTick.addEventListener('input', function(){
+          ticketType.setAttribute('disabled', 'disabled');
+          checkTicketType();
+        });
+
+        // Listen for input on senior ticket type
+        seniorTick.addEventListener('input', function(){
+          ticketType.setAttribute('disabled', 'disabled');
+          checkTicketType();
+        });
+
+        // Function to allow the tickets page to be submitted
+        function checkTicketType() {
+          // Make sure at least one ticket type is selected before
+          // allowing the submit button to be clicked
+          if ((adultTick.value) > 0 ||
+             (childTick.value) > 0 ||
+             (seniorTick.value) > 0)
+          {
+            ticketType.removeAttribute('disabled');
+            // console.log("Can submit ticket page");
+            ticketType.addEventListener('click', function(e) {
+              storeTicketType(e, adultTick.value, childTick.value, seniorTick.value);
+            });
+          }
+        }
+      } // ticketType== null
+  /*
+      // FOR WBT - will be deleted!!!!!!!!!
+      // Check if movie date selected should be displayed
+
+
+        var time_movieTime;
+        var time_movieDate;
+        var tickets_adultTickets = 0;
+        var tickets_childTickets = 0;
+        var tickets_seniorTickets = 0;
+
+        // Function to retrieve movie time, date, and tickets from local storage
+        function getLocalStorageTimeNTickets() {
+          var timeAndTickets = {
+            time_movieTime: null,
+            time_movieDate: null,
+            tickets_adultTickets : 0,
+            tickets_childTickets : 0,
+            tickets_seniorTickets :0
+          }
+
+          // Get Time and Date
+          timeAndTickets.time_movieDate = localStorage.getItem('time_movieDate');
+          timeAndTickets.time_movieTime = localStorage.getItem('time_movieTime');
+
+          // Check for Tickets by type
+          timeAndTickets.tickets_adultTickets = localStorage.getItem('tickets_adultTickets');
+          timeAndTickets.tickets_childTickets = localStorage.getItem('tickets_childTickets');
+          timeAndTickets.tickets_seniorTickets = localStorage.getItem('tickets_seniorTickets');
+          return(timeAndTickets);
+        }
+        var movieDateSel  = document.querySelector('#movie-date-selected');
+
+        if (movieDateSel != null && ticketType == null) {
+          console.log("Can print time and tickets");
+          // Get time and Tickets
+          var timeTickets = getLocalStorageTimeNTickets();
+
+          var date_selected = timeTickets.time_movieDate;
+          var time_selected = timeTickets.time_movieTime;
+
+          // Create display string for showtime and date
+          var date_display = "Movie date "+ date_selected + " | "+ time_selected;
+          movieDateSel.innerText = date_display;
+
+          // Check for Tickets and date_display
+          var locStor_adultT = timeTickets.tickets_adultTickets;
+          var locStor_childT = timeTickets.tickets_childTickets;
+          var locStor_seniorT = timeTickets.tickets_seniorTickets;
+
+          var ticketArea = document.createElement('p');
+          var para = document.createElement('p');
+
+          movieDateSel.appendChild(ticketArea);
+          ticketArea.innerText = "Ticket summary:"
+          ticketArea.appendChild(para);
+
+          var cost;
+          if (locStor_adultT > 0) {
+            cost = Number(locStor_adultT) * 12.50;
+            ticketArea.innerText +=
+            "\nAdults -      " + "$"+cost+ " ("+locStor_adultT + " at $12.50)";
+          }
+          if (locStor_childT > 0) {
+            cost = Number(locStor_childT) * 11.00
+            ticketArea.innerText +=
+            "\nChildren - " + "$"+cost + " ("+locStor_childT + " at $11.00)";
+          }
+          if (locStor_seniorT > 0) {
+            cost = Number(locStor_seniorT) * 12.00
+            ticketArea.innerText +=
+            "\nSeniors -  " + "$"+cost +" ("+locStor_seniorT + " at $12.00)";
+          }
+        }
+  */
+      } // end if (storageAvailable....
+    // === END TIME AND TICKETS FUNCTIONALITY
+
+  });
+  // ======END TIME AND TICKETS FUNCTIONS
+
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     var movie_list, movie_nodes, movie_attributes, sort_result;
@@ -402,6 +591,6 @@
       });
     }
 
-  });
+  }); // DOM loaded
 
 })();
