@@ -200,7 +200,6 @@ label[for="sr-tickets"] {
 }
 
 /* ===== Module Rules ===== */
-=======
 .seat-page-header p {
   border-radius: 0.3125em;
   background: gray;
@@ -252,9 +251,6 @@ input[type="checkbox"]:checked ~ label {
   margin-top: 1.3em;
   margin-bottom: 1.3em;
 }
-
-
-/* Module Rules */
 
 /* ===== Module Rules ===== */
 .seat label {
@@ -336,7 +332,6 @@ input[type="checkbox"]:checked ~ label {
     width: 2.875em;
   }
 }
-=======
 
 #expand-sort {
   color: #efefef;
