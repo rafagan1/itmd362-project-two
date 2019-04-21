@@ -93,7 +93,9 @@ input[type="submit"]:disabled {
 #movie-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); /* TODO: Update to rel unit */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.325em;
+  padding: 0.325em;
 }
 
 #sort-by {
@@ -130,6 +132,26 @@ input[type="submit"]:disabled {
   border: none;
   border-radius: 0.325em;
   font-size: inherit;
+  padding: 0.325em;
+}
+
+.movie-entry {
+  border: solid 0.05em #CC0000;
+}
+
+.movie-entry a {
+  text-decoration: none;
+}
+
+.movie-title {
+  background: #CC0000;
+  padding: 0.325em 0;
+  text-align: center;
+  color: #efefef;
+}
+
+.movie-info {
+  font-size: 0.707em;
   padding: 0.325em;
 }
 
