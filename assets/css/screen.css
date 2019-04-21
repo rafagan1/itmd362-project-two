@@ -94,7 +94,7 @@ input[type="submit"]:disabled {
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); /* TODO: Update to rel unit */
 }
 
-<<<<<<< HEAD
+
 /* RULES FOR TIME & TICKETS - will reorder soon */
 #time-form #ticket-form, h2 {
   text-align: center;
@@ -168,8 +168,63 @@ label[for="sr-tickets"] {
 
 /* END RULES FOR TIME & TICKETS - will reorder soon */
 
+.seat-page-header p {
+  border-radius: 0.3125em;
+  background: gray;
+  color: #ffffff;
+  margin: 1.875em;
+  padding: 0.3125em;
+  text-align: center;
+}
+
+#main-seat-img {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 1.25em;
+}
+
+#main-seat-img img {
+  padding-left: 0.1875em;
+  margin: 0.625em;
+}
+
+#main-seat-img figcaption {
+  font-size: 0.75em;
+}
+.seat label{
+  display: block;
+}
+
+.seat input {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.seat [for="companionone"],
+.seat [for="companiontwo"] {
+  background: black;
+  color: #ffffff;
+}
+.seat [for="wheelchairone"],
+.seat [for="wheelchairtwo"] {
+  background: #40A6FA;
+}
+input[type="checkbox"]:checked ~ label {
+  background: #cc0000;
+  color: #ffffff;
+}
+#back-seats {
+  margin-top: 1.3em;
+}
+#seats-display {
+  margin-top: 1.3em;
+  margin-bottom: 1.3em;
+}
+
+
 /* Module Rules */
-=======
+
 /* ===== Module Rules ===== */
 >>>>>>> b88faf18d3937a2bc342fb69a4e194cd01dbf515
 
