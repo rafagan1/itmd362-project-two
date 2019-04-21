@@ -45,7 +45,9 @@ section, form {
   padding-bottom: 0.65em;
 }
 
-p {
+p,
+#founders,
+#location h3 {
   padding-top: 0.65em;
   padding-left: 1em;
 }
@@ -115,6 +117,23 @@ input[type="submit"]:disabled {
 
 #result-message {
   padding-right: 1em;
+}
+
+#top-header {
+  background: #080000;
+}
+
+#nav-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  padding-bottom: 0.325em;
+}
+
+#nav-list a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #efefef;
 }
 
 /* RULES FOR TIME & TICKETS - will reorder soon */
@@ -252,6 +271,10 @@ input[type="checkbox"]:checked ~ label {
   margin-bottom: 1.3em;
 }
 
+#founders-list {
+  padding-left: 1em;
+}
+
 /* ===== Module Rules ===== */
 .seat label {
   background: gray;
@@ -310,6 +333,17 @@ input[type="checkbox"]:checked ~ label {
   row-gap: 0.325em;
 }
 
+#address li {
+  margin-left: 2em;
+  text-decoration: underline dotted;
+  text-decoration-color: #977373;
+}
+
+.founder-entry::first-letter {
+  color: #990000;
+  font-size: 200%;
+}
+
 /* ===== State Rules ===== */
 @media screen and (min-width: 500px) {
   #seating-page {
@@ -321,6 +355,7 @@ input[type="checkbox"]:checked ~ label {
     height: 1.65em;
     width: 1.875em;
   }
+}
 @media screen and (min-width: 750px) {
   #seating-page {
     padding: 3.125em;
@@ -354,6 +389,14 @@ input[type="checkbox"]:checked ~ label {
 @media screen and (min-width: 500px) {
   #movie-list {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  #nav-list {
+    justify-content: flex-start;
+  }
+
+  #nav-list li {
+    margin: 0 5%;
   }
 }
 
