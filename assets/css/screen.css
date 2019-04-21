@@ -214,9 +214,7 @@ input[type="checkbox"]:checked ~ label {
   background: #cc0000;
   color: #ffffff;
 }
-#back-seats {
-  margin-top: 1.3em;
-}
+
 #seats-display {
   margin-top: 1.3em;
   margin-bottom: 1.3em;
