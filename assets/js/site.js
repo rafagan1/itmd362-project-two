@@ -382,7 +382,7 @@
     if (senior > 0) {
       localStorage.setItem('tickets_seniorTickets', senior);
     }
-    document.location.assign('booking.html');
+    document.location.assign('../seating');
   }
   document.addEventListener('DOMContentLoaded', function() {
     // ==== TIME AND TICKETS FUNCTIONALITY
@@ -409,7 +409,8 @@
       }
       // Check for the submit button/input on the ticket page
       if (ticketType !== null) {
-
+        var ticketSum = 0;
+        var ticketMax = 20;
         // Disable the submit button unti at least one ticket
         // type is selected.
         ticketType.setAttribute('disabled', 'disabled');
@@ -437,11 +438,13 @@
 
         // Function to allow the tickets page to be submitted
         function checkTicketType() {
-          // Make sure at least one ticket type is selected before
-          // allowing the submit button to be clicked
-          if ((adultTick.value) > 0 ||
+          // Get the total number of tickets selected.
+          ticketSum = Number(adultTick.value) + Number(childTick.value) + Number(seniorTick.value);
+          // Make sure at least one ticket type is selected and the max is
+          // not exceeded before allowing the submit button to be clicked
+          if (((adultTick.value) > 0 ||
              (childTick.value) > 0 ||
-             (seniorTick.value) > 0)
+             (seniorTick.value) > 0) && ticketSum <= ticketMax)
           {
             ticketType.removeAttribute('disabled');
             // console.log("Can submit ticket page");
