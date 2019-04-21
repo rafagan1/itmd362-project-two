@@ -297,10 +297,12 @@
     if (count === 0) {
       sort_result.className = "";
       sort_result.innerText = "Sorry, no movies were found with those filters.";
+      document.querySelector("#movie-list").className = "hidden";
     }
     else {
       sort_result.className = "hidden";
       sort_result.innerText = "";
+      document.querySelector("#movie-list").className = "";
     }
   }
 
