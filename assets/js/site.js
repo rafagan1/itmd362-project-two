@@ -295,9 +295,11 @@
   // Outputs a message if no movies were found for a set of filters
   function check_movie_list(count, sort_result) {
     if (count === 0) {
+      sort_result.className = "";
       sort_result.innerText = "Sorry, no movies were found with those filters.";
     }
     else {
+      sort_result.className = "hidden";
       sort_result.innerText = "";
     }
   }
@@ -347,6 +349,7 @@
     // on movie selection homepage
     if('content' in document.createElement('template')) {
       sort_result.setAttribute('id', 'result-message');
+      sort_result.setAttribute('class', 'hidden');
 
       // Add section for sorting movies after the #select-movie section
       document.querySelector('#select-movie-h2').after(document.querySelector('#sort-by-template').content);

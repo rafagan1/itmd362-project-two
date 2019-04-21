@@ -33,7 +33,7 @@ h1 {
 
 h2 {
   font-size: 1.414em;
-  line-height: 1.8387553041em; /* 1.2em */ 
+  line-height: 1.8387553041em; /* 1.2em */
   background-color: #cc0000;
   color: #efefef;
   padding: 0 0.70721em;
@@ -95,6 +95,10 @@ input[type="submit"]:disabled {
 }
 
 /* ===== Module Rules ===== */
+
+.hidden {
+  display: none;
+}
 
 /* ===== State Rules ===== */
 
