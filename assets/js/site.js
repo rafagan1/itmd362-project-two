@@ -345,7 +345,7 @@
     if (senior > 0) {
       localStorage.setItem('tickets_seniorTickets', senior);
     }
-    document.location.assign('booking.html');
+    document.location.assign('../seating');
   }
   document.addEventListener('DOMContentLoaded', function() {
     // ==== TIME AND TICKETS FUNCTIONALITY
