@@ -156,7 +156,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
   function calc_subtotal(adult, child, senior) {
     return adult*12.50 + child*11.00 + senior*12.00;
   }
-  
+
   // function to select seats, name, and show it to user
   const selections = {};
   function display_seat(e) {
@@ -251,7 +251,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
       }
 
       // When the form is submitted, navigate to the success page
-      payment_form.addEventListener('submit', function) {
+      payment_form.addEventListener('submit', function() {
         document.location.assign('../success');
       });
 
