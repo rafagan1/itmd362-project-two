@@ -295,10 +295,14 @@
   // Outputs a message if no movies were found for a set of filters
   function check_movie_list(count, sort_result) {
     if (count === 0) {
+      sort_result.className = "";
       sort_result.innerText = "Sorry, no movies were found with those filters.";
+      document.querySelector("#movie-list").className = "hidden";
     }
     else {
+      sort_result.className = "hidden";
       sort_result.innerText = "";
+      document.querySelector("#movie-list").className = "";
     }
   }
 
@@ -493,7 +497,7 @@
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
-    var movie_list, movie_nodes, movie_attributes, sort_result;
+    var movie_list, movie_nodes, movie_attributes, sort_result, sort_button;
     if (document.getElementById('main-select-movie') === null) {
       return;
     }
@@ -536,11 +540,36 @@
     // on movie selection homepage
     if('content' in document.createElement('template')) {
       sort_result.setAttribute('id', 'result-message');
-      document.querySelector('#select-movie-h2').appendChild(sort_result);
+      sort_result.setAttribute('class', 'hidden');
 
       // Add section for sorting movies after the #select-movie section
-      document.querySelector('#main-select-movie').appendChild(document.querySelector('#sort-by-template').content);
+      document.querySelector('#select-movie-h2').after(document.querySelector('#sort-by-template').content);
 
+      // Add element for displaying a message for no sort results
+      document.querySelector('#sort-by').after(sort_result);
+
+      // At smaller screens, expand to view Sort By feautre
+      sort_button = document.createElement('a');
+      sort_button.textContent = 'Expand ▾';
+      sort_button.setAttribute('id', 'expand-sort');
+      sort_button.setAttribute('href', '');
+
+      document.querySelector("#sort-by-h2").appendChild(sort_button);
+      document.querySelector('#sort-by-movie').className = 'hidden';
+      document.querySelector('#reset-sort').className = 'hidden';
+
+      // Show/hide the Sort By feature
+      document.querySelector("#sort-by-h2").addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#sort-by-movie').classList.toggle('hidden');
+        document.querySelector('#reset-sort').classList.toggle('hidden');
+        if (document.querySelector('#sort-by-movie').className === 'hidden') {
+          sort_button.textContent = 'Expand ▾';
+        }
+        else {
+          sort_button.textContent = 'Hide ▴';
+        }
+      });
 
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
