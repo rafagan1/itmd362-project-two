@@ -120,26 +120,26 @@ input[type="submit"]:disabled {
 <<<<<<< HEAD
 /* RULES FOR TIME & TICKETS - will reorder soon */
 #time-form #ticket-form, h2 {
-  text-align: center;
+  text-align: inherit;
   padding-bottom: 2em;
 }
 
 #movie-date-selected {
-  text-align: left;
+  text-align: inherit;
   font-size: 0.75em;
 }
 
 #time-form #ticket-form, ul li {
   list-style: none;
   padding-bottom: 1.5em;
-  text-align: center;
+  text-align: inherit;
 }
 
 #show-time, #ticket-type {
   background-color: green;
   border-radius: 1em;
   color: white;
-  float: center;
+  float: inherit;
   cursor: pointer;
   font-size: 60%;
   min-height: 3em;
@@ -159,7 +159,7 @@ input[type="submit"]:disabled {
 #time-form #ticket-form label, select, input {
   display: block;
   box-sizing: border-box;
-  text-align: center;
+  text-align: inherit;
   padding: 0.5em;
   margin: auto;
   color: blue;
@@ -170,7 +170,7 @@ input[type="submit"]:disabled {
 #time-form #ticket-form, legend {
   font-size: 1em;
   display: grid;
-  text-align: center;
+  text-align: inherit;
   padding: 1.5em;
   margin: auto;
   border-radius: 0.5em;
@@ -187,6 +187,12 @@ label[for="adult-tickets"],
 label[for="ch-tickets"],
 label[for="sr-tickets"] {
   font-size: 0.75em;
+}
+
+#ticket-max {
+  color: blue;
+  font-size: 0.5em;
+  font-style: italic;
 }
 
 /* END RULES FOR TIME & TICKETS - will reorder soon */
