@@ -226,7 +226,18 @@ input[type="checkbox"]:checked ~ label {
 /* Module Rules */
 
 /* ===== Module Rules ===== */
->>>>>>> b88faf18d3937a2bc342fb69a4e194cd01dbf515
+.seat label {
+  background: gray;
+  border: 0.0625em solid;
+  border-radius: 0.1875em;
+  cursor: pointer;
+  font-size: 0.625em;
+  height: 1.75em;
+  margin-bottom: 0.5em;
+  padding: 0.3em;
+  text-align: center;
+  width: 1.5em;
+}
 
 /* ===== State Rules ===== */
 
