@@ -95,6 +95,14 @@
       return validate(remove_all_whitespace(email), /^.+@.+$/g);
     }
 
+    function calc_subtotal(adult, child, senior) {
+      return adult*12.50 + child*11.00 + senior*12.00;
+    }
+
+    function calc_tax(amount) {
+      return amount*.1;
+    }
+
     // Event Listeners
     document.addEventListener('DOMContentLoaded', function() {
       // Variables for Movie Select / Home page
