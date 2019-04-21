@@ -166,12 +166,22 @@ input[type="submit"]:disabled {
 
 /* ===== State Rules ===== */
 
+#expand-sort {
+  color: #efefef;
+  font-size: 0.5em;
+  padding-left: 1.30039em;
+  text-decoration: none;
+}
+
+#reset-sort.hidden,
+#movie-list.hidden,
 .hidden {
   display: none;
 }
 
-#movie-list.hidden {
-  display: none;
+/* Indicate Sort-By heading is clickable when Expand/Hide toggle is visible */
+.js #sort-by {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {
@@ -214,6 +224,21 @@ input[type="submit"]:disabled {
     height: 100%;
   }
 
+  /* Hide show/hide toggle for Sort By feature */
+  #expand-sort {
+    display: none;
+  }
+
+  /* Show the Sort By feature */
+  #reset-sort.hidden,
+  #sort-by-movie.hidden {
+    display: inherit;
+  }
+
+  /* Remove indication that Sort-By heading is clickable */
+  .js #sort-by {
+    cursor: default;
+  }
 }
 
 /* ===== Theme Rules ===== */

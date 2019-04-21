@@ -308,7 +308,7 @@
 
   // Run JS once DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
-    var movie_list, movie_nodes, movie_attributes, sort_result;
+    var movie_list, movie_nodes, movie_attributes, sort_result, sort_button;
     if (document.getElementById('main-select-movie') === null) {
       return;
     }
@@ -358,6 +358,29 @@
 
       // Add element for displaying a message for no sort results
       document.querySelector('#sort-by').after(sort_result);
+
+      // At smaller screens, expand to view Sort By feautre
+      sort_button = document.createElement('a');
+      sort_button.textContent = 'Expand ▾';
+      sort_button.setAttribute('id', 'expand-sort');
+      sort_button.setAttribute('href', '');
+
+      document.querySelector("#sort-by-h2").appendChild(sort_button);
+      document.querySelector('#sort-by-movie').className = 'hidden';
+      document.querySelector('#reset-sort').className = 'hidden';
+
+      // Show/hide the Sort By feature
+      document.querySelector("#sort-by-h2").addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#sort-by-movie').classList.toggle('hidden');
+        document.querySelector('#reset-sort').classList.toggle('hidden');
+        if (document.querySelector('#sort-by-movie').className === 'hidden') {
+          sort_button.textContent = 'Expand ▾';
+        }
+        else {
+          sort_button.textContent = 'Hide ▴';
+        }
+      });
 
       // Listen for selection on #genre-select to sort by movie genre
       document.querySelector('#genre-select').addEventListener('change', function(e) {
