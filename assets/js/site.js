@@ -277,6 +277,22 @@
         }
       });
     }  // End of payment
+
+    if (document.getElementById('main-success') !== null) {
+      // Success page
+
+      if (storageAvailable('localStorage')) {
+        // Load movie and purchase details
+        document.querySelector('#summary-movie').innerText += ' '+ localStorage.getItem('movie-title');
+        document.querySelector('#summary-time').innerText += ' '+ localStorage.getItem('time_movieDate') + " at " + localStorage.getItem('time_movieTime');
+        document.querySelector('#summary-tickets').innerText += ' '+ (Number(localStorage.getItem('tickets_adultTickets')) + Number(localStorage.getItem('tickets_childTickets')) + Number(localStorage.getItem('tickets_seniorTickets')));
+        document.querySelector('#summary-adults').innerText += ' '+localStorage.getItem('tickets_adultTickets');
+        document.querySelector('#summary-childs').innerText += ' '+localStorage.getItem('tickets_childTickets');
+        document.querySelector('#summary-senior').innerText += ' '+localStorage.getItem('tickets_seniorTickets');
+
+        // TODO: Clear storage for next session
+      }
+    }
   });
 
   // ETC
