@@ -250,11 +250,6 @@ function destroyPrefixedStorageItemKeys(prefix) {
         }
       }
 
-      // When the form is submitted, navigate to the success page
-      payment_form.addEventListener('submit', function() {
-        document.location.assign('../success');
-      });
-
       // Set up listener for any changes in the form using keyup
       payment_form.addEventListener('keyup', function() {
         // Initialize variables for use later
