@@ -212,9 +212,21 @@ function destroyPrefixedStorageItemKeys(prefix) {
 
         // Update summary with information
         document.querySelector('#summary-movie').innerText += ' '+ movie_title;
-        document.querySelector('#summary-adults').innerText += ' '+adult_tix;
-        document.querySelector('#summary-childs').innerText += ' '+child_tix;
-        document.querySelector('#summary-senior').innerText += ' '+senior_tix;
+        if (localStorage.getItem('tickets_adultTickets') === null) {
+          document.querySelector('#summary-adults').remove();
+        } else {
+          document.querySelector('#summary-adults').innerText += ' '+adult_tix;
+        }
+        if (localStorage.getItem('tickets_childTickets') === null) {
+          document.querySelector('#summary-childs').remove();
+        } else {
+          document.querySelector('#summary-childs').innerText += ' '+child_tix;
+        }
+        if (localStorage.getItem('tickets_seniorTickets') === null) {
+          document.querySelector('#summary-senior').remove();
+        } else {
+          document.querySelector('#summary-senior').innerText += ' '+senior_tix;
+        }
 
         // Calculate subtotal, tax, and grand total
         subtotal = calc_subtotal(adult_tix, child_tix, senior_tix);
@@ -364,9 +376,22 @@ function destroyPrefixedStorageItemKeys(prefix) {
         document.querySelector('#summary-movie').innerText += ' '+ localStorage.getItem('movie-title');
         document.querySelector('#summary-time').innerText += ' '+ localStorage.getItem('time_movieDate') + " at " + localStorage.getItem('time_movieTime');
         document.querySelector('#summary-tickets').innerText += ' '+ (Number(localStorage.getItem('tickets_adultTickets')) + Number(localStorage.getItem('tickets_childTickets')) + Number(localStorage.getItem('tickets_seniorTickets')));
-        document.querySelector('#summary-adults').innerText += ' '+localStorage.getItem('tickets_adultTickets');
-        document.querySelector('#summary-childs').innerText += ' '+localStorage.getItem('tickets_childTickets');
-        document.querySelector('#summary-senior').innerText += ' '+localStorage.getItem('tickets_seniorTickets');
+
+        if (localStorage.getItem('tickets_adultTickets') === null) {
+          document.querySelector('#summary-adults').remove();
+        } else {
+          document.querySelector('#summary-adults').innerText += ' '+localStorage.getItem('tickets_adultTickets');
+        }
+        if (localStorage.getItem('tickets_childTickets') === null) {
+          document.querySelector('#summary-childs').remove();
+        } else {
+          document.querySelector('#summary-childs').innerText += ' '+localStorage.getItem('tickets_childTickets');
+        }
+        if (localStorage.getItem('tickets_seniorTickets') === null) {
+          document.querySelector('#summary-senior').remove();
+        } else {
+          document.querySelector('#summary-senior').innerText += ' '+localStorage.getItem('tickets_seniorTickets');
+        }
 
         // Clear storage for next session
         localStorage.clear();
