@@ -136,29 +136,30 @@ input[type="submit"]:disabled {
   color: #efefef;
 }
 
-
 /* RULES FOR TIME & TICKETS - will reorder soon */
-#time-form #ticket-form, h2 {
-  text-align: center;
+.time-heading,
+.ticket-heading {
+  text-align: inherit;
   padding-bottom: 2em;
 }
 
 #movie-date-selected {
-  text-align: left;
+  text-align: inherit;
   font-size: 0.75em;
 }
 
-#time-form #ticket-form, ul li {
+.time-list li,
+.ticket-list li {
   list-style: none;
   padding-bottom: 1.5em;
-  text-align: center;
+  text-align: inherit;
 }
 
 #show-time, #ticket-type {
   background-color: green;
   border-radius: 1em;
   color: white;
-  float: center;
+  float: inherit;
   cursor: pointer;
   font-size: 60%;
   min-height: 3em;
@@ -175,10 +176,13 @@ input[type="submit"]:disabled {
   margin: auto;
 }
 
-#time-form #ticket-form label, select, input {
+select.time-list,
+select.ticket-list,
+input.time-list,
+input.ticket-list {
   display: block;
   box-sizing: border-box;
-  text-align: center;
+  text-align: inherit;
   padding: 0.5em;
   margin: auto;
   color: blue;
@@ -189,7 +193,7 @@ input[type="submit"]:disabled {
 #time-form #ticket-form, legend {
   font-size: 1em;
   display: grid;
-  text-align: center;
+  text-align: inherit;
   padding: 1.5em;
   margin: auto;
   border-radius: 0.5em;
@@ -208,8 +212,13 @@ label[for="sr-tickets"] {
   font-size: 0.75em;
 }
 
-/* END RULES FOR TIME & TICKETS - will reorder soon */
+#ticket-max {
+  color: blue;
+  font-size: 0.5em;
+  font-style: italic;
+}
 
+/* ===== Module Rules ===== */
 .seat-page-header p {
   border-radius: 0.3125em;
   background: gray;
@@ -262,12 +271,9 @@ input[type="checkbox"]:checked ~ label {
   margin-bottom: 1.3em;
 }
 
-
 #founders-list {
   padding-left: 1em;
 }
-
-/* Module Rules */
 
 /* ===== Module Rules ===== */
 .seat label {
@@ -337,7 +343,6 @@ input[type="checkbox"]:checked ~ label {
   color: #990000;
   font-size: 200%;
 }
-
 
 /* ===== State Rules ===== */
 @media screen and (min-width: 500px) {
