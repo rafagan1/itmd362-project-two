@@ -117,6 +117,23 @@ input[type="submit"]:disabled {
   padding-right: 1em;
 }
 
+#top-header {
+  background: #080000;
+}
+
+#nav-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  padding-bottom: 0.325em;
+}
+
+#nav-list a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #efefef;
+}
+
 
 /* RULES FOR TIME & TICKETS - will reorder soon */
 #time-form #ticket-form, h2 {
@@ -350,6 +367,14 @@ input[type="checkbox"]:checked ~ label {
 @media screen and (min-width: 500px) {
   #movie-list {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  #nav-list {
+  justify-content: flex-start;
+  }
+
+  #nav-list li {
+    margin: 0 5%;
   }
 }
 
