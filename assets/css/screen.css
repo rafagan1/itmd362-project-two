@@ -45,7 +45,9 @@ section, form {
   padding-bottom: 0.65em;
 }
 
-p {
+p,
+#founders,
+#location h3 {
   padding-top: 0.65em;
   padding-left: 1em;
 }
@@ -261,6 +263,10 @@ input[type="checkbox"]:checked ~ label {
 }
 
 
+#founders-list {
+  padding-left: 1em;
+}
+
 /* Module Rules */
 
 /* ===== Module Rules ===== */
@@ -321,6 +327,17 @@ input[type="checkbox"]:checked ~ label {
   row-gap: 0.325em;
 }
 
+#address li {
+  margin-left: 2em;
+  text-decoration: underline dotted;
+  text-decoration-color: #977373;
+}
+
+.founder-entry::first-letter {
+  color: #990000;
+  font-size: 200%;
+}
+
 
 /* ===== State Rules ===== */
 @media screen and (min-width: 500px) {
@@ -371,7 +388,7 @@ input[type="checkbox"]:checked ~ label {
   }
 
   #nav-list {
-  justify-content: flex-start;
+    justify-content: flex-start;
   }
 
   #nav-list li {
