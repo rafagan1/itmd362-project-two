@@ -184,6 +184,7 @@
     var movie_list, movie_nodes, movie_attributes, sort_result, sort_button;
 
     // Variables for Date/Time page
+    var submit_showTime, adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax;
 
     // Variables for Ticket page
 
@@ -478,9 +479,76 @@
         }
       });
     }  // End of payment
-  });
 
-  // ETC
+    // ==== TIME AND TICKETS FUNCTIONALITY
+    if (document.querySelector('#time-page') !== null || document.querySelector('#tickets-page')) {
+      submit_showTime = document.getElementById('show-time');
+
+      // Variables on ticket page
+      adultTick = document.querySelector('#adult-tickets');
+      childTick = document.querySelector('#ch-tickets');
+      seniorTick = document.querySelector('#sr-tickets');
+      ticketType = document.querySelector('#ticket-type');
+
+      if (storageAvailable('localStorage')) {
+        // Check for the submit button on the time/date page
+        if (submit_showTime !== null) {
+          // Time page can only be submitted when the date
+          // and time fields are selected
+          submit_showTime.addEventListener('click', function(e){
+            storeDateAndTime(e);
+          });
+        }
+        // Check for the submit button/input on the ticket page
+        if (ticketType !== null) {
+          ticketSum = 0;
+          ticketMax = 20;
+          // Disable the submit button unti at least one ticket
+          // type is selected.
+          ticketType.setAttribute('disabled', 'disabled');
+
+          // Allow the page to be submitted if at least one ticket type
+          // is selected.
+          adultTick.addEventListener('input', function(){
+            // Could be deleting a value initially selected.
+            // Disable the submit button and check the input value.
+            ticketType.setAttribute('disabled', 'disabled');
+            checkTicketType();
+          });
+
+          // Listen for input on child ticket type
+          childTick.addEventListener('input', function(){
+            ticketType.setAttribute('disabled', 'disabled');
+            checkTicketType();
+          });
+
+          // Listen for input on senior ticket type
+          seniorTick.addEventListener('input', function(){
+            ticketType.setAttribute('disabled', 'disabled');
+            checkTicketType();
+          });
+
+          // Function to allow the tickets page to be submitted
+          function checkTicketType() {
+            // Get the total number of tickets selected.
+            ticketSum = Number(adultTick.value) + Number(childTick.value) + Number(seniorTick.value);
+            // Make sure at least one ticket type is selected and the max is
+            // not exceeded before allowing the submit button to be clicked
+            if (((adultTick.value) > 0 ||
+               (childTick.value) > 0 ||
+               (seniorTick.value) > 0) && ticketSum <= ticketMax)
+            {
+              ticketType.removeAttribute('disabled');
+              // console.log("Can submit ticket page");
+              ticketType.addEventListener('click', function(e) {
+                storeTicketType(e, adultTick.value, childTick.value, seniorTick.value);
+              });
+            }
+          }
+        } // ticketType== null
+      } // end if (storageAvailable....
+    } // === END TIME AND TICKETS FUNCTIONALITY
+  });
 
   //  TODO: Update expiration month/year based on current date
   //   ie: if current mo/yr is june 2020, have the mo initialize to 06 and year to 2020, with min 2020 and max 2040 (+20)
@@ -585,80 +653,6 @@
     }
     document.location.assign('../seating');
   }
-  document.addEventListener('DOMContentLoaded', function() {
-    // ==== TIME AND TICKETS FUNCTIONALITY
-    // Variables for time and tickets pages
-
-    // Selectors for Time page
-
-    var submit_showTime = document.getElementById('show-time');
-
-    // Variables on ticket page
-    var adultTick = document.querySelector('#adult-tickets');
-    var childTick = document.querySelector('#ch-tickets');
-    var seniorTick = document.querySelector('#sr-tickets');
-    var ticketType = document.querySelector('#ticket-type');
-
-    if (storageAvailable('localStorage')) {
-      // Check for the submit button on the time/date page
-      if (submit_showTime !== null) {
-        // Time page can only be submitted when the date
-        // and time fields are selected
-        submit_showTime.addEventListener('click', function(e){
-          storeDateAndTime(e);
-        });
-      }
-      // Check for the submit button/input on the ticket page
-      if (ticketType !== null) {
-        var ticketSum = 0;
-        var ticketMax = 20;
-        // Disable the submit button unti at least one ticket
-        // type is selected.
-        ticketType.setAttribute('disabled', 'disabled');
-
-        // Allow the page to be submitted if at least one ticket type
-        // is selected.
-        adultTick.addEventListener('input', function(){
-          // Could be deleting a value initially selected.
-          // Disable the submit button and check the input value.
-          ticketType.setAttribute('disabled', 'disabled');
-          checkTicketType();
-        });
-
-        // Listen for input on child ticket type
-        childTick.addEventListener('input', function(){
-          ticketType.setAttribute('disabled', 'disabled');
-          checkTicketType();
-        });
-
-        // Listen for input on senior ticket type
-        seniorTick.addEventListener('input', function(){
-          ticketType.setAttribute('disabled', 'disabled');
-          checkTicketType();
-        });
-
-        // Function to allow the tickets page to be submitted
-        function checkTicketType() {
-          // Get the total number of tickets selected.
-          ticketSum = Number(adultTick.value) + Number(childTick.value) + Number(seniorTick.value);
-          // Make sure at least one ticket type is selected and the max is
-          // not exceeded before allowing the submit button to be clicked
-          if (((adultTick.value) > 0 ||
-             (childTick.value) > 0 ||
-             (seniorTick.value) > 0) && ticketSum <= ticketMax)
-          {
-            ticketType.removeAttribute('disabled');
-            // console.log("Can submit ticket page");
-            ticketType.addEventListener('click', function(e) {
-              storeTicketType(e, adultTick.value, childTick.value, seniorTick.value);
-            });
-          }
-        }
-      } // ticketType== null
-    } // end if (storageAvailable....
-    // === END TIME AND TICKETS FUNCTIONALITY
-  });
-  // ======END TIME AND TICKETS FUNCTIONS
 
   document.addEventListener('DOMContentLoaded', function(){
     // Select the necessary elements from the DOM
