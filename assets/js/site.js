@@ -181,6 +181,7 @@
   // Event Listeners
   document.addEventListener('DOMContentLoaded', function() {
     // Variables for Movie Select / Home page
+    var movie_list, movie_nodes, movie_attributes, sort_result, sort_button;
 
     // Variables for Date/Time page
 
@@ -192,6 +193,127 @@
     var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, allFormLabels, i;
 
     // Check which page we're on and load that content
+    if (document.getElementById('main-select-movie') !== null) {
+
+      // Represents the movie selection list on homepage
+      movie_list = document.querySelector('#movie-list');
+
+      // Node list of all the available movies
+      movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
+
+      // Save attributes of each movie for sorting
+      movie_attributes = get_movie_list(movie_nodes, ".movie-info");
+
+      // Create element for displaying a message if no movies were
+      // found under a set of filter criteria
+      sort_result = document.createElement('p');
+
+      // Change 'nojs' class for each html document to 'js'
+      document.querySelector('html').className = 'js';
+
+
+      if (storageAvailable('localStorage')) {
+        // Save title of clicked element in Local Storafe before proceeding to
+        // movie times page
+        document.querySelector('#movie-list').addEventListener('click', function(e) {
+          var elem = e.target;
+          e.preventDefault();
+          if (elem.className === 'movie-title' || elem.className === 'poster') {
+            while (elem.className !== 'movie-title') {
+              elem = elem.nextElementSibling;
+            }
+            localStorage.removeItem('movie-title');
+            localStorage.setItem('movie-title', elem.innerText);
+            document.location.assign('time/');
+          }
+        });
+      }
+
+      // If browser supports template, add Sort-By functionality
+      // on movie selection homepage
+      if('content' in document.createElement('template')) {
+        sort_result.setAttribute('id', 'result-message');
+        sort_result.setAttribute('class', 'hidden');
+
+        // Add section for sorting movies after the #select-movie section
+        document.querySelector('#select-movie-h2').after(document.querySelector('#sort-by-template').content);
+
+        // Add element for displaying a message for no sort results
+        document.querySelector('#sort-by').after(sort_result);
+
+        // At smaller screens, expand to view Sort By feautre
+        sort_button = document.createElement('a');
+        sort_button.textContent = 'Expand ▾';
+        sort_button.setAttribute('id', 'expand-sort');
+        sort_button.setAttribute('href', '');
+
+        document.querySelector("#sort-by-h2").appendChild(sort_button);
+        document.querySelector('#sort-by-movie').className = 'hidden';
+        document.querySelector('#reset-sort').className = 'hidden';
+
+        // Show/hide the Sort By feature
+        document.querySelector("#sort-by-h2").addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector('#sort-by-movie').classList.toggle('hidden');
+          document.querySelector('#reset-sort').classList.toggle('hidden');
+          if (document.querySelector('#sort-by-movie').className === 'hidden') {
+            sort_button.textContent = 'Expand ▾';
+          }
+          else {
+            sort_button.textContent = 'Hide ▴';
+          }
+        });
+
+        // Listen for selection on #genre-select to sort by movie genre
+        document.querySelector('#genre-select').addEventListener('change', function(e) {
+          var i;
+          var selection = e.target.value;
+          for (i = 0; i < movie_attributes.length; i++) {
+            if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
+              movie_list.appendChild(movie_nodes[i]);
+            }
+            else {
+              if (movie_list.contains(movie_nodes[i])) {
+                movie_list.removeChild(movie_nodes[i]);
+              }
+            }
+          }
+          check_movie_list(movie_list.childElementCount, sort_result);
+        });
+
+        // Listen for selection on #rating-select to sort by movie rating
+        document.querySelector('#rating-select').addEventListener('change', function(e) {
+          var i;
+          var selection = e.target.value;
+          for (i = 0; i < movie_attributes.length; i++) {
+            if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
+              movie_list.appendChild(movie_nodes[i]);
+            }
+            else {
+              if (movie_list.contains(movie_nodes[i])) {
+                movie_list.removeChild(movie_nodes[i]);
+              }
+            }
+          }
+          check_movie_list(movie_list.childElementCount, sort_result);
+        });
+
+        // Listen for click on 'Reset Filter' button to show all movies on screen
+        document.querySelector('#reset-sort').addEventListener('click', function(e) {
+          var movie;
+          e.preventDefault();
+          for (movie of movie_nodes) {
+            if (!movie_list.contains(movie)) {
+              movie_list.appendChild(movie);
+            }
+          }
+          check_movie_list(movie_list.childElementCount, sort_result);
+          document.querySelector('#genre-select').value = "";
+          document.querySelector('#rating-select').value = "";
+        });
+      }
+    }
+
     if (document.getElementById('main-pay-info') !== null) {
       // Payment page
       payment_form = document.querySelector('#payment');
@@ -613,133 +735,6 @@
 
   });
   // ======END TIME AND TICKETS FUNCTIONS
-
-  // Run JS once DOM is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    var movie_list, movie_nodes, movie_attributes, sort_result, sort_button;
-    if (document.getElementById('main-select-movie') === null) {
-      return;
-    }
-
-    // Represents the movie selection list on homepage
-    movie_list = document.querySelector('#movie-list');
-
-    // Node list of all the available movies
-    movie_nodes = document.querySelector('#movie-list').querySelectorAll(".movie-entry");
-
-    // Save attributes of each movie for sorting
-    movie_attributes = get_movie_list(movie_nodes, ".movie-info");
-
-    // Create element for displaying a message if no movies were
-    // found under a set of filter criteria
-    sort_result = document.createElement('p');
-
-    // Change 'nojs' class for each html document to 'js'
-    document.querySelector('html').className = 'js';
-
-
-    if (storageAvailable('localStorage')) {
-      // Save title of clicked element in Local Storafe before proceeding to
-      // movie times page
-      document.querySelector('#movie-list').addEventListener('click', function(e) {
-        var elem = e.target;
-        e.preventDefault();
-        if (elem.className === 'movie-title' || elem.className === 'poster') {
-          while (elem.className !== 'movie-title') {
-            elem = elem.nextElementSibling;
-          }
-          localStorage.removeItem('movie-title');
-          localStorage.setItem('movie-title', elem.innerText);
-          document.location.assign('time/');
-        }
-      });
-    }
-
-    // If browser supports template, add Sort-By functionality
-    // on movie selection homepage
-    if('content' in document.createElement('template')) {
-      sort_result.setAttribute('id', 'result-message');
-      sort_result.setAttribute('class', 'hidden');
-
-      // Add section for sorting movies after the #select-movie section
-      document.querySelector('#select-movie-h2').after(document.querySelector('#sort-by-template').content);
-
-      // Add element for displaying a message for no sort results
-      document.querySelector('#sort-by').after(sort_result);
-
-      // At smaller screens, expand to view Sort By feautre
-      sort_button = document.createElement('a');
-      sort_button.textContent = 'Expand ▾';
-      sort_button.setAttribute('id', 'expand-sort');
-      sort_button.setAttribute('href', '');
-
-      document.querySelector("#sort-by-h2").appendChild(sort_button);
-      document.querySelector('#sort-by-movie').className = 'hidden';
-      document.querySelector('#reset-sort').className = 'hidden';
-
-      // Show/hide the Sort By feature
-      document.querySelector("#sort-by-h2").addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('#sort-by-movie').classList.toggle('hidden');
-        document.querySelector('#reset-sort').classList.toggle('hidden');
-        if (document.querySelector('#sort-by-movie').className === 'hidden') {
-          sort_button.textContent = 'Expand ▾';
-        }
-        else {
-          sort_button.textContent = 'Hide ▴';
-        }
-      });
-
-      // Listen for selection on #genre-select to sort by movie genre
-      document.querySelector('#genre-select').addEventListener('change', function(e) {
-        var i;
-        var selection = e.target.value;
-        for (i = 0; i < movie_attributes.length; i++) {
-          if (check_genre(selection, movie_attributes[i].genre) && check_rating(document.querySelector('#rating-select').value, movie_attributes[i].rating)) {
-            movie_list.appendChild(movie_nodes[i]);
-          }
-          else {
-            if (movie_list.contains(movie_nodes[i])) {
-              movie_list.removeChild(movie_nodes[i]);
-            }
-          }
-        }
-        check_movie_list(movie_list.childElementCount, sort_result);
-      });
-
-      // Listen for selection on #rating-select to sort by movie rating
-      document.querySelector('#rating-select').addEventListener('change', function(e) {
-        var i;
-        var selection = e.target.value;
-        for (i = 0; i < movie_attributes.length; i++) {
-          if (check_genre(document.querySelector('#genre-select').value, movie_attributes[i].genre) && check_rating(selection, movie_attributes[i].rating)) {
-            movie_list.appendChild(movie_nodes[i]);
-          }
-          else {
-            if (movie_list.contains(movie_nodes[i])) {
-              movie_list.removeChild(movie_nodes[i]);
-            }
-          }
-        }
-        check_movie_list(movie_list.childElementCount, sort_result);
-      });
-
-      // Listen for click on 'Reset Filter' button to show all movies on screen
-      document.querySelector('#reset-sort').addEventListener('click', function(e) {
-        var movie;
-        e.preventDefault();
-        for (movie of movie_nodes) {
-          if (!movie_list.contains(movie)) {
-            movie_list.appendChild(movie);
-          }
-        }
-        check_movie_list(movie_list.childElementCount, sort_result);
-        document.querySelector('#genre-select').value = "";
-        document.querySelector('#rating-select').value = "";
-      });
-    }
-
-  }); // DOM loaded
 
   document.addEventListener('DOMContentLoaded', function(){
     // Select the necessary elements from the DOM
