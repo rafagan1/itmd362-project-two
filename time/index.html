@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Select Showtime</title>
+  <title>ARCN Theater - Select Showtime</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
   <link rel="stylesheet" href="../assets/css/screen.css" />
@@ -19,14 +19,16 @@
     </nav>
   </header>
   <main id="content">
-  <h2 class="time-heading">Showtimes</h2>
+    <header>
+      <h2 class="time-heading">Showtimes</h2>
+    </header>
     <form id="time-form" action="../tickets/index.html" method="get">
       <fieldset>
         <legend class="page-type">Select Date and Time</legend>
         <ul class="time-list">
           <li id="sel-date" >
-            <label for="pick-date">Slect Date Of Show </label>
-            <select id="pick-date" class="time-list" required>
+            <label for="pick-date">Select Date of Show </label>
+            <select id="pick-date" class="time-list">
               <option value="Thur-18"> Thur, Apr 23</option>
               <option value="Fri-19">Fri, Apr 19</option>
               <option value="Sat-20">Sat, Apr 20</option>
@@ -40,8 +42,8 @@
             </select>
           </li>
           <li id="ptime">
-            <label for="pick-time">Select Time Of Show</label>
-            <select id="pick-time" class="time-list" required >
+            <label for="pick-time">Select Time of Show</label>
+            <select id="pick-time" class="time-list">
               <option value="10AM">10:00 AM</option>
               <option value="12PM">12:00 PM</option>
               <option value="PM1">02:30 PM</option>

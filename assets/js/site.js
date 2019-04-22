@@ -158,9 +158,9 @@
     return adult*12.50 + child*11.00 + senior*12.00;
   }
 
-  function calc_tickets(adult, child, senior) {
-    return adult + child + senior;
-  }
+  // function calc_tickets(adult, child, senior) {
+  //  return adult + child + senior;
+  // }
 
   // function to select seats, name, and show it to user
   const selections = {};
@@ -311,7 +311,7 @@
     var seat_form, submit_button, seat_hint, checkboxes, seat_error;
 
     // Variables for Payment page
-    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax;
+    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, i;
 
     // Check which page we're on and load that content
     if (document.getElementById('main-select-movie') !== null) {
@@ -433,7 +433,7 @@
           document.querySelector('#rating-select').value = "";
         });
       }
-    }
+    } // End Homepage/Movie-selection
 
     if (document.getElementById('main-pay-info') !== null) {
       // Payment page
@@ -605,6 +605,12 @@
       // Success page
 
       if (storageAvailable('localStorage')) {
+        // If LocalStorage does not have selected movie, redirect to Homepage
+        // Prevents user from skipping steps
+        if (localStorage.getItem('movie-title') === null) {
+          document.location.assign('../');
+        }
+
         // Load movie and purchase details
         document.querySelector('#summary-movie').innerText += ' '+ localStorage.getItem('movie-title');
         document.querySelector('#summary-time').innerText += ' '+ localStorage.getItem('time_movieDate') + " at " + localStorage.getItem('time_movieTime');
@@ -641,6 +647,12 @@
       ticketType = document.querySelector('#ticket-type');
 
       if (storageAvailable('localStorage')) {
+        // If LocalStorage does not have selected movie, redirect to Homepage
+        // Prevents user from skipping steps
+        if (localStorage.getItem('movie-title') === null) {
+          document.location.assign('../');
+        }
+
         // Check for the submit button on the time/date page
         if (submit_showTime !== null) {
           // Time page can only be submitted when the date
@@ -707,7 +719,12 @@
       });
 
       if(storageAvailable('localStorage')) {
-      // Restore any existing inputs stored in localStorage
+        // If LocalStorage does not have selected movie, redirect to Homepage
+        // Prevents user from skipping steps
+        if (localStorage.getItem('movie-title') === null) {
+          document.location.assign('../');
+        }
+        // Restore any existing inputs stored in localStorage
         restorePrefixedFormInputsFromLocalStorage('seat_form');
         // Store Post Title leveraging the `input` event
         // https://developer.mozilla.org/en-US/docs/Web/Events/input
