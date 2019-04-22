@@ -439,6 +439,15 @@ input[type="checkbox"]:checked ~ label {
   #movie-list {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  #main-about h2, #main-payment h2, #main-success h2, #about p, #contact p, #contact h3, #main-success p, #main-success ul, #main-success a {
+    padding-left: 16%;
+    padding-right: 16%;
+  }
+
+  #about #location, #summary-tickets li {
+    padding-left: 17%;
+  }
 }
 
 @media screen and (min-width: 1000px) {
