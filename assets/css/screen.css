@@ -52,20 +52,20 @@ p,
   padding-left: 1em;
 }
 
-label, #summary {
+label, .summary {
   padding-left: 1em;
 }
 
-#purchase-info li, #summary li {
+#purchase-info li, .summary li {
   padding-top: 0.65em;
   padding-left: 1em;
 }
 
-#summary-subtotal {
+.summary-subtotal {
   font-style: italic;
 }
 
-#summary-movie, #summary-total {
+.summary-movie, .summary-total {
   font-weight: bold;
 }
 
@@ -445,7 +445,7 @@ input[type="checkbox"]:checked ~ label {
     padding-right: 16%;
   }
 
-  #about #location, #summary-tickets li {
+  #about #location, .summary-tickets li {
     padding-left: 17%;
   }
 }
@@ -501,7 +501,7 @@ input[type="checkbox"]:checked ~ label {
     padding-right: 28%;
   }
 
-  #about #location, #summary-tickets li {
+  #about #location, .summary-tickets li {
     padding-left: 29%;
   }
 }
