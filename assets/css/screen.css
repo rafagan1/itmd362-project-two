@@ -440,7 +440,7 @@ input[type="checkbox"]:checked ~ label {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  #main-about h2, #main-payment h2, #main-success h2, #about p, #contact p, #contact h3, #main-success p, #main-success ul, #main-success a {
+  #main-about h2, #main-pay-info h2, #main-success h2, #about p, #contact p, #contact h3, #purchase-info li, #payment li, #main-success p, #main-success ul, #main-success a {
     padding-left: 16%;
     padding-right: 16%;
   }
@@ -492,6 +492,17 @@ input[type="checkbox"]:checked ~ label {
   /* Remove indication that Sort-By heading is clickable */
   .js #sort-by {
     cursor: default;
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  #main-about h2, #main-pay-info h2, #main-success h2, #about p, #contact p, #contact h3, #purchase-info li, #payment li, #main-success p, #main-success ul, #main-success a {
+    padding-left: 28%;
+    padding-right: 28%;
+  }
+
+  #about #location, #summary-tickets li {
+    padding-left: 29%;
   }
 }
 
