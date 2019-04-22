@@ -157,7 +157,7 @@
   function calc_subtotal(adult, child, senior) {
     return adult*12.50 + child*11.00 + senior*12.00;
   }
-  
+
   function calc_tickets(adult, child, senior) {
     return adult + child + senior;
   }
@@ -630,11 +630,7 @@
         localStorage.clear();
       }
     }
-  });
 
-  // ETC
-
-    // ==== TIME AND TICKETS FUNCTIONALITY
     if (document.getElementById('time-page') !== null || document.getElementById('tickets-page')) {
       submit_showTime = document.getElementById('show-time');
 
@@ -731,65 +727,4 @@
       });
     }
   }); // DOM loaded
-
-  // declare all variables needed
-  var seat_form, submit_button, seat_hint, total_tickets, adult_tkt, child_tkt, senior_tkt;
-  document.addEventListener('DOMContentLoaded', function(){
-  // Select the necessary elements from the DOM
-  seat_form = document.querySelector('#seat-form');
-  submit_button = document.querySelector('#continue');
-  seat_hint = document.querySelector('#seats-display .hint');
-  adult_tkt = JSON.parse(localStorage.getItem('tickets_adultTickets'))
-  child_tkt = JSON.parse(localStorage.getItem('tickets_childTickets'));
-  senior_tkt = JSON.parse(localStorage.getItem('tickets_seniorTickets'));
-
-  // insert error message
-  seat_hint.innerHTML += ' <b id="seat-error"></b>';
-  // disable the form submition
-  submit_button.setAttribute('disabled', 'disabled');
-  // call the functions
-  seat_form.addEventListener("click", display_seat);
-  total_tickets = calc_tickets(adult_tkt, child_tkt, senior_tkt);
-  // Listen for input clicked and validate tha form
-  seat_form.addEventListener("click", function(){
-    // validate the form to submit it
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    var seat_error = document.querySelector('#seats-display');
-    if (checkboxes === total_tickets){
-      submit_button.removeAttribute('disabled');
-    }else {
-      submit_button.setAttribute('disabled', 'disabled');
-      seat_error.innerText = 'You need to select seats equal to your ticket.';
-    }
-
-    });
-
-    if(storageAvailable('localStorage')) {
-    // Restore any existing inputs stored in localStorage
-      restorePrefixedFormInputsFromLocalStorage('seat_form');
-      // Store Post Title leveraging the `input` event
-      // https://developer.mozilla.org/en-US/docs/Web/Events/input
-      seat_form.addEventListener('input', function(){
-        storePrefixedInputStorageItem(seat_form.name, event.target);
-      });
-    }
-
-    // Listen for the form's submit event, intercept it and
-    // display a confirmation where the form once was
-    seat_form.addEventListener('submit', function(e){
-      e.preventDefault();
-      document.location.assign('../payment');
-      if(storageAvailable('localStorage')) {
-        destroyPrefixedStorageItemKeys(seat_form.id);
-      }
-    });
-
-    // End of DOMContentLoaded
-  });
-
-  //  TODO: Update expiration month/year based on current date
-  //   ie: if current mo/yr is june 2020, have the mo initialize to 06 and year to 2020, with min 2020 and max 2040 (+20)
-  //  TODO: Warnings/errors for missing inputs
-  //   ie: check if any fields are empty or contain errors, live feedback for invalid input
-
 })();
