@@ -56,7 +56,15 @@ label, .summary {
   padding-left: 1em;
 }
 
-#purchase-info li, .summary li {
+.time-list li,
+.ticket-list li {
+  list-style: none;
+  padding-bottom: 1.5em;
+  text-align: inherit;
+}
+
+.summary li,
+#purchase-info li {
   padding-top: 0.65em;
   padding-left: 1em;
 }
@@ -112,6 +120,16 @@ input[type="submit"]:disabled {
   background-color: #ffd1d1;
 }
 
+.movie-entry a {
+  text-decoration: none;
+}
+
+#nav-list a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #efefef;
+}
+
 #main-success a {
   padding-left: 1em;
   color: #007a7a;
@@ -160,12 +178,6 @@ input[type="submit"]:disabled {
   padding-bottom: 0.325em;
 }
 
-#nav-list a {
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #efefef;
-}
-
 /* RULES FOR TIME & TICKETS - will reorder soon */
 .time-heading,
 .ticket-heading {
@@ -176,13 +188,6 @@ input[type="submit"]:disabled {
 #movie-date-selected {
   text-align: inherit;
   font-size: 0.75em;
-}
-
-.time-list li,
-.ticket-list li {
-  list-style: none;
-  padding-bottom: 1.5em;
-  text-align: inherit;
 }
 
 #show-time, #ticket-type {
@@ -278,24 +283,38 @@ label[for="sr-tickets"] {
 #main-seat-img figcaption {
   font-size: 0.75em;
 }
-.seat label{
-  display: block;
-}
 
 .seat input {
   display: none;
   opacity: 0;
   visibility: hidden;
 }
+
 .seat [for="companionone"],
 .seat [for="companiontwo"] {
   background: black;
   color: #ffffff;
 }
+
 .seat [for="wheelchairone"],
 .seat [for="wheelchairtwo"] {
   background: #40A6FA;
 }
+
+.seat label {
+  background: gray;
+  border: 0.0625em solid;
+  border-radius: 0.1875em;
+  display: block;
+  cursor: pointer;
+  font-size: 0.625em;
+  height: 1.75em;
+  margin-bottom: 0.5em;
+  padding: 0.3em;
+  text-align: center;
+  width: 1.5em;
+}
+
 input[type="checkbox"]:checked ~ label {
   background: #cc0000;
   color: #ffffff;
@@ -311,18 +330,6 @@ input[type="checkbox"]:checked ~ label {
 }
 
 /* ===== Module Rules ===== */
-.seat label {
-  background: gray;
-  border: 0.0625em solid;
-  border-radius: 0.1875em;
-  cursor: pointer;
-  font-size: 0.625em;
-  height: 1.75em;
-  margin-bottom: 0.5em;
-  padding: 0.3em;
-  text-align: center;
-  width: 1.5em;
-}
 
 #sort-by h2 {
   background: #990000;
@@ -344,9 +351,7 @@ input[type="checkbox"]:checked ~ label {
   border: solid 0.05em #CC0000;
 }
 
-.movie-entry a {
-  text-decoration: none;
-}
+
 
 .movie-title {
   background: #CC0000;
@@ -380,28 +385,6 @@ input[type="checkbox"]:checked ~ label {
 }
 
 /* ===== State Rules ===== */
-@media screen and (min-width: 500px) {
-  #seating-page {
-    padding: 1.2222222222em;
-    padding-top: 1.5em;
-  }
-  .seat label {
-    font-size: 0.75em;
-    height: 1.65em;
-    width: 1.875em;
-  }
-}
-@media screen and (min-width: 750px) {
-  #seating-page {
-    padding: 3.125em;
-    padding-top: 1.5em;
-  }
-  .seat label {
-    font-size: 0.80em;
-    height: 1.8em;
-    width: 2.875em;
-  }
-}
 
 #expand-sort {
   color: #efefef;
@@ -422,6 +405,17 @@ input[type="checkbox"]:checked ~ label {
 }
 
 @media screen and (min-width: 500px) {
+  #seating-page {
+    padding: 1.2222222222em;
+    padding-top: 1.5em;
+  }
+
+  .seat label {
+    font-size: 0.75em;
+    height: 1.65em;
+    width: 1.875em;
+  }
+
   #movie-list {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -436,17 +430,28 @@ input[type="checkbox"]:checked ~ label {
 }
 
 @media screen and (min-width: 750px) {
+  #seating-page {
+    padding: 3.125em;
+    padding-top: 1.5em;
+  }
+
+  .seat label {
+    font-size: 0.8em;
+    height: 1.8em;
+    width: 2.875em;
+  }
+
   #movie-list {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  #about #location, .summary-tickets li {
+    padding-left: 17%;
   }
 
   #main-about h2, #main-pay-info h2, #main-success h2, #about p, #contact p, #contact h3, #purchase-info li, #payment li, #main-success p, #main-success ul, #main-success a {
     padding-left: 16%;
     padding-right: 16%;
-  }
-
-  #about #location, .summary-tickets li {
-    padding-left: 17%;
   }
 }
 
@@ -496,13 +501,13 @@ input[type="checkbox"]:checked ~ label {
 }
 
 @media screen and (min-width: 1250px) {
+  #about #location, .summary-tickets li {
+    padding-left: 29%;
+  }
+
   #main-about h2, #main-pay-info h2, #main-success h2, #about p, #contact p, #contact h3, #purchase-info li, #payment li, #main-success p, #main-success ul, #main-success a {
     padding-left: 28%;
     padding-right: 28%;
-  }
-
-  #about #location, .summary-tickets li {
-    padding-left: 29%;
   }
 }
 
