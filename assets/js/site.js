@@ -655,84 +655,8 @@
           }
         }
       } // ticketType== null
-      /*
-      // FOR WBT - will be deleted!!!!!!!!!
-      // Check if movie date selected should be displayed
-
-
-        var time_movieTime;
-        var time_movieDate;
-        var tickets_adultTickets = 0;
-        var tickets_childTickets = 0;
-        var tickets_seniorTickets = 0;
-
-        // Function to retrieve movie time, date, and tickets from local storage
-        function getLocalStorageTimeNTickets() {
-          var timeAndTickets = {
-            time_movieTime: null,
-            time_movieDate: null,
-            tickets_adultTickets : 0,
-            tickets_childTickets : 0,
-            tickets_seniorTickets :0
-          }
-
-          // Get Time and Date
-          timeAndTickets.time_movieDate = localStorage.getItem('time_movieDate');
-          timeAndTickets.time_movieTime = localStorage.getItem('time_movieTime');
-
-          // Check for Tickets by type
-          timeAndTickets.tickets_adultTickets = localStorage.getItem('tickets_adultTickets');
-          timeAndTickets.tickets_childTickets = localStorage.getItem('tickets_childTickets');
-          timeAndTickets.tickets_seniorTickets = localStorage.getItem('tickets_seniorTickets');
-          return(timeAndTickets);
-        }
-        var movieDateSel  = document.querySelector('#movie-date-selected');
-
-        if (movieDateSel != null && ticketType == null) {
-          console.log("Can print time and tickets");
-          // Get time and Tickets
-          var timeTickets = getLocalStorageTimeNTickets();
-
-          var date_selected = timeTickets.time_movieDate;
-          var time_selected = timeTickets.time_movieTime;
-
-          // Create display string for showtime and date
-          var date_display = "Movie date "+ date_selected + " | "+ time_selected;
-          movieDateSel.innerText = date_display;
-
-          // Check for Tickets and date_display
-          var locStor_adultT = timeTickets.tickets_adultTickets;
-          var locStor_childT = timeTickets.tickets_childTickets;
-          var locStor_seniorT = timeTickets.tickets_seniorTickets;
-
-          var ticketArea = document.createElement('p');
-          var para = document.createElement('p');
-
-          movieDateSel.appendChild(ticketArea);
-          ticketArea.innerText = "Ticket summary:"
-          ticketArea.appendChild(para);
-
-          var cost;
-          if (locStor_adultT > 0) {
-            cost = Number(locStor_adultT) * 12.50;
-            ticketArea.innerText +=
-            "\nAdults -      " + "$"+cost+ " ("+locStor_adultT + " at $12.50)";
-          }
-          if (locStor_childT > 0) {
-            cost = Number(locStor_childT) * 11.00
-            ticketArea.innerText +=
-            "\nChildren - " + "$"+cost + " ("+locStor_childT + " at $11.00)";
-          }
-          if (locStor_seniorT > 0) {
-            cost = Number(locStor_seniorT) * 12.00
-            ticketArea.innerText +=
-            "\nSeniors -  " + "$"+cost +" ("+locStor_seniorT + " at $12.00)";
-          }
-        }
-      */
     } // end if (storageAvailable....
     // === END TIME AND TICKETS FUNCTIONALITY
-
   });
   // ======END TIME AND TICKETS FUNCTIONS
 
