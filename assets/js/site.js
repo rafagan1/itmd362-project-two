@@ -605,6 +605,12 @@
       // Success page
 
       if (storageAvailable('localStorage')) {
+        // If LocalStorage does not have selected movie, redirect to Homepage
+        // Prevents user from skipping steps
+        if (localStorage.getItem('movie-title') === null) {
+          document.location.assign('../');
+        }
+
         // Load movie and purchase details
         document.querySelector('#summary-movie').innerText += ' '+ localStorage.getItem('movie-title');
         document.querySelector('#summary-time').innerText += ' '+ localStorage.getItem('time_movieDate') + " at " + localStorage.getItem('time_movieTime');
