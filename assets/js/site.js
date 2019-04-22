@@ -177,6 +177,123 @@
     document.getElementById("seats-display").innerHTML = result.join(" + ").toUpperCase();
   }
 
+  // Given a list of movies and id for inner list of its attributes,
+  // Returns a list of of movie objects (title, genre, rating, etc.)
+  // Outer loop traverses each movie
+  // Inner loop saves attributes of each movie
+  function get_movie_list(movie_nodes, attribute_list) {
+    var movie_attributes = [], node, movie, movie_entry;
+    for (node of movie_nodes) {
+      movie_entry = {
+        title: node.id
+      };
+      for (movie of node.querySelector(attribute_list).children) {
+        movie_entry[movie.className] = movie.innerText;
+      }
+      movie_attributes.push(movie_entry);
+    }
+    return movie_attributes;
+  }
+
+  // Checks if the selected movie genre from the sort-by form matches
+  // the genre of a particular movie
+  function check_genre(selection, genres) {
+    genres = genres.toLowerCase().split(', ');
+    if (selection !== "") {
+      return (genres.includes(selection));
+    }
+    else {
+      // Selection is "All Genres", every movie is a match
+      return true;
+    }
+  }
+
+  // Checks if the selected movie rating from the sort-by form matches
+  // the rating of a particular movie
+  function check_rating(selection, rating) {
+    if (selection !== "") {
+      return (selection === rating);
+    }
+    else {
+      // Selection is "All Ratings", every movie is a match
+      return true;
+    }
+  }
+
+  // Outputs a message if no movies were found for a set of filters
+  function check_movie_list(count, sort_result) {
+    if (count === 0) {
+      sort_result.className = "";
+      sort_result.innerText = "Sorry, no movies were found with those filters.";
+      document.querySelector("#movie-list").className = "hidden";
+    }
+    else {
+      sort_result.className = "hidden";
+      sort_result.innerText = "";
+      document.querySelector("#movie-list").className = "";
+    }
+  }
+
+  // ========TIME AND TICKETS FUNCTIONS !!!!!
+  // Save selected movie time and date in local storage
+  function storeDateAndTime(e) {
+    var dateSelected = document.querySelector('#pick-date');
+    var timeSelected = document.querySelector('#pick-time');
+    var dateSel, timeSel;
+    // Remove previous stored time and date
+    e.preventDefault();
+    localStorage.removeItem('time_movieTime');
+    localStorage.removeItem('time_movieDate');
+
+    // Get the selected time and date
+    dateSel = dateSelected.options[dateSelected.selectedIndex].text;
+    timeSel = timeSelected.options[timeSelected.selectedIndex].text;
+
+    // Store the selected date and time.
+    localStorage.setItem('time_movieDate', dateSel);
+    localStorage.setItem('time_movieTime', timeSel);
+    document.location.assign('../tickets');
+  }
+
+  // Save selected movie time and date in local storage
+  function storeTicketType(e, adult, child, senior) {
+
+    e.preventDefault();
+    // Remove previous stored time and date
+    localStorage.removeItem('tickets_adultTickets');
+    localStorage.removeItem('tickets_childTickets');
+    localStorage.removeItem('tickets_seniorTickets');
+
+    if (adult > 0) {
+      localStorage.setItem('tickets_adultTickets', adult);
+    }
+    if (child > 0) {
+      localStorage.setItem('tickets_childTickets', child);
+    }
+
+    if (senior > 0) {
+      localStorage.setItem('tickets_seniorTickets', senior);
+    }
+    document.location.assign('../seating');
+  }
+
+  // Function to allow the tickets page to be submitted
+  function checkTicketType(adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax) {
+    // Get the total number of tickets selected.
+    ticketSum = Number(adultTick.value) + Number(childTick.value) + Number(seniorTick.value);
+    // Make sure at least one ticket type is selected and the max is
+    // not exceeded before allowing the submit button to be clicked
+    if (((adultTick.value) > 0 ||
+       (childTick.value) > 0 ||
+       (seniorTick.value) > 0) && ticketSum <= ticketMax)
+    {
+      ticketType.removeAttribute('disabled');
+      // console.log("Can submit ticket page");
+      ticketType.addEventListener('click', function(e) {
+        storeTicketType(e, adultTick.value, childTick.value, seniorTick.value);
+      });
+    }
+  }
 
   // Event Listeners
   document.addEventListener('DOMContentLoaded', function() {
@@ -512,38 +629,20 @@
             // Could be deleting a value initially selected.
             // Disable the submit button and check the input value.
             ticketType.setAttribute('disabled', 'disabled');
-            checkTicketType();
+            checkTicketType(adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax);
           });
 
           // Listen for input on child ticket type
           childTick.addEventListener('input', function(){
             ticketType.setAttribute('disabled', 'disabled');
-            checkTicketType();
+            checkTicketType(adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax);
           });
 
           // Listen for input on senior ticket type
           seniorTick.addEventListener('input', function(){
             ticketType.setAttribute('disabled', 'disabled');
-            checkTicketType();
+            checkTicketType(adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax);
           });
-
-          // Function to allow the tickets page to be submitted
-          function checkTicketType() {
-            // Get the total number of tickets selected.
-            ticketSum = Number(adultTick.value) + Number(childTick.value) + Number(seniorTick.value);
-            // Make sure at least one ticket type is selected and the max is
-            // not exceeded before allowing the submit button to be clicked
-            if (((adultTick.value) > 0 ||
-               (childTick.value) > 0 ||
-               (seniorTick.value) > 0) && ticketSum <= ticketMax)
-            {
-              ticketType.removeAttribute('disabled');
-              // console.log("Can submit ticket page");
-              ticketType.addEventListener('click', function(e) {
-                storeTicketType(e, adultTick.value, childTick.value, seniorTick.value);
-              });
-            }
-          }
         } // ticketType== null
       } // end if (storageAvailable....
     } // === END TIME AND TICKETS FUNCTIONALITY
@@ -599,104 +698,5 @@
   //   ie: if current mo/yr is june 2020, have the mo initialize to 06 and year to 2020, with min 2020 and max 2040 (+20)
   //  TODO: Warnings/errors for missing inputs
   //   ie: check if any fields are empty or contain errors, live feedback for invalid input
-
-  // Given a list of movies and id for inner list of its attributes,
-  // Returns a list of of movie objects (title, genre, rating, etc.)
-  // Outer loop traverses each movie
-  // Inner loop saves attributes of each movie
-  function get_movie_list(movie_nodes, attribute_list) {
-    var movie_attributes = [], node, movie, movie_entry;
-    for (node of movie_nodes) {
-      movie_entry = {
-        title: node.id
-      };
-      for (movie of node.querySelector(attribute_list).children) {
-        movie_entry[movie.className] = movie.innerText;
-      }
-      movie_attributes.push(movie_entry);
-    }
-    return movie_attributes;
-  }
-
-  // Checks if the selected movie genre from the sort-by form matches
-  // the genre of a particular movie
-  function check_genre(selection, genres) {
-    genres = genres.toLowerCase().split(', ');
-    if (selection !== "") {
-      return (genres.includes(selection));
-    }
-    else {
-      // Selection is "All Genres", every movie is a match
-      return true;
-    }
-  }
-
-  // Checks if the selected movie rating from the sort-by form matches
-  // the rating of a particular movie
-  function check_rating(selection, rating) {
-    if (selection !== "") {
-      return (selection === rating);
-    }
-    else {
-      // Selection is "All Ratings", every movie is a match
-      return true;
-    }
-  }
-
-  // Outputs a message if no movies were found for a set of filters
-  function check_movie_list(count, sort_result) {
-    if (count === 0) {
-      sort_result.className = "";
-      sort_result.innerText = "Sorry, no movies were found with those filters.";
-      document.querySelector("#movie-list").className = "hidden";
-    }
-    else {
-      sort_result.className = "hidden";
-      sort_result.innerText = "";
-      document.querySelector("#movie-list").className = "";
-    }
-  }
-
-  // ========TIME AND TICKETS FUNCTIONS !!!!!
-  // Save selected movie time and date in local storage
-  function storeDateAndTime(e) {
-    var dateSelected = document.querySelector('#pick-date');
-    var timeSelected = document.querySelector('#pick-time');
-    // Remove previous stored time and date
-    e.preventDefault();
-    localStorage.removeItem('time_movieTime');
-    localStorage.removeItem('time_movieDate');
-
-    // Get the selected time and date
-    var dateSel = dateSelected.options[dateSelected.selectedIndex].text;
-    var timeSel = timeSelected.options[timeSelected.selectedIndex].text;
-
-    // Store the selected date and time.
-    localStorage.setItem('time_movieDate', dateSel);
-    localStorage.setItem('time_movieTime', timeSel);
-    document.location.assign('../tickets');
-  }
-
-  // Save selected movie time and date in local storage
-  function storeTicketType(e, adult, child, senior) {
-
-    e.preventDefault();
-    // Remove previous stored time and date
-    localStorage.removeItem('tickets_adultTickets');
-    localStorage.removeItem('tickets_childTickets');
-    localStorage.removeItem('tickets_seniorTickets');
-
-    if (adult > 0) {
-      localStorage.setItem('tickets_adultTickets', adult);
-    }
-    if (child > 0) {
-      localStorage.setItem('tickets_childTickets', child);
-    }
-
-    if (senior > 0) {
-      localStorage.setItem('tickets_seniorTickets', senior);
-    }
-    document.location.assign('../seating');
-  }
 
 })();
