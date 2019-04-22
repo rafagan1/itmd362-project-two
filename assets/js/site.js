@@ -311,7 +311,7 @@
     var seat_form, submit_button, seat_hint, checkboxes, seat_error;
 
     // Variables for Payment page
-    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, allFormLabels, i;
+    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax;
 
     // Check which page we're on and load that content
     if (document.getElementById('main-select-movie') !== null) {
@@ -456,9 +456,21 @@
 
         // Update summary with information
         document.querySelector('#summary-movie').innerText += ' '+ movie_title;
-        document.querySelector('#summary-adults').innerText += ' '+adult_tix;
-        document.querySelector('#summary-childs').innerText += ' '+child_tix;
-        document.querySelector('#summary-senior').innerText += ' '+senior_tix;
+        if (localStorage.getItem('tickets_adultTickets') === null) {
+          document.querySelector('#summary-adults').remove();
+        } else {
+          document.querySelector('#summary-adults').innerText += ' '+adult_tix;
+        }
+        if (localStorage.getItem('tickets_childTickets') === null) {
+          document.querySelector('#summary-childs').remove();
+        } else {
+          document.querySelector('#summary-childs').innerText += ' '+child_tix;
+        }
+        if (localStorage.getItem('tickets_seniorTickets') === null) {
+          document.querySelector('#summary-senior').remove();
+        } else {
+          document.querySelector('#summary-senior').innerText += ' '+senior_tix;
+        }
 
         // Calculate subtotal, tax, and grand total
         subtotal = calc_subtotal(adult_tix, child_tix, senior_tix);
@@ -468,15 +480,6 @@
         document.querySelector('#summary-subtotal').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal);
         document.querySelector('#summary-tax').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(tax);
         document.querySelector('#summary-total').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal+tax);
-
-        // TODO: On submit, navigate to success page (on that page, clear localStorage)
-      }
-
-      // Initialize warning/error labels
-      allFormLabels = document.getElementsByTagName('label');
-      for (i = 0; i < allFormLabels.length; i++) {
-        console.log(allFormLabels[i].id);
-        document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
       }
 
       // Enable/Disable submit button
@@ -531,9 +534,8 @@
 
           // Invalid name
           if (!validate_name(pay_name)) {
-            console.log('Invalid Name');
             if (document.querySelector('#name-label + .error') === null) {
-              document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error">Enter the name that appears on your card.</b>');
             }
           } else {
             if (document.querySelector('#name-label + .error') !== null) {
@@ -543,9 +545,8 @@
 
           // Invalid CCN
           if (!validate_ccn(pay_ccn)) {
-            console.log('Invalid CCN');
             if (document.querySelector('#ccn-label + .error') === null) {
-              document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error">Enter your 16-digit credit card number.</b>');
             }
           } else {
             if (document.querySelector('#ccn-label + .error') !== null) {
@@ -556,7 +557,7 @@
           // Invalid expr year
           if (!validate_expr_year(pay_expr_yr)) {
             if (document.querySelector('#exp-year-label + .error') === null) {
-              document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error">Enter a 4-digit year after 2018.</b>');
             }
           } else {
             if (document.querySelector('#exp-year-label + .error') !== null) {
@@ -567,7 +568,7 @@
           // Invalid CVV
           if (!validate_cvv(pay_cvv)) {
             if (document.querySelector('#cvv-label + .error') === null) {
-              document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error">Enter the 3 or 4-digit code on the back of your card.</b>');
             }
           } else {
             if (document.querySelector('#cvv-label + .error') !== null) {
@@ -578,7 +579,7 @@
           // Invalid zip code
           if (!validate_zipcode(pay_zipcode)) {
             if (document.querySelector('#zipcode-label + .error') === null) {
-              document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error">Enter in the format "#####" or "#####-####"</b>');
             }
           } else {
             if (document.querySelector('#zipcode-label + .error') !== null) {
@@ -589,7 +590,7 @@
           // Invalid email
           if (!validate_email(pay_email)) {
             if (document.querySelector('#email-label + .error') === null) {
-              document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error">Don\'t forget to include @ in your email address.</b>');
             }
           } else {
             if (document.querySelector('#email-label + .error') !== null) {
@@ -599,6 +600,39 @@
         }
       });
     }  // End of payment
+
+    if (document.getElementById('main-success') !== null) {
+      // Success page
+
+      if (storageAvailable('localStorage')) {
+        // Load movie and purchase details
+        document.querySelector('#summary-movie').innerText += ' '+ localStorage.getItem('movie-title');
+        document.querySelector('#summary-time').innerText += ' '+ localStorage.getItem('time_movieDate') + " at " + localStorage.getItem('time_movieTime');
+        document.querySelector('#summary-tickets').innerText += ' '+ (Number(localStorage.getItem('tickets_adultTickets')) + Number(localStorage.getItem('tickets_childTickets')) + Number(localStorage.getItem('tickets_seniorTickets')));
+
+        if (localStorage.getItem('tickets_adultTickets') === null) {
+          document.querySelector('#summary-adults').remove();
+        } else {
+          document.querySelector('#summary-adults').innerText += ' '+localStorage.getItem('tickets_adultTickets');
+        }
+        if (localStorage.getItem('tickets_childTickets') === null) {
+          document.querySelector('#summary-childs').remove();
+        } else {
+          document.querySelector('#summary-childs').innerText += ' '+localStorage.getItem('tickets_childTickets');
+        }
+        if (localStorage.getItem('tickets_seniorTickets') === null) {
+          document.querySelector('#summary-senior').remove();
+        } else {
+          document.querySelector('#summary-senior').innerText += ' '+localStorage.getItem('tickets_seniorTickets');
+        }
+
+        // Clear storage for next session
+        localStorage.clear();
+      }
+    }
+  });
+
+  // ETC
 
     // ==== TIME AND TICKETS FUNCTIONALITY
     if (document.getElementById('time-page') !== null || document.getElementById('tickets-page')) {
