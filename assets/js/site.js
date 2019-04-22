@@ -156,7 +156,10 @@ function destroyPrefixedStorageItemKeys(prefix) {
   function calc_subtotal(adult, child, senior) {
     return adult*12.50 + child*11.00 + senior*12.00;
   }
-  
+  function calc_tickets(adult, child, senior) {
+    return adult + child + senior;
+  }
+
   // function to select seats, name, and show it to user
   const selections = {};
   function display_seat(e) {
@@ -740,27 +743,34 @@ function destroyPrefixedStorageItemKeys(prefix) {
 
   }); // DOM loaded
 
+  // declare all variables needed
+  var seat_form, submit_button, seat_hint, total_tickets, adult_tkt, child_tkt, senior_tkt;
   document.addEventListener('DOMContentLoaded', function(){
   // Select the necessary elements from the DOM
-  var seat_form = document.querySelector('#seat-form');
-  var submit_button = document.querySelector('#continue');
-  var seat_hint = document.querySelector('#seats-display .hint');
+  seat_form = document.querySelector('#seat-form');
+  submit_button = document.querySelector('#continue');
+  seat_hint = document.querySelector('#seats-display .hint');
+  adult_tkt = JSON.parse(localStorage.getItem('tickets_adultTickets'))
+  child_tkt = JSON.parse(localStorage.getItem('tickets_childTickets'));
+  senior_tkt = JSON.parse(localStorage.getItem('tickets_seniorTickets'));
+
   // insert error message
   seat_hint.innerHTML += ' <b id="seat-error"></b>';
   // disable the form submition
   submit_button.setAttribute('disabled', 'disabled');
-  // call the display function
+  // call the functions
   seat_form.addEventListener("click", display_seat);
+  total_tickets = calc_tickets(adult_tkt, child_tkt, senior_tkt);
   // Listen for input clicked and validate tha form
   seat_form.addEventListener("click", function(){
     // validate the form to submit it
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
     var seat_error = document.querySelector('#seats-display');
-    if (checkboxes !== 0){
+    if (checkboxes === total_tickets){
       submit_button.removeAttribute('disabled');
     }else {
       submit_button.setAttribute('disabled', 'disabled');
-      seat_error.innerText = 'Select your seat.';
+      seat_error.innerText = 'You need to select seats equal to your ticket.';
     }
 
     });
