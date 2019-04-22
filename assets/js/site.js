@@ -24,63 +24,64 @@
     }
   }
 
-// Get all interesting information about an input element
-function getInputData(input_element) {
- return {
-   id: input_element.id,
-   name: input_element.name,
-   type: input_element.tagName.toLowerCase(),
-   value: input_element.value
- };
-}
+  // Get all interesting information about an input element
+  function getInputData(input_element) {
+    return {
+      id: input_element.id,
+      name: input_element.name,
+      type: input_element.tagName.toLowerCase(),
+      value: input_element.value
+    };
+  }
 
-// Store a prefixed storage item with input item data
-function storePrefixedInputStorageItem(prefix, input_element) {
- var item_data = getInputData(input_element);
- localStorage.setItem(prefix + item_data.id, JSON.stringify(item_data));
-}
+  // Store a prefixed storage item with input item data
+  function storePrefixedInputStorageItem(prefix, input_element) {
+    var item_data = getInputData(input_element);
+    localStorage.setItem(prefix + item_data.id, JSON.stringify(item_data));
+  }
 
-// Retrieve and parse an input storage item
-function retrieveAndParseInputStorageItem(key) {
- return JSON.parse(localStorage.getItem(key));
-}
+  // Retrieve and parse an input storage item
+  function retrieveAndParseInputStorageItem(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
 
-// Retrieve all prefixed storage item keys
-function retrievePrefixedStorageItemKeys(prefix) {
- var saved_keys = [];
- var i, key;
- for(i = 0; i < localStorage.length; i++) {
-   // Get only the items that begin with `prefix`
-   key = localStorage.key(i);
-   if (key.startsWith(prefix)) {
-     saved_keys.push(key);
-   }
- }
- return saved_keys;
-}
+  // Retrieve all prefixed storage item keys
+  function retrievePrefixedStorageItemKeys(prefix) {
+    var saved_keys = [];
+    var i, key;
+    for(i = 0; i < localStorage.length; i++) {
+      // Get only the items that begin with `prefix`
+      key = localStorage.key(i);
+      if (key.startsWith(prefix)) {
+        saved_keys.push(key);
+      }
+    }
+    return saved_keys;
+  }
 
-function restorePrefixedFormInputsFromLocalStorage(prefix) {
- // Get an array of all the prefixed stored keys
- var saved_keys = retrievePrefixedStorageItemKeys(prefix);
- // Loop through the array and use the stored object data to
- // restore the value of the corresponding form item
- var key, item, input_by_id;
- for (key of saved_keys) {
-   item = retrieveAndParseInputStorageItem(key);
-   // Use old-school getElementById; no need to prefix with #
-   input_by_id = document.getElementById(item.id);
-   if (input_by_id) {
-     input_by_id.value = item.value;
-   }
- }
-}
-function destroyPrefixedStorageItemKeys(prefix) {
- var keys_to_destroy = retrievePrefixedStorageItemKeys(prefix);
- var key;
- for (key of keys_to_destroy) {
-   localStorage.removeItem(key);
- }
-}
+  function restorePrefixedFormInputsFromLocalStorage(prefix) {
+    // Get an array of all the prefixed stored keys
+    var saved_keys = retrievePrefixedStorageItemKeys(prefix);
+    // Loop through the array and use the stored object data to
+    // restore the value of the corresponding form item
+    var key, item, input_by_id;
+    for (key of saved_keys) {
+      item = retrieveAndParseInputStorageItem(key);
+      // Use old-school getElementById; no need to prefix with #
+      input_by_id = document.getElementById(item.id);
+      if (input_by_id) {
+        input_by_id.value = item.value;
+      }
+    }
+  }
+
+  function destroyPrefixedStorageItemKeys(prefix) {
+    var keys_to_destroy = retrievePrefixedStorageItemKeys(prefix);
+    var key;
+    for (key of keys_to_destroy) {
+      localStorage.removeItem(key);
+    }
+  }
 
   // Value cleaning functions
 
@@ -156,7 +157,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
   function calc_subtotal(adult, child, senior) {
     return adult*12.50 + child*11.00 + senior*12.00;
   }
-  
+
   // function to select seats, name, and show it to user
   const selections = {};
   function display_seat(e) {
@@ -607,7 +608,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           }
         }
       */
-      } // end if (storageAvailable....
+    } // end if (storageAvailable....
     // === END TIME AND TICKETS FUNCTIONALITY
 
   });
@@ -741,28 +742,28 @@ function destroyPrefixedStorageItemKeys(prefix) {
   }); // DOM loaded
 
   document.addEventListener('DOMContentLoaded', function(){
-  // Select the necessary elements from the DOM
-  var seat_form = document.querySelector('#seat-form');
-  var submit_button = document.querySelector('#continue');
-  var seat_hint = document.querySelector('#seats-display .hint');
-  // insert error message
-  seat_hint.innerHTML += ' <b id="seat-error"></b>';
-  // disable the form submition
-  submit_button.setAttribute('disabled', 'disabled');
-  // call the display function
-  seat_form.addEventListener("click", display_seat);
-  // Listen for input clicked and validate tha form
-  seat_form.addEventListener("click", function(){
-    // validate the form to submit it
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    var seat_error = document.querySelector('#seats-display');
-    if (checkboxes !== 0){
-      submit_button.removeAttribute('disabled');
-    }else {
-      submit_button.setAttribute('disabled', 'disabled');
-      seat_error.innerText = 'Select your seat.';
-    }
-
+    // Select the necessary elements from the DOM
+    var seat_form = document.querySelector('#seat-form');
+    var submit_button = document.querySelector('#continue');
+    var seat_hint = document.querySelector('#seats-display .hint');
+    // insert error message
+    seat_hint.innerHTML += ' <b id="seat-error"></b>';
+    // disable the form submition
+    submit_button.setAttribute('disabled', 'disabled');
+    // call the display function
+    seat_form.addEventListener("click", display_seat);
+    // Listen for input clicked and validate tha form
+    seat_form.addEventListener("click", function(){
+      // validate the form to submit it
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+      var seat_error = document.querySelector('#seats-display');
+      if (checkboxes !== 0){
+        submit_button.removeAttribute('disabled');
+      }
+      else {
+        submit_button.setAttribute('disabled', 'disabled');
+        seat_error.innerText = 'Select your seat.';
+      }
     });
 
     if(storageAvailable('localStorage')) {
