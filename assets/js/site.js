@@ -188,7 +188,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
     // Variables for Seating page
 
     // Variables for Payment page
-    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, allFormLabels, i;
+    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax;
 
     // Check which page we're on and load that content
     if (document.getElementById('main-pay-info') !== null) {
@@ -236,15 +236,6 @@ function destroyPrefixedStorageItemKeys(prefix) {
         document.querySelector('#summary-subtotal').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal);
         document.querySelector('#summary-tax').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(tax);
         document.querySelector('#summary-total').innerText += ' '+Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal+tax);
-
-        // TODO: On submit, navigate to success page (on that page, clear localStorage)
-      }
-
-      // Initialize warning/error labels
-      allFormLabels = document.getElementsByTagName('label');
-      for (i = 0; i < allFormLabels.length; i++) {
-        console.log(allFormLabels[i].id);
-        document.querySelector('#'+allFormLabels[i].id).insertAdjacentHTML('afterend', '<b class="error"></b>');
       }
 
       // Enable/Disable submit button
@@ -299,7 +290,6 @@ function destroyPrefixedStorageItemKeys(prefix) {
 
           // Invalid name
           if (!validate_name(pay_name)) {
-            console.log('Invalid Name');
             if (document.querySelector('#name-label + .error') === null) {
               document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
             }
@@ -311,7 +301,6 @@ function destroyPrefixedStorageItemKeys(prefix) {
 
           // Invalid CCN
           if (!validate_ccn(pay_ccn)) {
-            console.log('Invalid CCN');
             if (document.querySelector('#ccn-label + .error') === null) {
               document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
             }
