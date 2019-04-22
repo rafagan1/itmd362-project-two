@@ -291,7 +291,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           // Invalid name
           if (!validate_name(pay_name)) {
             if (document.querySelector('#name-label + .error') === null) {
-              document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#name-label').insertAdjacentHTML('afterend', '<b class="error">Enter the name that appears on your card.</b>');
             }
           } else {
             if (document.querySelector('#name-label + .error') !== null) {
@@ -302,7 +302,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           // Invalid CCN
           if (!validate_ccn(pay_ccn)) {
             if (document.querySelector('#ccn-label + .error') === null) {
-              document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#ccn-label').insertAdjacentHTML('afterend', '<b class="error">Enter your 16-digit credit card number.</b>');
             }
           } else {
             if (document.querySelector('#ccn-label + .error') !== null) {
@@ -313,7 +313,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           // Invalid expr year
           if (!validate_expr_year(pay_expr_yr)) {
             if (document.querySelector('#exp-year-label + .error') === null) {
-              document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#exp-year-label').insertAdjacentHTML('afterend', '<b class="error">Enter a 4-digit year after 2018.</b>');
             }
           } else {
             if (document.querySelector('#exp-year-label + .error') !== null) {
@@ -324,7 +324,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           // Invalid CVV
           if (!validate_cvv(pay_cvv)) {
             if (document.querySelector('#cvv-label + .error') === null) {
-              document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#cvv-label').insertAdjacentHTML('afterend', '<b class="error">Enter the 3 or 4-digit code on the back of your card.</b>');
             }
           } else {
             if (document.querySelector('#cvv-label + .error') !== null) {
@@ -335,7 +335,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           // Invalid zip code
           if (!validate_zipcode(pay_zipcode)) {
             if (document.querySelector('#zipcode-label + .error') === null) {
-              document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#zipcode-label').insertAdjacentHTML('afterend', '<b class="error">Enter in the format "#####" or "#####-####"</b>');
             }
           } else {
             if (document.querySelector('#zipcode-label + .error') !== null) {
@@ -346,7 +346,7 @@ function destroyPrefixedStorageItemKeys(prefix) {
           // Invalid email
           if (!validate_email(pay_email)) {
             if (document.querySelector('#email-label + .error') === null) {
-              document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error"></b>');
+              document.querySelector('#email-label').insertAdjacentHTML('afterend', '<b class="error">Don\'t forget to include @ in your email address.</b>');
             }
           } else {
             if (document.querySelector('#email-label + .error') !== null) {
