@@ -433,7 +433,7 @@
           document.querySelector('#rating-select').value = "";
         });
       }
-    }
+    } // End Homepage/Movie-selection
 
     if (document.getElementById('main-pay-info') !== null) {
       // Payment page
@@ -641,6 +641,12 @@
       ticketType = document.querySelector('#ticket-type');
 
       if (storageAvailable('localStorage')) {
+        // If LocalStorage does not have selected movie, redirect to Homepage
+        // Prevents user from skipping steps
+        if (localStorage.getItem('movie-title') === null) {
+          document.location.assign('../');
+        }
+
         // Check for the submit button on the time/date page
         if (submit_showTime !== null) {
           // Time page can only be submitted when the date
@@ -707,7 +713,12 @@
       });
 
       if(storageAvailable('localStorage')) {
-      // Restore any existing inputs stored in localStorage
+        // If LocalStorage does not have selected movie, redirect to Homepage
+        // Prevents user from skipping steps
+        if (localStorage.getItem('movie-title') === null) {
+          document.location.assign('../');
+        }
+        // Restore any existing inputs stored in localStorage
         restorePrefixedFormInputsFromLocalStorage('seat_form');
         // Store Post Title leveraging the `input` event
         // https://developer.mozilla.org/en-US/docs/Web/Events/input
