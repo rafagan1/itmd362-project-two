@@ -183,12 +183,11 @@
     // Variables for Movie Select / Home page
     var movie_list, movie_nodes, movie_attributes, sort_result, sort_button;
 
-    // Variables for Date/Time page
+    // Variables for Date/Time page & Ticket page
     var submit_showTime, adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax;
 
-    // Variables for Ticket page
-
     // Variables for Seating page
+    var seat_form, submit_button, seat_hint, checkboxes, seat_error;
 
     // Variables for Payment page
     var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, allFormLabels, i;
@@ -481,7 +480,7 @@
     }  // End of payment
 
     // ==== TIME AND TICKETS FUNCTIONALITY
-    if (document.querySelector('#time-page') !== null || document.querySelector('#tickets-page')) {
+    if (document.getElementById('time-page') !== null || document.getElementById('tickets-page')) {
       submit_showTime = document.getElementById('show-time');
 
       // Variables on ticket page
@@ -548,6 +547,52 @@
         } // ticketType== null
       } // end if (storageAvailable....
     } // === END TIME AND TICKETS FUNCTIONALITY
+
+    if (document.getElementById('seat-content') !== null) {
+      // Select the necessary elements from the DOM
+      seat_form = document.querySelector('#seat-form');
+      submit_button = document.querySelector('#continue');
+      seat_hint = document.querySelector('#seats-display .hint');
+      // insert error message
+      seat_hint.innerHTML += ' <b id="seat-error"></b>';
+      // disable the form submition
+      submit_button.setAttribute('disabled', 'disabled');
+      // call the display function
+      seat_form.addEventListener("click", display_seat);
+      // Listen for input clicked and validate tha form
+      seat_form.addEventListener("click", function(){
+        // validate the form to submit it
+        checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        seat_error = document.querySelector('#seats-display');
+        if (checkboxes !== 0){
+          submit_button.removeAttribute('disabled');
+        }
+        else {
+          submit_button.setAttribute('disabled', 'disabled');
+          seat_error.innerText = 'Select your seat.';
+        }
+      });
+
+      if(storageAvailable('localStorage')) {
+      // Restore any existing inputs stored in localStorage
+        restorePrefixedFormInputsFromLocalStorage('seat_form');
+        // Store Post Title leveraging the `input` event
+        // https://developer.mozilla.org/en-US/docs/Web/Events/input
+        seat_form.addEventListener('input', function(){
+          storePrefixedInputStorageItem(seat_form.name, event.target);
+        });
+      }
+
+      // Listen for the form's submit event, intercept it and
+      // display a confirmation where the form once was
+      seat_form.addEventListener('submit', function(e){
+        e.preventDefault();
+        document.location.assign('../payment');
+        if(storageAvailable('localStorage')) {
+          destroyPrefixedStorageItemKeys(seat_form.id);
+        }
+      });
+    }
   });
 
   //  TODO: Update expiration month/year based on current date
@@ -653,53 +698,5 @@
     }
     document.location.assign('../seating');
   }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    // Select the necessary elements from the DOM
-    var seat_form = document.querySelector('#seat-form');
-    var submit_button = document.querySelector('#continue');
-    var seat_hint = document.querySelector('#seats-display .hint');
-    // insert error message
-    seat_hint.innerHTML += ' <b id="seat-error"></b>';
-    // disable the form submition
-    submit_button.setAttribute('disabled', 'disabled');
-    // call the display function
-    seat_form.addEventListener("click", display_seat);
-    // Listen for input clicked and validate tha form
-    seat_form.addEventListener("click", function(){
-      // validate the form to submit it
-      var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
-      var seat_error = document.querySelector('#seats-display');
-      if (checkboxes !== 0){
-        submit_button.removeAttribute('disabled');
-      }
-      else {
-        submit_button.setAttribute('disabled', 'disabled');
-        seat_error.innerText = 'Select your seat.';
-      }
-    });
-
-    if(storageAvailable('localStorage')) {
-    // Restore any existing inputs stored in localStorage
-      restorePrefixedFormInputsFromLocalStorage('seat_form');
-      // Store Post Title leveraging the `input` event
-      // https://developer.mozilla.org/en-US/docs/Web/Events/input
-      seat_form.addEventListener('input', function(){
-        storePrefixedInputStorageItem(seat_form.name, event.target);
-      });
-    }
-
-    // Listen for the form's submit event, intercept it and
-    // display a confirmation where the form once was
-    seat_form.addEventListener('submit', function(e){
-      e.preventDefault();
-      document.location.assign('../payment');
-      if(storageAvailable('localStorage')) {
-        destroyPrefixedStorageItemKeys(seat_form.id);
-      }
-    });
-
-    // End of DOMContentLoaded
-  });
 
 })();
