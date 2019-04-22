@@ -112,6 +112,15 @@ input[type="submit"]:disabled {
   background-color: #ffd1d1;
 }
 
+#main-success a {
+  padding-left: 1em;
+  color: #007a7a;
+}
+
+#main-success a:hover, #main-success a:active {
+  color: #7fbe00;
+}
+
 /* ===== Layout Rules ===== */
 #movie-list {
   list-style: none;
