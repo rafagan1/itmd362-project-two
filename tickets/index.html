@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Ticket Type</title>
+  <title>ARCN Theater - Ticket Type</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
   <link rel="stylesheet" href="../assets/css/screen.css" />
@@ -19,35 +19,37 @@
     </nav>
   </header>
   <main id="content">
-  <p id="movie-date-selected"> </p>
-  <h2 class="ticket-heading">Ticket Type</h2>
-  <form id="ticket-form" action="booking.html" method="get">
-    <fieldset>
-      <legend class="page-type">Select Ticket Type</legend>
-      <p id="ticket-max">
-        For orders of more that 20 ttickets, please contact customer service at <u>1-800-MAX-TICK</u>
-      </p>
-      <ul class="ticket-list">
-      <li id="adult">
-        <label for="adult-tickets">Adult ($12.50)</label>
-        <input type= "number" id= "adult-tickets" class="ticket-list" name="adult-tickets" min="0" max="20" placeholder="(Age 13+)" />
-      </li>
-      <li id="child">
-        <label for="ch-tickets">Child($11.00) </label>
-        <input type="number" id="ch-tickets" class="ticket-list" name="ch-tickets" min="0" max="20" placeholder="(Age 2-12)" />
-      </li>
-        <li id="senior">
-        <label for="sr-tickets">Senior($12.00)</label>
-        <input type="number" id="sr-tickets" class="ticket-list" name="sr-tickets" min="0" max="20" placeholder="(Age 60+)" />
-      </li>
-        <li id="submit">
-        <input type="submit" id="ticket-type" class="ticket-list" value="NEXT" formaction="booking.html" />
-      </li>
-    </ul>
-    </fieldset>
+    <header>
+      <h2 class="ticket-heading">Ticket Type</h2>
+    </header>
+    <p id="movie-date-selected"> </p>
+    <form id="ticket-form" action="booking.html" method="get">
+      <fieldset>
+        <legend class="page-type">Select Ticket Type</legend>
+        <p id="ticket-max">
+          For orders of more that 20 ttickets, please contact customer service at <u>1-800-MAX-TICK</u>
+        </p>
+        <ul class="ticket-list">
+        <li id="adult">
+          <label for="adult-tickets">Adult ($12.50)</label>
+          <input type= "number" id= "adult-tickets" class="ticket-list" name="adult-tickets" min="0" max="20" placeholder="(Age 13+)" />
+        </li>
+        <li id="child">
+          <label for="ch-tickets">Child($11.00) </label>
+          <input type="number" id="ch-tickets" class="ticket-list" name="ch-tickets" min="0" max="20" placeholder="(Age 2-12)" />
+        </li>
+          <li id="senior">
+          <label for="sr-tickets">Senior($12.00)</label>
+          <input type="number" id="sr-tickets" class="ticket-list" name="sr-tickets" min="0" max="20" placeholder="(Age 60+)" />
+        </li>
+          <li id="submit">
+          <input type="submit" id="ticket-type" class="ticket-list" value="NEXT" formaction="booking.html" />
+        </li>
+      </ul>
+      </fieldset>
     </form>
   </main>
- <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/site.js"></script>
   <!--<script src="../assets/js/mysite.js"></script>-->
 </body>
 </html>
