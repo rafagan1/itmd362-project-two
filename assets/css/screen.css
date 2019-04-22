@@ -52,8 +52,21 @@ p,
   padding-left: 1em;
 }
 
-label {
+label, #summary {
   padding-left: 1em;
+}
+
+#purchase-info li, #summary li {
+  padding-top: 0.65em;
+  padding-left: 1em;
+}
+
+#summary-subtotal {
+  font-style: italic;
+}
+
+#summary-movie, #summary-total {
+  font-weight: bold;
 }
 
 #payment li {
