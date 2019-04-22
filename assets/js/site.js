@@ -158,9 +158,9 @@
     return adult*12.50 + child*11.00 + senior*12.00;
   }
 
-  function calc_tickets(adult, child, senior) {
-    return adult + child + senior;
-  }
+  // function calc_tickets(adult, child, senior) {
+  //  return adult + child + senior;
+  // }
 
   // function to select seats, name, and show it to user
   const selections = {};
@@ -311,7 +311,7 @@
     var seat_form, submit_button, seat_hint, checkboxes, seat_error;
 
     // Variables for Payment page
-    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax;
+    var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, i;
 
     // Check which page we're on and load that content
     if (document.getElementById('main-select-movie') !== null) {
