@@ -158,9 +158,9 @@
     return adult*12.50 + child*11.00 + senior*12.00;
   }
 
-  // function calc_tickets(adult, child, senior) {
-  //  return adult + child + senior;
-  // }
+  function calc_tickets(num_adult, num_child, num_senior) {
+  return num_adult + num_child + num_senior;
+  }
 
   // function to select seats, name, and show it to user
   const selections = {};
