@@ -308,7 +308,7 @@
     var submit_showTime, adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax;
 
     // Variables for Seating page
-    var seat_form, submit_button, seat_hint, checkboxes, seat_error;
+    var seat_form, submit_button, seat_hint, checkboxes, adult_tkt, child_tkt, senior_tkt, ticket_num;
 
     // Variables for Payment page
     var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, i;
