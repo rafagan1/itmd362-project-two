@@ -158,9 +158,9 @@
     return adult*12.50 + child*11.00 + senior*12.00;
   }
 
-  // function calc_tickets(adult, child, senior) {
-  //  return adult + child + senior;
-  // }
+  function calc_tickets(num_adult, num_child, num_senior) {
+    return num_adult + num_child + num_senior;
+  }
 
   // function to select seats, name, and show it to user
   const selections = {};
@@ -308,7 +308,7 @@
     var submit_showTime, adultTick, childTick, seniorTick, ticketType, ticketSum, ticketMax;
 
     // Variables for Seating page
-    var seat_form, submit_button, seat_hint, checkboxes, seat_error;
+    var seat_form, submit_button, seat_hint, checkboxes, adult_tkt, child_tkt, senior_tkt, ticket_num;
 
     // Variables for Payment page
     var payment_form, submit_payment, pay_name, pay_ccn, pay_expr_mo, pay_expr_yr, pay_cvv, pay_zipcode, pay_email, movie_title, adult_tix, child_tix, senior_tix, subtotal, tax, i;
@@ -698,6 +698,10 @@
       seat_form = document.querySelector('#seat-form');
       submit_button = document.querySelector('#continue');
       seat_hint = document.querySelector('#seats-display .hint');
+      adult_tkt = JSON.parse(localStorage.getItem('tickets_adultTickets'));
+      child_tkt = JSON.parse(localStorage.getItem('tickets_childTickets'));
+      senior_tkt = JSON.parse(localStorage.getItem('tickets_seniorTickets'));
+
       // insert error message
       seat_hint.innerHTML += ' <b id="seat-error"></b>';
       // disable the form submition
@@ -706,15 +710,17 @@
       seat_form.addEventListener("click", display_seat);
       // Listen for input clicked and validate tha form
       seat_form.addEventListener("click", function(){
+        // Calculate tickets
+        ticket_num = calc_tickets(adult_tkt, child_tkt, senior_tkt);
         // validate the form to submit it
         checkboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
-        seat_error = document.querySelector('#seats-display');
-        if (checkboxes !== 0){
+
+        if (checkboxes === ticket_num){
           submit_button.removeAttribute('disabled');
         }
         else {
           submit_button.setAttribute('disabled', 'disabled');
-          seat_error.innerText = 'Select your seat.';
+          document.querySelector('#seats-display').innerText = 'Select your seat equal to ' +ticket_num +' ticket';
         }
       });
 
