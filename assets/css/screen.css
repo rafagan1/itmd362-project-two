@@ -191,18 +191,18 @@ input[type="submit"]:disabled {
 }
 
 #show-time, #ticket-type {
-  background-color: green;
-  border-radius: 1em;
-  color: white;
+  background-color: #080;
+  color: #fff;
   float: inherit;
   cursor: pointer;
-  font-size: 60%;
-  min-height: 3em;
-  width: 25%;
+  min-height: 2em;
+  text-align:center;
+  width: 100%;
 }
 
 #ticket-form input[type="number"], option {
   background-color: lightblue;
+  text-align: center;
 }
 
 #time-form #ticket-form, fieldset {
@@ -399,6 +399,13 @@ input[type="checkbox"]:checked ~ label {
   display: none;
 }
 
+#content-header,
+#seat-content #movie #tickets #screen {
+  background: #CC0000;
+  padding: 0.325em 0;
+  /* text-align: center; */
+  color: #efefef;
+}
 /* Indicate Sort-By heading is clickable when Expand/Hide toggle is visible */
 .js #sort-by {
   cursor: pointer;
@@ -454,6 +461,7 @@ input[type="checkbox"]:checked ~ label {
     padding-right: 16%;
   }
 }
+
 
 @media screen and (min-width: 1000px) {
   #body-select-movie {
